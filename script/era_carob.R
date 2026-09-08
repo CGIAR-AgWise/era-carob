@@ -150,7 +150,7 @@ d <- data.frame(
    latitude= substr(df$Site.LatD, 1, 6),
    longitude= substr(df$Site.LonD,1, 6),
    rain= df$Site.MAP,
-   #temp= df$Site.MAT,
+   temp= df$Site.MAT,
    elevation= df$Site.Elevation,
    soil_type= df$Site.Soil.Texture,
    year= substr(df$Time, 1, 4),
@@ -240,7 +240,27 @@ d <- data.frame(
    product_type = df$Product.Type
 )
 
+### fixing rain value and type
 
+rain <- strsplit(d$rain, "-|\\.\\.")
+max_len <- max(sapply(rain, length)) 
+split_padded <- lapply(rain, function(x) {
+   length(x) <- max_len
+   return(x)
+})
+rain <- as.data.frame(do.call(rbind, split_padded), stringsAsFactors = FALSE)
+d$rain <- as.numeric(gsub("NA", NA, rain$V1))
+
+## Fixing temp
+
+temp <- strsplit(d$temp, "-|\\.\\.")
+max_len <- max(sapply(temp, length)) 
+split_padded <- lapply(temp, function(x) {
+   length(x) <- max_len
+   return(x)
+})
+tmp <- as.data.frame(do.call(rbind, split_padded), stringsAsFactors = FALSE)
+d$temp <- as.numeric(gsub("NA", NA, tmp$V1))
 
 ### fixing seed density unit 
 
@@ -302,7 +322,7 @@ d$OM_used[i] <- TRUE
 
 #### fixing crop names
 crop <- strsplit(d$crop, "-|\\.\\.")
-max_len <- max(sapply(crop, length))
+max_len <- max(sapply(crop, length)) 
 split_padded <- lapply(crop, function(x) {
    length(x) <- max_len
    return(x)
@@ -314,7 +334,8 @@ P <- gsub("tephrosia vogelii", "tephrosia", P)
 P <- gsub("macadamia", "macadamia nut", P)
 P <- gsub("gliricidia sepium", "gliricidia", P)
 P <- gsub("crotalaria grahamiana", "crotalaria", P)
-P <- gsub("fallow", "none", P)
+P <- gsub("^fallow", "none", P)
+P <- gsub("natural fallow", "none", P)
 P <- gsub("bambara nut", "bambara groundnut", P)
 P <- gsub("crotalaria spectabilis", "crotalaria", P)
 P <- gsub("brachiaria hybrid", "brachiaria", P)
@@ -438,7 +459,7 @@ names(dwf)[i] <- c("yield","soil_SOC", "soil_total_N", "soil_N", "soil_SOM", "CO
 ### fixing tillage
 dwf$land_prep_method <- ifelse(is.na(dwf$land_prep_method) & !is.na(dwf$tillage), dwf$tillage, dwf$land_prep_method)
 
-### Fixing land prep 
+  ### Fixing land prep 
 #dwf$land_prep <- dwf$land_prep_method
 dwf$land_prep_method <- tolower(ifelse(grepl("CT|CONV|ConvTill|conv|CON|Conservation|Direct|Conv|CA|Conventional", dwf$land_prep_method), "conventional", 
                                ifelse(grepl("MT|Min Till", dwf$land_prep_method), "minimum tillage",
@@ -478,5 +499,10 @@ dwf$yield_part <- tolower(ifelse(grepl("Grain/Seed", dwf$yield_part), "grain",
                   ifelse(grepl("Fibre|Suga", dwf$yield_part), "fibres",
                   ifelse(grepl("Nuts", dwf$yield_part), "pod", dwf$yield_part)))))))))))))
 
+
+##### livestock
+
+lvsk <- dwf[which(dwf$product_type=="Animal"),]
+dwf <- dwf[!grepl("Animal", dwf$product_type),]
 
 
