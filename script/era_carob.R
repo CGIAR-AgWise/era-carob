@@ -152,7 +152,7 @@ d <- data.frame(
    rain= df$Site.MAP,
    #temp= df$Site.MAT,
    elevation= df$Site.Elevation,
-   soil_type= df$Site.Soil.Texture,
+   soil_texture= df$Site.Soil.Texture,
    year= substr(df$Time, 1, 4),
    seasonal_prep= df$Time.Clim.SP,
    total_prec= df$Time.Clim.TAP,
@@ -251,16 +251,19 @@ split_padded <- lapply(rain, function(x) {
 rain <- as.data.frame(do.call(rbind, split_padded), stringsAsFactors = FALSE)
 d$rain <- as.numeric(gsub("NA", NA, rain$V1))
 
-## Fixing temp
 
-temp <- strsplit(d$temp, "-|\\.\\.")
-max_len <- max(sapply(temp, length)) 
-split_padded <- lapply(temp, function(x) {
+### Fixing soil texture
+texture <- strsplit(d$soil_texture, "-|\\.\\.|/")
+max_len <- max(sapply(texture, length)) 
+split_padded <- lapply(texture, function(x) {
    length(x) <- max_len
    return(x)
 })
-tmp <- as.data.frame(do.call(rbind, split_padded), stringsAsFactors = FALSE)
-d$temp <- as.numeric(gsub("NA", NA, tmp$V1))
+text <- as.data.frame(do.call(rbind, split_padded), stringsAsFactors = FALSE)
+d$soil_texture <- tolower(gsub("NA", NA, text$V1))
+P <- carobiner::fix_name(d$soil_texture)
+P <- gsub("silt loam", "silty loam", P)
+d$soil_texture <- P
 
 ### fixing seed density unit 
 
