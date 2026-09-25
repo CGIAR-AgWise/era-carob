@@ -278,7 +278,7 @@ i <- !is.na(d$seed_density) | !is.na(d$seed_rate)
 d$plant_density[i] <- NA
 d$units <- NULL
 
-d$crop_rotation <- gsub("\\|+", ";", d$crop_rotation)
+d$crop_rotation <- tolower(gsub("\\|+", ";", d$crop_rotation))
 
 d$treatment_type <- ifelse(grepl("TRUE", d$control_T), "control", "treatment")
 
@@ -295,10 +295,8 @@ d$country <- ifelse(grepl("Uganda", d$country), "Uganda",
 ### Fixing intercrops
 
 split <- strsplit(d$intercrops, "\\*\\*\\*")
-
 # Find the max number of parts in any row
 max_len <- max(sapply(split, length))
-
 # Pad each list element to the same length with NAs
 split_padded <- lapply(split, function(x) {
    length(x) <- max_len
@@ -368,10 +366,48 @@ P <- gsub("brachiaria decumbens", "brachiaria", P)
 P <- gsub("helichrysum petiolare", "licorice", P)
 P <- gsub("ornithopus sativus", "serradella", P)
 P <- gsub("artichokes", "jerusalem artichoke", P)
-P <- gsub("acacia sp", "acacia", P)
+P <- gsub("acacia sp|acacia.*", "acacia", P)
 P <- gsub("acacia auriculiformis", "earleaf acacia", P)
 P <- gsub("flemingia sp.", "flemingia", P)
+P <- gsub("black gram", "gram", P)
+P <- gsub("vigna.*unguiculata", "legume", P)
+P <- gsub("proso mille", "millet", P)
+P <- gsub("peanut|arachis pintoi", "groundnut", P)
+P <- gsub("rice bean", "rice", P)
+P <- gsub("tree cassava", "cassava", P)
+P <- gsub("water yam|white yam", "yam", P)
+P <- gsub("sweet potato", "sweetpotato", P)
+P <- gsub("durum wheat", "wheat", P)
+P <- gsub("banana sweet", "banana", P)
+P <- gsub("new cocoyam", "cocoyam", P)
+P <- gsub("chili|capsicum", "pepper", P)
+P <- gsub("canola", "rapeseed", P)
+P <- gsub("^oats|black oats", "oat", P)
+P <- gsub("^ryegrass$|westerwold ryegrass", "rye grass",  P)
+P <- gsub("grazing vetch|vicia villosa", "vetch", P)
+P <- gsub("clitoria ternatea", "pea", P)
+P <- gsub("calopogonium mucunoides", "calopo", P)
+P <- gsub("melia azedarach", "melia", P)
+P <- gsub("alnus acuminata", "alder", P)
+P <- gsub("casuarina equisetifolia", "casuarina", P)
+P <- gsub("ethiopian mustard", "mustard", P)
+P <- gsub("sudan grass", "sorghum", P)
+P <- gsub("guar gum", "guar", P)
+P <- gsub("sweetcane", "sugarcan", P)
+P <- gsub("glyricidia sepium|gliricida sepium", "gliricida", P)
 d$crop <- P
+
+non_crop <- c(
+   "soil", "seed", "none",
+   "unspecified", "unknown plant",
+   "unspecified legume", "unspecified grass",
+   "unspecified fodder grass",
+   "unspecified tree",
+   "other fodder",
+   "fodder (natural vegetation)"
+)
+
+d$crop[d$crop %in% non_crop ] <- NA
 
 ## Fixing longitude and latitude 
 
