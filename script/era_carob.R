@@ -441,6 +441,16 @@ P <- gsub("mline sowing", "line sowing", P)
 P <- gsub("direct seedingr", "direct seeding", P)
 d$planting_method <- P
 
+P <- carobiner::fix_name(d$planting_implement)
+P <- gsub("Unspecified", "unknown", P)
+P <- gsub("Tractor", "4 wheel tractor", P)
+P <- gsub("Animal labour", "animal", P)
+P <- gsub("Manual labour", "manual", P)
+P <- gsub("Not in template", "none", P)
+P <- gsub("uu", "unknown", P)
+P <- gsub("planter|Planter", "jab planter", P)
+d$planting_implement <- P
+
 ## Fixing longitude and latitude 
 
 d$longitude <- sub("(\\d*\\.\\d*?)\\.+", "\\1", d$longitude)## keep only the first decimal point
