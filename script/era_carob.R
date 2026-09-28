@@ -410,6 +410,37 @@ non_crop <- c(
 
 d$crop[d$crop %in% non_crop ] <- NA
 
+## Fixing planting method and implement
+
+P <- carobiner::fix_name(tolower(d$planting_method))
+P <- gsub("Unspecified", "unknown", P)
+P <- gsub("direct drilling/sowing", "direct seeding", P)
+P <- gsub("dibble stick", "dibbling", P)
+P <- gsub("direct-seeding plante", "direct seeding", P)
+P <- gsub("zero-tillage planter", "none", P)
+P <- gsub("drill planter", "dibbling", P)
+P <- gsub("cuttings", "unknown", P)
+P <- gsub("drilling", "dibbling", P)
+P <- gsub("cutlasses", "unknown", P)
+P <- gsub("manual hoe seeding", "manual", P)
+P <- gsub("hand seeding", "manual", P)
+P <- gsub("manual S=seeding", "manual", P)
+P <- gsub("drilled into furrows", "dibbling", P)
+P <- gsub("ratoon", "unknown", P)
+P <- gsub("ripline", "unknown", P)
+P <- gsub("dribble", "dibbling", P)
+P <- gsub("furrows", "unknown", P)
+P <- gsub("jab matraca planter", "unknown", P)
+P <- gsub("no-till planter", "none", P)
+P <- gsub("agoye ripper rip-line", "line sowing", P)
+P <- gsub("hand-hoe planting holes", "manual", P)
+P <- gsub("jab planter|ridges", "unknown", P)
+P <- gsub("manual seeding|hand plante", "manual", P)
+P <- gsub("tine planter", "unknown", P)
+P <- gsub("mline sowing", "line sowing", P)
+P <- gsub("direct seedingr", "direct seeding", P)
+d$planting_method <- P
+
 ## Fixing longitude and latitude 
 
 d$longitude <- sub("(\\d*\\.\\d*?)\\.+", "\\1", d$longitude)## keep only the first decimal point
