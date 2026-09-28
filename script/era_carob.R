@@ -369,7 +369,6 @@ P <- gsub("artichokes", "jerusalem artichoke", P)
 P <- gsub("acacia sp|acacia.*", "acacia", P)
 P <- gsub("acacia auriculiformis", "earleaf acacia", P)
 P <- gsub("flemingia sp.", "flemingia", P)
-P <- gsub("black gram", "gram", P)
 P <- gsub("vigna.*unguiculata", "legume", P)
 P <- gsub("proso mille", "millet", P)
 P <- gsub("peanut|arachis pintoi", "groundnut", P)
@@ -395,6 +394,7 @@ P <- gsub("sudan grass", "sorghum", P)
 P <- gsub("guar gum", "guar", P)
 P <- gsub("sweetcane", "sugarcan", P)
 P <- gsub("glyricidia sepium|gliricida sepium", "gliricida", P)
+P <- gsub(" sp| sp.", "", P)
 d$crop <- P
 
 non_crop <- c(
@@ -404,7 +404,8 @@ non_crop <- c(
    "unspecified fodder grass",
    "unspecified tree",
    "other fodder",
-   "fodder (natural vegetation)"
+   "fodder (natural vegetation),
+    unspecified cover crop"
 )
 
 d$crop[d$crop %in% non_crop ] <- NA
@@ -413,8 +414,8 @@ d$crop[d$crop %in% non_crop ] <- NA
 
 d$longitude <- sub("(\\d*\\.\\d*?)\\.+", "\\1", d$longitude)## keep only the first decimal point
 P <- carobiner::fix_name(d$longitude)
-P <- gsub("\\.+$", "", P)
-d$longitude <- P
+P <- gsub("-1.-0", NA, P)
+d$longitude <- trimws(P)
 d$longitude <- as.numeric(d$longitude)
 
 d$latitude <- sub("(\\d*\\.\\d*?)\\.+", "\\1", d$latitude)## keep only the first decimal point
