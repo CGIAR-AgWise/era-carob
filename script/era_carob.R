@@ -465,6 +465,16 @@ P <- gsub("\\.+$", "", P)
 d$latitude <- P
 d$latitude <- as.numeric(d$latitude)
 
+### fixing location 
+loc <- strsplit(d$location, "\\.\\.")
+max_len <- max(sapply(loc, length)) 
+split_padded <- lapply(loc, function(x) {
+   length(x) <- max_len
+   return(x)
+})
+
+loc <- as.data.frame(do.call(rbind, split_padded), stringsAsFactors = FALSE)
+d$location <- carobiner::fix_name(loc$V1, "title")
 
 
 ### Fixing Fertilizer
@@ -581,6 +591,8 @@ dwf$yield_part <- tolower(ifelse(grepl("Grain/Seed", dwf$yield_part), "grain",
                   ifelse(grepl("Nuts", dwf$yield_part), "pod", dwf$yield_part)))))))))))))
 
 
+### drop rows with missing crop 
+dwf <- dwf[!is.na(dwf$crop),]
 ##### livestock
 
 lvsk <- dwf[which(dwf$product_type=="Animal"),]
