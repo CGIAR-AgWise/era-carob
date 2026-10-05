@@ -169,7 +169,7 @@ d <- data.frame(
    planting_date= ifelse(grepl("Planting",  df$PD.Plant.Variable), df$PD.Plant.Start, NA_character_) ,
    transplanting_date = ifelse(grepl("Transplanting",  df$PD.Plant.Variable), df$PD.Plant.Start, NA_character_) ,
    planting_end= df$PD.Plant.End,
-   tillage= df$Till.Level.Name,
+   #tillage= df$Till.Level.Name,
    land_prep_method= ifelse(is.na(df$T.Method)& !is.na(df$Till.Other), df$Till.Other, df$T.Method),
    land_prep_implement= df$T.Mechanization,
    variable= df$Out.Subind,
@@ -278,7 +278,16 @@ i <- !is.na(d$seed_density) | !is.na(d$seed_rate)
 d$plant_density[i] <- NA
 d$units <- NULL
 
-d$crop_rotation <- tolower(gsub("\\|+", ";", d$crop_rotation))
+
+rotation <- strsplit(d$crop_rotation, "\\|+|\\.+")
+max_len <- max(sapply(rotation, length)) 
+split_padded <- lapply(rotation, function(x) {
+   length(x) <- max_len
+   return(x)
+})
+rota <- as.data.frame(do.call(rbind, split_padded), stringsAsFactors = FALSE)
+d$crop_rotation <- tolower(gsub("NA", NA, rota$V1))
+d$crop_rotation <- tolower(gsub("\\*+", ";", d$crop_rotation))
 
 d$treatment_type <- ifelse(grepl("TRUE", d$control_T), "control", "treatment")
 
@@ -476,6 +485,20 @@ split_padded <- lapply(loc, function(x) {
 loc <- as.data.frame(do.call(rbind, split_padded), stringsAsFactors = FALSE)
 d$location <- carobiner::fix_name(loc$V1, "title")
 
+### Fixing irrigation method
+d$irrigation_method <- ifelse(grepl("Irrigation \\(Other\\)", d$irrigation_method), "Irrigation (Other)", d$irrigation_method)
+P <- carobiner::fix_name(d$irrigation_method)
+P <- gsub("Drip Irrigation", "drip", P)
+P <- gsub("Irrigation \\(Other\\)", "unknown", P)
+P <- gsub("Flood \\(Complete\\)", "flood", P)
+P <- gsub("Flood \\(Furrow\\)", "flood", P)
+P <- gsub("Unspecified", "unknown", P)
+P <- gsub("Drip \\(b34\\)", "drip", P)
+P <- gsub("Sprinkler \\(b72\\)", "sprinkler", P)
+P <- gsub("Other \\(b53\\)", "unknown", P)
+P <- gsub("Sprinkler Irrigation", "sprinkler", P)
+P <- gsub("NA", NA, P)
+d$irrigation_method <- P
 
 ### Fixing Fertilizer
 
