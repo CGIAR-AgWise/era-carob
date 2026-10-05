@@ -485,6 +485,32 @@ split_padded <- lapply(loc, function(x) {
 loc <- as.data.frame(do.call(rbind, split_padded), stringsAsFactors = FALSE)
 d$location <- carobiner::fix_name(loc$V1, "title")
 
+#### Fixing maturity days
+md <- strsplit(d$maturity_days, "\\.+")
+max_len <- max(sapply(md, length)) 
+split_padded <- lapply(md, function(x) {
+   length(x) <- max_len
+   return(x)
+})
+
+mt <- as.data.frame(do.call(rbind, split_padded), stringsAsFactors = FALSE)
+d$maturity_days <- carobiner::fix_name(mt$V1, "title")
+d$maturity_days <- as.numeric(gsub("Na", NA, ifelse(grepl("\\$", d$maturity_days), NA, d$maturity_days)))
+
+### Fixing variety type 
+
+V <- strsplit(d$variety_type, "\\.+")
+max_len <- max(sapply(V, length)) 
+split_padded <- lapply(V, function(x) {
+   length(x) <- max_len
+   return(x)
+})
+
+Vt <- as.data.frame(do.call(rbind, split_padded), stringsAsFactors = FALSE)
+d$variety_type <- carobiner::fix_name(Vt$V1, "title")
+
+
+
 ### Fixing irrigation method
 d$irrigation_method <- ifelse(grepl("Irrigation \\(Other\\)", d$irrigation_method), "Irrigation (Other)", d$irrigation_method)
 P <- carobiner::fix_name(d$irrigation_method)
