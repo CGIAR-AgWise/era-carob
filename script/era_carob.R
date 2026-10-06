@@ -494,7 +494,7 @@ split_padded <- lapply(md, function(x) {
 })
 
 mt <- as.data.frame(do.call(rbind, split_padded), stringsAsFactors = FALSE)
-d$maturity_days <- carobiner::fix_name(mt$V1, "title")
+d$maturity_days <- mt$V1
 d$maturity_days <- as.numeric(gsub("Na", NA, ifelse(grepl("\\$", d$maturity_days), NA, d$maturity_days)))
 
 ### Fixing variety type 
@@ -507,7 +507,7 @@ split_padded <- lapply(V, function(x) {
 })
 
 Vt <- as.data.frame(do.call(rbind, split_padded), stringsAsFactors = FALSE)
-d$variety_type <- carobiner::fix_name(Vt$V1, "title")
+d$variety_type <- Vt$V1
 
 
 
