@@ -169,7 +169,7 @@ d <- data.frame(
    planting_date= ifelse(grepl("Planting",  df$PD.Plant.Variable), df$PD.Plant.Start, NA_character_) ,
    transplanting_date = ifelse(grepl("Transplanting",  df$PD.Plant.Variable), df$PD.Plant.Start, NA_character_) ,
    planting_end= df$PD.Plant.End,
-   #tillage= df$Till.Level.Name,
+   tillage= df$Till.Level.Name,
    land_prep_method= ifelse(is.na(df$T.Method)& !is.na(df$Till.Other), df$Till.Other, df$T.Method),
    land_prep_implement= df$T.Mechanization,
    variable= df$Out.Subind,
@@ -224,9 +224,9 @@ d <- data.frame(
    
    
    pesticide_used= ifelse(grepl("Biopesticide", df$C.Type), TRUE, FALSE),
-   pesticide_used_method= ifelse(grepl("Biopesticide", df$C.Type), df$C.App.Method, "none"), 
-   pesticide_used_implement= ifelse(grepl("Biopesticide", df$C.Type), df$C.Mechanization, "none"), 
-   pesticide_used_amount= ifelse(grepl("Biopesticide", df$C.Type), df$C.Amount, 0), 
+   pesticide_method= ifelse(grepl("Biopesticide", df$C.Type), df$C.App.Method, "none"), 
+   pesticide_implement= ifelse(grepl("Biopesticide", df$C.Type), df$C.Mechanization, "none"), 
+   pesticide_amount= ifelse(grepl("Biopesticide", df$C.Type), df$C.Amount, 0), 
    pesticide_product= ifelse(grepl("Biopesticide", df$C.Type), df$C.Name, "none"),
    
    soil_clay= df$soil_clay,
@@ -239,6 +239,24 @@ d <- data.frame(
    soil_P_total= df$soil_TP,
    product_type = df$Product.Type
 )
+
+
+
+
+### product type
+prod <- strsplit(d$product_type, "\\*+")
+max_len <- max(sapply(prod, length)) 
+split_padded <- lapply(prod, function(x) {
+   length(x) <- max_len
+   return(x)
+})
+
+prod <- as.data.frame(do.call(rbind, split_padded), stringsAsFactors = FALSE)
+d$product_type <- gsub("NA", NA, prod$V1)
+
+##### livestock
+lvsk <- d[which(d$product_type=="Animal"),]
+d <- d[!grepl("Animal", d$product_type),]
 
 ### fixing rain value and type
 
@@ -303,7 +321,7 @@ d$country <- ifelse(grepl("Uganda", d$country), "Uganda",
 
 ### Fixing intercrops
 
-split <- strsplit(d$intercrops, "\\*\\*\\*")
+split <- strsplit(d$intercrops, "\\*+")
 # Find the max number of parts in any row
 max_len <- max(sapply(split, length))
 # Pad each list element to the same length with NAs
@@ -322,9 +340,12 @@ inter$V2 <- ifelse(grepl("Poupartia silvatica", inter$V2), "Poupartia silvatica"
             ifelse(grepl("Pearl Millet", inter$V2), "Pearl Millet", 
             ifelse(grepl("Mango..Papaya", inter$V2), "Mango", inter$V2)))))
 
-d$intercrops <- tolower(ifelse(!is.na(inter$V3) & !is.na(inter$V4), paste(inter$V2, inter$V3, inter$V4, sep = ";"), 
-                               ifelse(!is.na(inter$V3) & is.na(inter$V4), paste(inter$V2, inter$V3, sep = ";"), inter$V2)))
-
+d$intercrops <- tolower(
+   apply(inter[, c("V2", "V3", "V4")], 1, function(x) {
+      x <- x[!is.na(x) & trimws(x) != ""]
+      paste(x, collapse = ";")
+   })
+)
 
 i <- which(d$K_organic!=0 | d$N_organic!=0 |d$P_organic!=0)
 d$OM_used <- FALSE
@@ -616,14 +637,14 @@ dw <- lapply(ff, function(y) proc(y, d))
 dwf <- do.call(carobiner::bindr, dw)
 
 i <- grepl(paste("Crop_Yield", "Soil_Organic_Carbon", "Soil_Total_Nitrogen", "Soil_Nitrogen", "Soil_Organic_Matter", "Carbon_Dioxide_Emissions", "Soil_Organic_Carbon_\\(Change\\)", "CO2_Equivalent_Emissions", "Variable_Cost_per_Unit_Product", "Aboveground_Biomass", "Pest_&_Pathogen_\\(Losses\\)", "Effective_Cation_Exchange_Capacity", "Methane_Emissions", "Nitrous_Oxide_Emissions", "Cation_Exchange_Capacity", "Erosion", "Labour_Cost", "Labour_Person_Hours", "Net_Return", sep = "|"), names(dwf))
-names(dwf)[i] <- c("yield","soil_SOC", "soil_N_total", "soil_N", "soil_SOM", "CO2_emission", "soil_ex_SOC", "CO2_eq_emission", "variable_cost", "fwy_total", "pest_severity", "soil_CEC_eff", "soil_CH4_emission", "soil_N2O_emission", "soil_CEC", "soil_erosion", "labour_Cost", "labour", "net_benefit")
+names(dwf)[i] <- c("yield","soil_SOC", "soil_N_total", "soil_N", "soil_SOM", "emission_CO2", "soil_SOC_exch", "CO2_eq_emission", "variable_cost", "fwy_total", "pest_severity", "soil_CEC_eff", "emission_CH4", "emission_N2O", "soil_CEC", "soil_erosion", "labour_Cost", "labour", "net_benefit")
 
 
 ### fixing tillage
 dwf$land_prep_method <- ifelse(is.na(dwf$land_prep_method) & !is.na(dwf$tillage), dwf$tillage, dwf$land_prep_method)
+dwf$id <- dwf$tillage <- NULL
+ ### Fixing land prep 
 
-  ### Fixing land prep 
-#dwf$land_prep <- dwf$land_prep_method
 dwf$land_prep_method <- tolower(ifelse(grepl("CT|CONV|ConvTill|conv|CON|Conservation|Direct|Conv|CA|Conventional", dwf$land_prep_method), "conventional", 
                                ifelse(grepl("MT|Min Till", dwf$land_prep_method), "minimum tillage",
                                ifelse(grepl("Disc", dwf$land_prep_method), "disk tillage", 
@@ -665,9 +686,6 @@ dwf$yield_part <- tolower(ifelse(grepl("Grain/Seed", dwf$yield_part), "grain",
 
 ### drop rows with missing crop 
 dwf <- dwf[!is.na(dwf$crop),]
-##### livestock
 
-lvsk <- dwf[which(dwf$product_type=="Animal"),]
-dwf <- dwf[!grepl("Animal", dwf$product_type),]
 
 
