@@ -124,7 +124,7 @@ ds <- do.call(carobiner::bindr, ds)
 ds$id <- NULL
 names(ds) <- gsub("Soil.", "soil_", names(ds))
 i <- grep("CLY|SLT|SND|soil_AP", names(ds))
-names(ds)[i] <-  c("soil_clay","soil_silt","soil_sand", "soil_P_available")
+names(ds)[i] <-  c("soil_clay","soil_silt","soil_sand", "soil_P")
 
 rb <- merge(rb, ds, by= intersect(names(rb), names(ds)), all= TRUE)
 rb <- rb[!grepl("All Sites", rb$Site.ID),]
@@ -509,6 +509,29 @@ split_padded <- lapply(V, function(x) {
 Vt <- as.data.frame(do.call(rbind, split_padded), stringsAsFactors = FALSE)
 d$variety_type <- Vt$V1
 
+### Fixing variety 
+
+V <- strsplit(d$variety, "\\.+")
+max_len <- max(sapply(V, length)) 
+split_padded <- lapply(V, function(x) {
+   length(x) <- max_len
+   return(x)
+})
+
+Vty <- as.data.frame(do.call(rbind, split_padded), stringsAsFactors = FALSE)
+d$variety <- gsub("\\*+", ";", Vty$V1)
+
+### Fixing variety traits
+
+V <- strsplit(d$variety_traits, "\\.+")
+max_len <- max(sapply(V, length)) 
+split_padded <- lapply(V, function(x) {
+   length(x) <- max_len
+   return(x)
+})
+
+Vtr <- as.data.frame(do.call(rbind, split_padded), stringsAsFactors = FALSE)
+d$variety_traits <- gsub("NA", NA, Vtr$V1)
 
 
 ### Fixing irrigation method
@@ -593,7 +616,7 @@ dw <- lapply(ff, function(y) proc(y, d))
 dwf <- do.call(carobiner::bindr, dw)
 
 i <- grepl(paste("Crop_Yield", "Soil_Organic_Carbon", "Soil_Total_Nitrogen", "Soil_Nitrogen", "Soil_Organic_Matter", "Carbon_Dioxide_Emissions", "Soil_Organic_Carbon_\\(Change\\)", "CO2_Equivalent_Emissions", "Variable_Cost_per_Unit_Product", "Aboveground_Biomass", "Pest_&_Pathogen_\\(Losses\\)", "Effective_Cation_Exchange_Capacity", "Methane_Emissions", "Nitrous_Oxide_Emissions", "Cation_Exchange_Capacity", "Erosion", "Labour_Cost", "Labour_Person_Hours", "Net_Return", sep = "|"), names(dwf))
-names(dwf)[i] <- c("yield","soil_SOC", "soil_total_N", "soil_N", "soil_SOM", "CO2_emission", "soil_ex_SOC", "CO2_eq_emission", "variable_cost", "fwy_total", "pest_severity", "soil_CEC_eff", "CH4_emission", "N2O_emission", "soil_CEC", "soil_erosion", "labour_Cost", "labour", "net_benefit")
+names(dwf)[i] <- c("yield","soil_SOC", "soil_N_total", "soil_N", "soil_SOM", "CO2_emission", "soil_ex_SOC", "CO2_eq_emission", "variable_cost", "fwy_total", "pest_severity", "soil_CEC_eff", "soil_CH4_emission", "soil_N2O_emission", "soil_CEC", "soil_erosion", "labour_Cost", "labour", "net_benefit")
 
 
 ### fixing tillage
