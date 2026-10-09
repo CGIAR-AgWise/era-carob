@@ -192,8 +192,8 @@ d <- data.frame(
    #fert_Io_unit= df$F.I.Unit,
    irrigation_amount= df$I.Amount,
    irrigation_method= df$I.Method,
-   irrigation_date= ifelse(is.na(df$I.Date.Start) & !is.na(df$I.Date.Gen), df$I.Date.Gen, df$I.Date.Start),
-   irrigation_date_end= df$I.Date.End,
+   irrigation_dates= ifelse(is.na(df$I.Date.Start) & !is.na(df$I.Date.Gen), df$I.Date.Gen, df$I.Date.Start),
+   irrigation_dates_end= df$I.Date.End,
    irrigated= !is.na(df$I.Amount) & df$I.Amount != 0,
    planting_method= df$Plant.Method,
    planting_implement= df$Plant.Mechanization,
@@ -422,10 +422,53 @@ P <- gsub("casuarina equisetifolia", "casuarina", P)
 P <- gsub("ethiopian mustard", "mustard", P)
 P <- gsub("sudan grass", "sorghum", P)
 P <- gsub("guar gum", "guar", P)
-P <- gsub("sweetcane", "sugarcan", P)
+P <- gsub("sweetcane", "sugarcane", P)
 P <- gsub("glyricidia sepium|gliricida sepium", "gliricida", P)
 P <- gsub(" sp| sp.", "", P)
-d$crop <- P
+d$crop <- trimws(P)
+
+
+crop_map <- c(
+   "gliricida" = "gliricidia",
+   "hyptiscigera" = "sesame",
+   "jointvetche" = "vetch",
+   "millett" = "millet",
+   "oil palm oil" = "oil palm",
+   "sennactabilis" = "senna actabilis", # tree
+   "terminalia ivoresensis" = "terminalia ivorensis",# tree
+   "drosanthemumciosum" = "drosanthemum floribundum", # not in carob
+   "eggplant." = "eggplant",
+   "squash (c.moschata)" = "squash",
+   "fodder (natural vegetation)" = "vegetable",
+   "carrot & parsnip" = "carrot",
+   "lemon & lime" = "lemon",
+   "peach & nectarine" = "peach",
+   "patula pine" = "pine",
+   "alder" = "alder", # tree not in carob
+   "arabica" = "arabica coffee",
+   "calopo" = "calopo", # not in carob
+   "common vetch" = "vetch",
+   "egyptian clover" = "berseem clover",
+   "fodder radish" = "radish",
+   "horsegram" = "horse gram", # not in carob
+   "indian pea" = "pea",
+   "kikuyu grass" = "kikuyu grass", # not in carob
+   "linseed" = "flax",
+   "niger" = "niger",
+   "oat" = "oats",
+   "rape" = "rapeseed",
+   "robusta" = "robusta coffee",
+   "silverleaf" = "silver leaf", # desmodium
+   "smutsfinger grass" = "smuts finger grass", # not in carob
+   "sunchoke" = "jerusalem artichoke",
+   "tick clover" = "clover",
+   "turkey berry" = "turkey berry",  # not in carob
+   "winter vetch" = "vetch",
+   "vetiver" = "vetiver grass" # not in carob
+)
+
+i <- d$crop %in% names(crop_map)
+d$crop[i] <- crop_map[d$crop[i]]
 
 non_crop <- c(
    "soil", "seed", "none",
@@ -443,7 +486,7 @@ d$crop[d$crop %in% non_crop ] <- NA
 ## Fixing planting method and implement
 
 P <- carobiner::fix_name(tolower(d$planting_method))
-P <- gsub("Unspecified", "unknown", P)
+P <- gsub("unspecified", "unknown", P)
 P <- gsub("direct drilling/sowing", "direct seeding", P)
 P <- gsub("dibble stick", "dibbling", P)
 P <- gsub("direct-seeding plante", "direct seeding", P)
@@ -602,6 +645,51 @@ d$K_fertilizer <- P
 d$K_fertilizer <- ifelse(grepl("999999|999", d$K_fertilizer), NA, d$K_fertilizer)
 d$K_fertilizer <- as.numeric(gsub("\\s.*", "", d$K_fertilizer))
 
+## Fixing herbicide product
+
+d$herbicide_product <- tolower(trimws(d$herbicide_method))
+herbicide_map <- c(
+   "acetanilide" = "butachlor",  
+   "altrazine" = "atrazine",
+   "bispyribac sodium" = "bispyribac-sodium",
+   "bullet" = "atrazine",      
+   "butachlor" = "butachlor",
+   "buty ester" = "2,4-d",
+   "chlorimuron" = "chlorimuron-ethyl", # not in carob
+   "diclofop-methyl" = "diclofop-methyl", # not in carob
+   "dual" = "metolachlor",
+   "dual gold" = "s-metolachlor",
+   "ethoxisulfuron" = "ethoxysulfuron", # not in carob
+   "fenoxaprop" = "fenoxaprop-p-ethyl",
+   "florasulam" = "florasulam",
+   "fluaifop-butyl" = "fluazifop-butyl",
+   "fluazifop-p-butyl" = "fluazifop-p-butyl",
+   "flumetsulam" = "flumetsulam", # not in carob
+   "fomesafen" = "fomesafen", # not in carob
+   "furadan 5g" = "carbofuran",  # not in carob
+   "gramoxone" = "paraquat dichloride",
+   "imazaquin" = "imazaquin", # not in carob
+   "imazethapyr" = "imazethapyr, ammonium salt",
+   "l-l'-dimethyl-4,4'-bipyridinium" = "paraquat dichloride",
+   "lasso" = "alachlor",
+   "metsulfuron-methyl" = "metsulfuron",
+   "mustang 306 se" = "florasulam", 
+   "n-(phosphono-methyl) glycine" = "glyphosate",
+   "paraquat" = "paraquat dichloride",
+   "primagram" = "unknown",   # 
+   "prosulfuron" = "prosulfuron", # Not in carob
+   "quizalofop-p-ethyl" = "quizalofop-p-ethyl", # not in carob
+   "stomp" = "pendimethalin",
+   "sulfentrazone" = "sulfentrazone",
+   "thifensulfuron-methyl" = "thifensulfuron-methyl",# not in carob
+   "topic (15wp)" = "clodinafop",
+   "unspecified" = "unknown",
+   "weedall" = "glyphosate"
+)
+
+i <- d$herbicide_method %in% herbicide_map
+d$herbicide_method[i] <- herbicide_map[d$herbicide_method[i]]
+
 
 ##############################################################
 #### Transforming response variable from long into wide format ##########
@@ -636,8 +724,8 @@ dw <- lapply(ff, function(y) proc(y, d))
 
 dwf <- do.call(carobiner::bindr, dw)
 
-i <- grepl(paste("Crop_Yield", "Soil_Organic_Carbon", "Soil_Total_Nitrogen", "Soil_Nitrogen", "Soil_Organic_Matter", "Carbon_Dioxide_Emissions", "Soil_Organic_Carbon_\\(Change\\)", "CO2_Equivalent_Emissions", "Variable_Cost_per_Unit_Product", "Aboveground_Biomass", "Pest_&_Pathogen_\\(Losses\\)", "Effective_Cation_Exchange_Capacity", "Methane_Emissions", "Nitrous_Oxide_Emissions", "Cation_Exchange_Capacity", "Erosion", "Labour_Cost", "Labour_Person_Hours", "Net_Return", sep = "|"), names(dwf))
-names(dwf)[i] <- c("yield","soil_SOC", "soil_N_total", "soil_N", "soil_SOM", "emission_CO2", "soil_SOC_exch", "CO2_eq_emission", "variable_cost", "fwy_total", "pest_severity", "soil_CEC_eff", "emission_CH4", "emission_N2O", "soil_CEC", "soil_erosion", "labour_Cost", "labour", "net_benefit")
+i <- grepl(paste("Crop_Yield", "Soil_Organic_Carbon", "Soil_Total_Nitrogen", "Soil_Nitrogen", "Soil_Organic_Matter", "Carbon_Dioxide_Emissions", "Soil_Organic_Carbon_\\(Change\\)", "CO2_Equivalent_Emissions", "Variable_Cost_per_Unit_Product", "Aboveground_Biomass", "Pest_&_Pathogen_\\(Losses\\)", "Effective_Cation_Exchange_Capacity", "Methane_Emissions", "Nitrous_Oxide_Emissions", "Cation_Exchange_Capacity", "Erosion", "Labour_Cost", "Labour_Person_Hours", "Net_Return", "Soil_Carbon_Stocks", sep = "|"), names(dwf))
+names(dwf)[i] <- c("yield","soil_SOC", "soil_N_total", "soil_N", "soil_SOM", "emission_CO2", "soil_SOC_exch", "CO2_eq_emission", "variable_cost", "fwy_total", "pest_severity", "soil_CEC_eff", "emission_CH4", "emission_N2O", "soil_CEC", "soil_erosion", "labour_Cost", "labour", "net_benefit", "soil_C_stock")
 
 
 ### fixing tillage
@@ -688,4 +776,4 @@ dwf$yield_part <- tolower(ifelse(grepl("Grain/Seed", dwf$yield_part), "grain",
 dwf <- dwf[!is.na(dwf$crop),]
 
 
-
+carobiner::write_files(path, meta, dwf)
