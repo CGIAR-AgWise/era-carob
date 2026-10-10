@@ -647,7 +647,7 @@ d$K_fertilizer <- as.numeric(gsub("\\s.*", "", d$K_fertilizer))
 
 ## Fixing herbicide product
 
-d$herbicide_product <- tolower(trimws(d$herbicide_method))
+d$herbicide_product <- tolower(trimws(d$herbicide_product))
 herbicide_map <- c(
    "acetanilide" = "butachlor",  
    "altrazine" = "atrazine",
@@ -687,8 +687,71 @@ herbicide_map <- c(
    "weedall" = "glyphosate"
 )
 
-i <- d$herbicide_method %in% herbicide_map
-d$herbicide_method[i] <- herbicide_map[d$herbicide_method[i]]
+i <- d$herbicide_product %in% herbicide_map
+d$herbicide_product[i] <- herbicide_map[d$herbicide_product[i]]
+
+### Fixing fungicide
+d$fungicide_product <- tolower(trimws(d$fungicide_product))
+
+fungicide_map <- c(
+   "apron plus" = "mefenoxam; fludioxonil",
+   "bayleton 25 wp" = "triadimefon",
+   "bonsoin" = "chlorothalonil;cymoxanil",
+   "carbendazim + thiram" = "carbendazim; thiram", # carbendazim: Not in carob
+   "fox" = "prothioconazole;trifloxystrobin",
+   "malathion" = NA,# insecticide
+   "manzate d" = "mancozeb",
+   "maxim" = "fludioxonil",
+   "maxim xl" = "mefenoxam; fludioxonil",
+   "nativo" = "tebuconazole; trifloxystrobin",
+   "nobel 25 wp" = "triadimefon",
+   "opera" = "pyraclostrobin; epoxiconazole",
+   "pencycuron" = "pencycuron",
+   "potassium silicate" = "potassium silicate",
+   "propiconazole" = "propiconazole",
+   "pyraclostrobin" = "pyraclostrobin",
+   "ridomilgold mz 68 wg" = "metalaxyl-m; mancozeb",
+   "rizolex-t50" = "tolclofos-methyl; thiram",
+   "sphere max" = "trifloxystrobin;cyproconazole",
+   "unspecified" = "unknown",
+   "vitavax" = "carboxin"
+)
+
+i <- d$fungicide_product %in% fungicide_map
+d$fungicide_product[i] <- fungicide_map[d$fungicide_product[i]]
+
+
+## Fixing insecticide
+
+d$insecticide_product <- tolower(trimws(d$insecticide_product))
+
+insecticide_map <- c(
+   "abamectin" = "abamectin",
+   "ampligo" = "chlorantraniliprole; lambda-cyhalothrin",
+   "belt" = "flubendiamide",
+   "bestox" = "alpha-cypermethrin",
+   "bulldock" = "beta-cyfluthrin",
+   "cyhalothrin" = "lambda-cyhalothrin",
+   "cypadem" = "cypermethrin",
+   "cyproconazole" = NA, # fungicide, not insecticide
+   "dipterex" = "trichlorfon",
+   "fenvalerate" = "fenvalerate",
+   "imidacloprid" = "imidacloprid",
+   "karate" = "lambda-cyhalothrin",
+   "nuvacron" = "monocrotophos",
+   "pirimicarb" = "pirimicarb",
+   "sulfuramid" = "sulfuramid", # not in carob
+   "termex" = "imidacloprid;bifenthrin",
+   "thiodan" = "endosulfan",
+   "thunder" = "thiamethoxam;tolfenpyrad",
+   "trichlorophon" = "trichlorfon",
+   "unspecified" = "unknown",
+   "vetox 85" = "carbaryl",
+   "warrant power" = "gamma-cyhalothrin"
+)
+
+i <- d$insecticide_product %in% insecticide_map
+d$insecticide_product[i] <- insecticide_map[d$insecticide_product[i]]
 
 
 ##############################################################
