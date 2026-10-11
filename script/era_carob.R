@@ -260,7 +260,7 @@ d <- d[!grepl("Animal", d$product_type),]
 
 ### fixing rain value and type
 
-rain <- strsplit(d$rain, "-|\\.\\.")
+rain <- strsplit(d$rain, "-|\\.+")
 max_len <- max(sapply(rain, length)) 
 split_padded <- lapply(rain, function(x) {
    length(x) <- max_len
@@ -347,6 +347,103 @@ d$intercrops <- tolower(
    })
 )
 
+
+inter_crop_map <- c(
+   "banana sweet" = "banana",
+   "common vetch" = "vetch",
+   "cooking banana" = "banana",
+   "cordia africana" = "african cordia",
+   "cordia alliodora" = "laurel",
+   "croton macrostachyus" = "croton",
+   "cupressus lusitanica" = "mexican cypress",
+   "dactyladenia barteri" = "dactyladenia",
+   "desmodium intortum" = "greenleaf",
+   "dracaena steudneri" = "dracaena",
+   "ehretia cymosa" = "ehretia",
+   "entada abyssinica" = "entada",
+   "erythrina poeppigiana" = "immortelle tree",
+   "eucalyptus alba" = "white gum",
+   "eucalyptus deglupta" = "rainbow eucalyptus",
+   "eucalyptus urograndis" = "eucalyptus hybrid",
+   "faidherbia albida" = "apple",
+   "fava bean" = "faba bean",
+   "ficus vasta" = "fig",
+   "flemingia macrophylla" = "flemingia",
+   "gliricidia sepium" = "gliricidia",
+   "gliricidia sp." = "gliricidia",
+   "grevillea robusta" = "silky oak",
+   "guiera senegalensis" = "guiera",
+   "hibiscus" = "hibiscus",
+   "inga densiflora" = "inga",
+   "inga sp." = "inga",
+   "leucaena diversifolia" = "leucaena",
+   "leucaena leucocephala" = "white leadtree",
+   "macadamia" = "macadamia",
+   "maesopsis eminii" = "musizi",
+   "maize..common bean" = "maize; common bean",
+   "mangifera" = "mango",
+   "markhamia lutea" = "nile tulip tree",
+   "medicago scutellata" = "snail medic",
+   "medicago truncatula" = "barrel medic",
+   "melia azedarach" = "chinaberry",
+   "milicia excelsa" = "iroko",
+   "milletia ferruginea" = "millettia",
+   "millettia ferruginea" = "millettia",
+   "mimosa caesalpiniifolia" = "mimosa tree",
+   "mucuna" = "velvet bean",
+   "newbouldia laevis" = "boundary tree",
+   "olea welwitshii" = "olive",
+   "ornithopus sativus" = "pink serradella",
+   "other fodder" = "unknown",
+   "other millet" = "millet",
+   "palisade grass" = "palisade grass",
+   "palm oil" = "oil palm",
+   "peltophorum dubium" = "yellow poinciana",
+   "phoenix reclinata" = "palm",
+   "poupartia silvatica" = "poupartia",
+   "pouteria adolfi-friedericii" = "pouteria",
+   "prunus africana" = "african cherry",
+   "pueraria phaseoloides" = "tropical kudzu",
+   "purple vetch" = "purple vetch",
+   "rice bean" = "rice",
+   "ruzigrass" = "ruzi grass",
+   "schefflera abyssinica" = "schefflera",
+   "senna siamea" = "senna",
+   "senna spectabilis" = "senna",
+   "sesbania rostrata" = "sesbania",
+   "sesbania sesban" = "egyptian riverhemp",
+   "silverleaf" = "Silver leaf",
+   "solanum sp." = "solanum",
+   "squash (c.moschata)" = "butternut squash",
+   "stylosanthes capitata" = "stylo",
+   "stylosanthes guianensis" = "stylo",
+   "stylosanthes hamata" = "stylo",
+   "sugar cane" = "sugarcane",
+   "sweet potato" = "sweetpotato",
+   "tephrosia candida" = "tephrosia",
+   "tephrosia vogelii" = "fish-poison bean",
+   "terminalia amazonia" = "yellow terminalia",
+   "terminalia ivorensis" = "idigbo",
+   "terminalia ivoresensis" = "idigbo",
+   "tick clover sp" = "clover",
+   "trifolium subterraneum" = "clover",
+   "unspecified" = "Unknown",
+   "unspecified fodder grass" = "legume",
+   "unspecified legume" = "legume",
+   "unspecified tree" = "unknown",
+   "urochloa decumbens" = "signal grass",
+   "urochloa eminii" = "urochloa",
+   "vepris dainellii" = "epris",
+   "vetiver grass" = "Vetiver",
+   "vicia villosa" = "hairy vetch",
+   "winter vetch" = "winter vetch",
+   "ziziphus mauritiana" = "indian jujube"
+)
+
+i <- d$intercrops %in% names(inter_crop_map)
+d$intercrops[i] <- inter_crop_map[d$intercrops[i]]
+
+
 i <- which(d$K_organic!=0 | d$N_organic!=0 |d$P_organic!=0)
 d$OM_used <- FALSE
 d$OM_used[i] <- TRUE
@@ -359,7 +456,7 @@ split_padded <- lapply(crop, function(x) {
    return(x)
 })
 crop <- as.data.frame(do.call(rbind, split_padded), stringsAsFactors = FALSE)
-d$crop <- tolower(crop$V1)
+d$crop <- tolower(trimws(crop$V1))
 P <- carobiner:::fix_name(d$crop)
 P <- gsub("tephrosia vogelii", "tephrosia", P)
 P <- gsub("macadamia", "macadamia nut", P)
@@ -424,8 +521,8 @@ P <- gsub("sudan grass", "sorghum", P)
 P <- gsub("guar gum", "guar", P)
 P <- gsub("sweetcane", "sugarcane", P)
 P <- gsub("glyricidia sepium|gliricida sepium", "gliricida", P)
-P <- gsub(" sp| sp.", "", P)
-d$crop <- trimws(P)
+P <- gsub("sp|sp.", "", P)
+d$crop <- P
 
 
 crop_map <- c(
@@ -464,7 +561,142 @@ crop_map <- c(
    "tick clover" = "clover",
    "turkey berry" = "turkey berry",  # not in carob
    "winter vetch" = "vetch",
-   "vetiver" = "vetiver grass" # not in carob
+   "vetiver" = "vetiver grass", # not in carob
+   "acrocomia aculeata" = "Macauba palm",
+   "aeschynomene histrix" = "vetch",
+   "african nightshade" = "African nightshade",
+   "afzelia africana" = "African afzelia",
+   "albizia coriaria" = "Albizia",
+   "albizia falcataria" = "Falcataria",
+   "albizia gummifera" = "peacock flower tree",
+   "albizia harveyi" = "albizia",
+   "albizia lebbeck" = "siris tree",
+   "albizia versicolor" = "albizia",
+   "albizia zygia" = "albizia",
+   "alchornea cordifolia" = "christmas bush",
+   "alfalfa" = "lucerne",
+   "allanblackia floribunda" = "allanblackia",
+   "artocarpus heterophyllus" = "jackfruit",
+   "azadirachta indica" = "neem", # tree plant
+   "bauhinia reticulata" = "bauhinia", # not in carob
+   "brachiaria humidicola" = "koronivia grass", # not in carob
+   "calliandra calothyrsus" = "calliandra",  # not in carob
+   "calliandra houstoniana" = "calliandra",  # not in carob
+   "cashew nut" = "cashew",  # not in carob
+   "castor" = "castor bean",
+   "celtis mildbraedii" = "celtis",  # not in carob
+   "chloris gayana" = "rhodes grass",  # not in carob
+   "chloroleucon eurycyclum" = "chloroleucon",  # not in carob
+   "cleretum bellidiforme" = "livingstone daisy",  # not in carob
+   "cocksfoot" = "cocksfoot grass",  # not in carob
+   "cocoyam" = "taro",
+   "cordia africana" = "african cordia",  # not in carob
+   "cordia alliodora" = "laurel", # not in carob
+   "crotalaria breviflora" = "crotalaria",
+   "crotalaria ochrolueca" = "crotalaria",
+   "crotalaria paulina" = "crotalaria",
+   "crotalaria retusa" = "crotalaria",
+   "croton macrostachyus" = "broad-leaved croton",# not in carob
+   "cupressus lusitanica" = "mexican cypress", # not in carob
+   "dactyladenia barteri" = "dactyladenia",# not in carob
+   "desmodium intortum" = "green leaf", # not in carob
+   "desmodium uncinatum" = "Silver leaf", # not in carob
+   "dimorphotheca pluvialis" = "rain daisy", # not in carob
+   "dracaena steudneri" = "dracaena", #  not in carob
+   "drosanthemum floribundum" = "dewflower",
+   "drosanthemum striatum" = "dewflower",
+   "ehretia cymosa" = "ehretia",
+   "entada abyssinica" = "entada",
+   "entandrophragma angolense" = "tiama",
+   "entandrophragma cylindricum" = "sapele",
+   "eriosema ellipticum" = "eriosema",
+   "erythrina abyssinica" = "red-hot-poker tree",
+   "erythrina poeppigiana" = "immortelle tree",
+   "eucalyptus alba" = "White gum",
+   "eucalyptus deglupta" = "rainbow eucalyptus",
+   "eucalyptus globulus" = "blue gum",
+   "eucalyptus urograndis" = "eucalyptus hybrid",
+   "faidherbia albida" = "apple",
+   "felicia heterophylla" = "blue daisy",
+   "fernandoa madagascariensis" = "fernandoa",
+   "ficus exasperata" = "sandpaper tree",
+   "ficus natalensis" = "fig",
+   "ficus vasta" = "fig",
+   "flemingia" = "flemingia",
+   "flemingia macrophylla" = "flemingia",
+   "gazania krebsiana" = "gazania",
+   "geranium incanum" = "wild geranium",
+   "grevillea robusta" = "silky oak",
+   "guiera senegalensis" = "guiera",
+   "heliophyla coronopifolia" = "flax",
+   "hermannia pinnata" = "hermannia",
+   "inga densiflora" = "ice-cream bean",
+   "jatropha curcas" = "physic nut",
+   "juniperus procera" = "african pencil cedar",
+   "lampranthus multiradiatus" = "Lampranthus",
+   "leeks" = "leek",
+   "lessertia frutescens" = "cancer bush",
+   "leucaena diversifolia" = "leucaena",
+   "leucaena leucocephala" = "white leadtree",
+   "leucaena pallida" = "leucaena",
+   "macrotyloma daltonii" = "horse gram",
+   "maesopsis eminii" = "musizi",
+   "markhamia lutea" = "nile tulip tree",
+   "medicago scutellata" = "snail medic",
+   "medicago truncatula" = "barrel medic",
+   "milicia excelsa" = "iroko",
+   "milletia ferruginea" = "milletia",
+   "millettia ferruginea" = "milletia",
+   "mimosa caesalpiniifolia" = "mimosa tree",
+   "miscanthidium violoceum" = "miscanthidium grass",
+   "monopsis lutea" = "monopsis",
+   "moringa oleifera" = "moringa",
+   "neonotonia wightii" = "soybean",
+   "newbouldia laevis" = "boundary tree",
+   "olea welwitshii" = "olive",
+   "opuntia stricta" = "prickly pear",
+   "palisade grass" = "palisade grass",
+   "parkia biglobosa" = "african locust bean",
+   "pelargonium capitatum" = "pelargonium",
+   "peltophorum dubium" = "yellow poinciana",
+   "phoenix reclinata" = "wild date palm", 
+   "poupartia silvatica" = "poupartia",
+   "pouteria adolfi" = "pouteria",
+   "prunus africana" = "african cherry",
+   "pueraria phaseoloides" = "tropical kudzu",
+   "rhamnus prinoides" = "rhamnus",
+   "roella ciliata" = "roella",
+   "schefflera abyssinica" = "schefflera",
+   "senecio elegans" = "Purple",
+   "senna actabilis" = "senna",
+   "senna siamea" = "senna",
+   "sesbania bispinosa" = "sesbania",
+   "sesbania cannabina" = "sesbania",
+   "sesbania rostrata" = "sesbania",
+   "sesbania sesban" = "sesbania",
+   "spondias mombin" = "yellow mombin",
+   "steirodiscus tagetes" = "steirodiscus",
+   "stylosanthes capitata" = "stylosanthes",
+   "stylosanthes guianensis" = "stylosanthes",
+   "stylosanthes hamata" = "stylosanthes",
+   "stylosanthes macrocephala" = "stylosanthes",
+   "swiss chard" = "swiss chard",
+   "tectona grandis" = "teak",
+   "tephrosia candida" = "tephrosia",
+   "terminalia amazonia" = "terminalia",
+   "terminalia ivorensis" = "idigbo",
+   "terminalia superba" = "limba",
+   "tithonia diversifolia" = "sunflower",
+   "toona ciliata" = "australian red cedar",
+   "trifolium subterraneum" = "clover",
+   "urochloa decumbens" = "signal grass",
+   "vachellia karroo" = "Sweet thorn",
+   "vachellia seyal" = "red acacia",
+   "vachellia xanthophloea" = "fever tree",
+   "vepris dainellii" = "vepris",
+   "vetiver grass" = "vetiver",
+   "yacon" = "Yacon",
+   "ziziphus mauritiana" = "indian jujube"
 )
 
 i <- d$crop %in% names(crop_map)
@@ -687,7 +919,7 @@ herbicide_map <- c(
    "weedall" = "glyphosate"
 )
 
-i <- d$herbicide_product %in% herbicide_map
+i <- d$herbicide_product %in% names(herbicide_map)
 d$herbicide_product[i] <- herbicide_map[d$herbicide_product[i]]
 
 ### Fixing fungicide
@@ -717,7 +949,7 @@ fungicide_map <- c(
    "vitavax" = "carboxin"
 )
 
-i <- d$fungicide_product %in% fungicide_map
+i <- d$fungicide_product %in% names(fungicide_map)
 d$fungicide_product[i] <- fungicide_map[d$fungicide_product[i]]
 
 
@@ -750,7 +982,7 @@ insecticide_map <- c(
    "warrant power" = "gamma-cyhalothrin"
 )
 
-i <- d$insecticide_product %in% insecticide_map
+i <- d$insecticide_product %in% names(insecticide_map)
 d$insecticide_product[i] <- insecticide_map[d$insecticide_product[i]]
 
 
@@ -792,7 +1024,7 @@ names(dwf)[i] <- c("yield","soil_SOC", "soil_N_total", "soil_N", "soil_SOM", "em
 
 
 ### fixing tillage
-dwf$land_prep_method <- ifelse(is.na(dwf$land_prep_method) & !is.na(dwf$tillage), dwf$tillage, dwf$land_prep_method)
+dwf$land_prep_method <- ifelse(is.na(dwf$land_prep_method) & !is.na(dwf$tillage), "tillage", dwf$land_prep_method)
 dwf$id <- dwf$tillage <- NULL
  ### Fixing land prep 
 
