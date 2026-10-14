@@ -307,6 +307,82 @@ rota <- as.data.frame(do.call(rbind, split_padded), stringsAsFactors = FALSE)
 d$crop_rotation <- tolower(gsub("NA", NA, rota$V1))
 d$crop_rotation <- tolower(gsub("\\*+", ";", d$crop_rotation))
 
+crop_rotation_map <- c(
+  "acacia albida delile" = "acacia",
+  "acacia angustissima" = "acacia",
+  "acacia auriculiformis" = "acacia",
+  "acacia crassicarpa" = "northern wattle",
+  "acacia decurrens" = "green wattle",
+  "acacia leptocarpa" = "north coast wattle",
+  "albizia falcataria" = "falcataria",
+  "albizia lebbeck" = "siris tree",
+  "alchornea cordifolia" = "christmas bush",
+  "alnus acuminata" = "andean alder",
+  "bambara nut" = "bambara groundnut",
+  "brachiaria brizantha" = "palisade grass",
+  "brachiaria hybrid" = "brachiaria hybrid",
+  "butter bean" = "lima bean",
+  "calliandra calothyrsus" = "calliandra",
+  "canola" = "Canola",
+  "casuarina equisetifolia" = "australian pine",
+  "chili" = "chili pepper",
+  "clitoria ternatea" = "pea",
+  "common vetch" = "vetch",
+  "crotalaria grahamiana" = "rattlepod",
+  "crotalaria juncea" = "sunn hemp",
+  "crotalaria ochrolueca" = "rattlebox",
+  "crotalaria paulina" = "crotalaria",
+  "crotalaria sp" = "crotalaria",
+  "crotalaria spectabilis" = "rattlebox",
+  "cupressus lusitanica" = "mexican cypress",
+  "dactyladenia barteri" = "dactyladenia",
+  "egyptian clover" = "clover",
+  "entada abyssinica" = "entada",
+  "eucalyptus urograndis" = "eucalyptus hybrid",
+  "fallow" = "none",
+  "fava bean" = "faba bean",
+  "flemingia sp" = "flemingia",
+  "fodder radish" = "radish",
+  "gliricidia sepium" = "gliricidia",
+  "grazing vetch" = "vetch",
+  "grevillea robusta" = "oak",
+  "hyptis spicigera" = "sesame",
+  "indian pea" = "grass pea",
+  "jointvetche" = "vetch",
+  "leucaena diversifolia" = "leucaena",
+  "leucaena leucocephala" = "white leadtree",
+  "leucaena pallida" = "leucaena",
+  "maesopsis eminii" = "musizi",
+  "markhamia lutea" = "nile tulip tree",
+  "melia azedarach" = "chinaberry",
+  "moringa oleifera" = "moringa",
+  "natural fallow" = "none",
+  "other fodder" = "none",
+  "palisade grass" = "palisade grass",
+  "patula pine" = "patula pine",
+  "peas" = "pea",
+  "peltophorum dubium" = "yellow poinciana",
+  "pueraria phaseoloides" = "tropical kudzu",
+  "ryegrass sp" = "ryegrass",
+  "senna siamea" = "senna",
+  "senna spectabilis" = "senna",
+  "sesbania cannabina" = "sesbania",
+  "sesbania sesban" = "egyptian riverhemp",
+  "stylosanthes capitata" = "stylo",
+  "stylosanthes guianensis" = "stylo",
+  "stylosanthes hamata" = "stylo",
+  "sweet potato" = "sweetpotato",
+  "tephrosia candida" = "tephrosia",
+  "tephrosia vogelii" = "fish-poison bean",
+  "tithonia diversifolia" = "sunflower",
+  "unspecified fodder grass" = "unknown",
+  "unspecified legume" = "legume",
+  "urochloa eminii" = "urochloa grass"
+)
+
+i <- d$crop_rotation %in% names(crop_rotation_map)
+d$crop_rotation[i] <- crop_rotation_map[d$crop_rotation[i]]
+
 d$treatment_type <- ifelse(grepl("TRUE", d$control_T), "control", "treatment")
 
 ### Fixing country
@@ -317,8 +393,11 @@ d$country <- ifelse(grepl("Uganda", d$country), "Uganda",
              ifelse(grepl("Benin..Togo", d$country), "Benin", 
              ifelse(grepl("Ghana..Benin", d$country), "Ghana", 
              ifelse(grepl("Kenya..Kenya", d$country), "Kenya", 
-             ifelse(grepl("Drc|Congo", d$country), "Democratic Republic of Congo", d$country))))))))
+             ifelse(grepl("Drc|Congo", d$country), "Democratic Republic of the Congo", d$country))))))))
 
+ d$country <- gsub("DRC|Democratic Republic of Congo", "Democratic Republic of the Congo", d$country)
+ d$country <- gsub("Ivory Coast", "Côte d'Ivoire", d$country)
+ d$country <- gsub("Swaziland", "Eswatini", d$country)
 ### Fixing intercrops
 
 split <- strsplit(d$intercrops, "\\*+")
