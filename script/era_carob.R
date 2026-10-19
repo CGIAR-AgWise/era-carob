@@ -1164,8 +1164,7 @@ dwf$yield_part <- tolower(ifelse(grepl("Grain/Seed", dwf$yield_part), "grain",
 dwf <- dwf[!is.na(dwf$crop),]
  
 
-carobiner::write_files(path, meta, dwf)
-
+#carobiner::write_files(path, meta, dwf)
 
 
 
