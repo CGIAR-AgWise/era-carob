@@ -241,8 +241,6 @@ d <- data.frame(
 )
 
 
-
-
 ### product type
 prod <- strsplit(d$product_type, "\\*+")
 max_len <- max(sapply(prod, length)) 
@@ -269,6 +267,17 @@ split_padded <- lapply(rain, function(x) {
 rain <- as.data.frame(do.call(rbind, split_padded), stringsAsFactors = FALSE)
 d$rain <- as.numeric(gsub("NA", NA, rain$V1))
 
+### fixing elevation value and type
+
+elev <- strsplit(d$elevation, "-|\\.+")
+max_len <- max(sapply(elev, length)) 
+split_padded <- lapply(elev, function(x) {
+   length(x) <- max_len
+   return(x)
+})
+elev <- as.data.frame(do.call(rbind, split_padded), stringsAsFactors = FALSE)
+d$elevation <- as.numeric(gsub("NA", NA, rain$V1))
+
 
 ### Fixing soil texture
 texture <- strsplit(d$soil_texture, "-|\\.\\.|/")
@@ -283,6 +292,10 @@ P <- carobiner::fix_name(d$soil_texture)
 P <- gsub("silt loam", "silty loam", P)
 d$soil_texture <- P
 
+### soil depth
+depth <- as.data.frame(do.call(rbind, strsplit(d$soil_depth, "-")))
+d$depth_bottom <- as.numeric(gsub("NA", NA, trimws(depth$V2)))
+d$depth_top <- as.numeric(gsub("NA", NA, trimws(depth$V1)))
 ### fixing seed density unit 
 
 d$seed_rate <- d$seed_density <- NA
@@ -1100,6 +1113,7 @@ dwf <- do.call(carobiner::bindr, dw)
 
 i <- grepl(paste("Crop_Yield", "Soil_Organic_Carbon", "Soil_Total_Nitrogen", "Soil_Nitrogen", "Soil_Organic_Matter", "Carbon_Dioxide_Emissions", "Soil_Organic_Carbon_\\(Change\\)", "CO2_Equivalent_Emissions", "Variable_Cost_per_Unit_Product", "Aboveground_Biomass", "Pest_&_Pathogen_\\(Losses\\)", "Effective_Cation_Exchange_Capacity", "Methane_Emissions", "Nitrous_Oxide_Emissions", "Cation_Exchange_Capacity", "Erosion", "Labour_Cost", "Labour_Person_Hours", "Net_Return", "Soil_Carbon_Stocks", sep = "|"), names(dwf))
 names(dwf)[i] <- c("yield","soil_SOC", "soil_N_total", "soil_N", "soil_SOM", "emission_CO2", "soil_SOC_exch", "CO2_eq_emission", "variable_cost", "fwy_total", "pest_severity", "soil_CEC_eff", "emission_CH4", "emission_N2O", "soil_CEC", "soil_erosion", "labour_Cost", "labour", "net_benefit", "soil_C_stock")
+dwf$yield <- as.numeric(dwf$yield)
 
 
 ### fixing tillage
@@ -1148,6 +1162,12 @@ dwf$yield_part <- tolower(ifelse(grepl("Grain/Seed", dwf$yield_part), "grain",
 
 ### drop rows with missing crop 
 dwf <- dwf[!is.na(dwf$crop),]
-
+ 
 
 carobiner::write_files(path, meta, dwf)
+
+
+
+
+
+
