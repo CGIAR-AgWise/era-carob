@@ -9,6 +9,17 @@ and CIAT. Cedric Ngakou developed the ERA-to-Carob transformation and
 merge; Namita Joshi contributed integration, reporting and fixes and
 leads climate integration.
 
+### ERA data version
+
+Both the historical replay and the corrected pipeline use the **ERA
+Agronomy bundle dated 12 May 2025**. Its agronomic JSON combines
+**Majestic Hippo 2020 (2025-04-11.1)** and **Industrious Elephant 2023
+(2025-05-09.2)**. Crop harmonisation uses the bundled master codes dated
+**2025-05-12**. The bundle also contains a compiled Parquet file
+labelled v1.0. The observation counts come from the agronomic JSON. The
+proposed v0.1 version refers to the ERA–Carob pipeline. [Pinned archive
+and SHA-256](audit/inputs.json)
+
 ### What the pinned comparison measures
 
 Each retained ERA row has a distinct ordinal in the source archive’s

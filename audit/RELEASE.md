@@ -2,6 +2,10 @@
 
 Scope: pinned code, aggregate validation evidence and reproduction instructions. The local wide table is an exploratory harmonisation output. No climate-enriched model data or rights-cleared combined database is released.
 
+## ERA source version
+
+The 12 May 2025 agronomy bundle contains the observation input `agronomic_majestic-hippo-2020-2025-04-11.1_industrious-elephant-2023-2025-05-09.2.json`. The vocabulary input is `era_master_codes-2025-05-12.json`. The archive's internal version CSV lists an earlier master-code filename dated 23 April. These identifiers follow the actual files extracted from the checksum-verified archive.
+
 ## Reproduce
 
 Clone the repository with its history (the replay reads the June transform with Git). From repository root, with network access, Python 3.9+, Git, curl, R and Pandoc:
