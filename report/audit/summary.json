@@ -1,0 +1,25 @@
+{
+  "era_rows": 244041,
+  "carob_rows": 246993,
+  "merged": 491034,
+  "raw": [
+    678,
+    54,
+    33
+  ],
+  "resolved": [
+    133,
+    57,
+    6
+  ],
+  "era_ids": 1720,
+  "carob_ids": 201,
+  "doi_edges": 21,
+  "doi_studies": 14,
+  "trials": 41631,
+  "record_keys": 246975,
+  "era_source": 110534,
+  "countries": 17,
+  "era_missing": 40247,
+  "carob_missing": 820
+}

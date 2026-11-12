@@ -1,94 +1,69 @@
-## ERA TO CAROB FORMAT
-
-# Run once to install dependencies:
-#install.packages(c("s3fs", "arrow", "terra", "remotes"), type = "binary")
-# remotes::install_github("carob-data/caramba")
-
-library(tidyr)
+# Exploratory broad-schema conversion. Run audit/prepare.py first.
 library(dplyr)
-library(s3fs)
-library(arrow)
-library(jsonlite)
-library(caramba)
-
-# Load ERA data from S3
-s3 <- s3fs::S3FileSystem$new(anonymous = TRUE)
-era_s3 <- "s3://digital-atlas/era"
-bundle_dir <- file.path(era_s3, "data", "packaged")
-
-all_files <- s3$dir_ls(bundle_dir)
-latest_bundle <- tail(sort(grep("era_agronomy_bundle.*\\.tar\\.gz$", all_files, value = TRUE)), 1)
-
-dl_dir <- "downloaded_data"
-dir.create(dl_dir, showWarnings = FALSE)
-bundle_local <- file.path(dl_dir, basename(latest_bundle))
-extract_dir <- file.path(dl_dir, tools::file_path_sans_ext(tools::file_path_sans_ext(basename(latest_bundle))))
-
-if (!file.exists(bundle_local)) {
-  s3$file_download(latest_bundle, bundle_local, overwrite = TRUE)
+library(tidyr)
+source("script/pinned.R")
+era_merge <- jsonlite::fromJSON(one_input("agronomic_*.json"))
+era_master <- jsonlite::fromJSON(one_input("era_master_codes*.json"))
+# Source ordinal is stable only within the pinned ERA archive.
+era_merge$Data.Out$era_source_row <- seq_len(nrow(era_merge$Data.Out))
+# Retain every outcome once; ambiguous or incomplete lookup keys supply no attributes.
+safe_lookup <- function(x,y,by) {
+  y <- unique(as.data.frame(y))
+  eligible <- complete.cases(y[by])
+  y <- y[eligible & !duplicated(y[by]) & !duplicated(y[by], fromLast=TRUE),,drop=FALSE]
+  z <- left_join(x,y,by=by,na_matches="never",relationship="many-to-one")
+  stopifnot(identical(x$era_source_row,z$era_source_row))
+  z
 }
-if (!dir.exists(extract_dir)) {
-  dir.create(extract_dir)
-  utils::untar(bundle_local, exdir = extract_dir)
-}
-
-json_agronomic <- list.files(extract_dir, pattern = "^agronomic_.*\\.json$", full.names = TRUE)
-json_master    <- list.files(extract_dir, pattern = "^era_master_codes.*\\.json$", full.names = TRUE)
-parquet_file   <- list.files(extract_dir, pattern = "^era_compiled.*\\.parquet$", full.names = TRUE)
-
-ERA_Compiled <- arrow::read_parquet(parquet_file)
-era_merge    <- jsonlite::fromJSON(json_agronomic[1], simplifyDataFrame = TRUE)
-era_master   <- jsonlite::fromJSON(json_master[1],    simplifyDataFrame = TRUE)
-
 ### Baseline data 
-rb <-  do.call(carobiner::bindr, era_merge["Data.Out"])
+rb <-  do.call(bindr, era_merge["Data.Out"])
 
 #### adding missing variables from prod.out to Data.out
-r5 <- do.call(carobiner::bindr, era_merge["Prod.Out"])
-rb <- merge(rb, r5,  by= intersect(names(rb), names(r5)), all = TRUE)
+r5 <- do.call(bindr, era_merge["Prod.Out"])
+rb <- safe_lookup(rb, r5, by=intersect(names(rb), names(r5)))
 
 ### Adding Tillage variables from Till.out to Data.out
-r7 <- do.call(carobiner::bindr, era_merge["Till.Out"])
-rb <- merge(rb, r7,  by= intersect(names(rb), names(r7)), all = TRUE)
+r7 <- do.call(bindr, era_merge["Till.Out"])
+rb <- safe_lookup(rb, r7, by=intersect(names(rb), names(r7)))
 
 ### Adding planting management information 
-r9 <- do.call(carobiner::bindr, era_merge["Plant.Method"])
-rb <- merge(rb, r9,  by= intersect(names(rb), names(r9)), all = TRUE)
+r9 <- do.call(bindr, era_merge["Plant.Method"])
+rb <- safe_lookup(rb, r9, by=intersect(names(rb), names(r9)))
 
 ### Adding fertilizer method
-r12 <- do.call(carobiner::bindr, era_merge["Fert.Method"])
-rb <- merge(rb, r12,  by= intersect(names(rb), names(r12)), all = TRUE)
+r12 <- do.call(bindr, era_merge["Fert.Method"])
+rb <- safe_lookup(rb, r12, by=intersect(names(rb), names(r12)))
 
 ### Adding chemical elements 
-r15 <- do.call(carobiner::bindr, era_merge["Chems.Out"])
-rb <- merge(rb, r15,  by= intersect(names(rb), names(r15)), all = TRUE)
+r15 <- do.call(bindr, era_merge["Chems.Out"])
+rb <- safe_lookup(rb, r15, by=intersect(names(rb), names(r15)))
 
 #### residue 
-r18 <-  unclass(do.call(carobiner::bindr, era_merge["Res.Method"]) )
-rb <- merge(rb, r18,  by= intersect(names(rb), names(r18)), all = TRUE)
+r18 <-  unclass(do.call(bindr, era_merge["Res.Method"]) )
+rb <- safe_lookup(rb, r18, by=intersect(names(rb), names(r18)))
 
 ## residue composition 
-r19 <-  do.call(carobiner::bindr, era_merge["Res.Comp"]) 
-rb <- merge(rb, r19,  by= intersect(names(rb), names(r19)), all = TRUE)
+r19 <-  do.call(bindr, era_merge["Res.Comp"])
+rb <- safe_lookup(rb, r19, by=intersect(names(rb), names(r19)))
 
 #### 
-r21 <-  do.call(carobiner::bindr, era_merge["pH.Out"]) 
-rb <- merge(rb, r21,  by= intersect(names(rb), names(r21)), all = TRUE)
+r21 <-  do.call(bindr, era_merge["pH.Out"])
+rb <- safe_lookup(rb, r21, by=intersect(names(rb), names(r21)))
 
 ####
-r22 <-  do.call(carobiner::bindr, era_merge["pH.Method"]) 
-rb <- merge(rb, r22,  by= intersect(names(rb), names(r22)), all = TRUE)
+r22 <-  do.call(bindr, era_merge["pH.Method"])
+rb <- safe_lookup(rb, r22, by=intersect(names(rb), names(r22)))
 
 ##### irrigation
-r23 <-  do.call(carobiner::bindr, era_merge["Irrig.Method"])
-rb <- merge(rb, r23,  by= intersect(names(rb), names(r23)), all = TRUE)
+r23 <-  do.call(bindr, era_merge["Irrig.Method"])
+rb <- safe_lookup(rb, r23, by=intersect(names(rb), names(r23)))
 
 ###
-r25 <-  do.call(carobiner::bindr, era_merge["WH.Out"])
-rb <- merge(rb, r25,  by= intersect(names(rb), names(r25)), all = TRUE)
+r25 <-  do.call(bindr, era_merge["WH.Out"])
+rb <- safe_lookup(rb, r25, by=intersect(names(rb), names(r25)))
 
 ### Add soil data 
-r2 <- do.call(carobiner::bindr, era_merge["Soil.Out"])
+r2 <- do.call(bindr, era_merge["Soil.Out"])
 d1 <- data.frame(
    Site.ID= r2$Site.ID,
    soil_depth= paste0(r2$Soil.Upper, "-", r2$Soil.Lower),
@@ -97,36 +72,13 @@ d1 <- data.frame(
    value= r2$value
 )
 
-proc_soil <- function(f){
-   
-   d2 <- d1[d1$B.Code==f,]
-   
-   ### Adding  step in the data to facilitate the transformation from long to wide 
-   ds <- d2 %>%
-      group_by(variable) %>%
-      mutate(id = row_number()) %>%
-      ungroup()
-   df <- ds %>%
-      pivot_wider(
-         id_cols = names(ds)[!grepl("variable|value", names(ds))],
-         names_from = variable ,        
-         values_from = value      
-      )
-   
-   return(df)
-   
-}
-
-#### Append the data base on the study (B_code)
-ff <- unique(r2$B.Code)
-ds <- lapply(ff, proc_soil)
-ds <- do.call(carobiner::bindr, ds)
-ds$id <- NULL
-names(ds) <- gsub("Soil.", "soil_", names(ds))
-i <- grep("CLY|SLT|SND|soil_AP", names(ds))
-names(ds)[i] <-  c("soil_clay","soil_silt","soil_sand", "soil_P")
-
-rb <- merge(rb, ds, by= intersect(names(rb), names(ds)), all= TRUE)
+# Only one distinct value per measured variable at the same site and depth.
+ds <- d1 %>% distinct() %>% group_by(B.Code, Site.ID, soil_depth, variable) %>%
+   summarise(value=if(n()==1L) first(value) else NA_real_,.groups="drop") %>%
+   pivot_wider(names_from=variable,values_from=value)
+names(ds) <- sub("^Soil[.]","soil_",names(ds))
+ds <- rename(ds,soil_clay=CLY,soil_silt=SLT,soil_sand=SND,soil_P=soil_AP)
+rb <- safe_lookup(rb, ds, by=intersect(names(rb), names(ds)))
 rb <- rb[!grepl("All Sites", rb$Site.ID),]
 ### keep only rows with crop and animal (livestoks)
 #df <- rb[!grepl("Animal", rb$Product.Type),]
@@ -140,15 +92,18 @@ cols <- c("PD.Plant.Start", "PD.Plant.End", "PD.Harvest.Start", "PD.Harvest.End"
 df[cols] <- lapply(df[cols], unclass)
 
 d <- data.frame(
+   yield_raw=ifelse(df$Out.Subind=="Crop_Yield", df$ED.Mean.T, NA),
+   yield_unit_raw=ifelse(df$Out.Subind=="Crop_Yield", df$Out.Unit, NA),
+   era_source_row=df$era_source_row,
    uri=df$B.DOI,
    reference= df$B.Author.Last,
    dataset_id= df$B.Code,
    location= df$Site.ID,
-   on_farm= grepl("On-farm", tolower(df$Site.Type)),
+   on_farm= grepl("on-farm", tolower(df$Site.Type)),
    is_survey = grepl("survey", tolower(df$Site.Type)),
    country= df$Country,
-   latitude= substr(df$Site.LatD, 1, 6),
-   longitude= substr(df$Site.LonD,1, 6),
+   latitude= df$Site.LatD,
+   longitude= df$Site.LonD,
    rain= df$Site.MAP,
    #temp= df$Site.MAT,
    elevation= df$Site.Elevation,
@@ -269,14 +224,7 @@ d$rain <- as.numeric(gsub("NA", NA, rain$V1))
 
 ### fixing elevation value and type
 
-elev <- strsplit(d$elevation, "-|\\.+")
-max_len <- max(sapply(elev, length)) 
-split_padded <- lapply(elev, function(x) {
-   length(x) <- max_len
-   return(x)
-})
-elev <- as.data.frame(do.call(rbind, split_padded), stringsAsFactors = FALSE)
-d$elevation <- as.numeric(gsub("NA", NA, rain$V1))
+d$elevation <- suppressWarnings(as.numeric(d$elevation))
 
 
 ### Fixing soil texture
@@ -288,7 +236,7 @@ split_padded <- lapply(texture, function(x) {
 })
 text <- as.data.frame(do.call(rbind, split_padded), stringsAsFactors = FALSE)
 d$soil_texture <- tolower(gsub("NA", NA, text$V1))
-P <- carobiner::fix_name(d$soil_texture)
+P <- fix_name(d$soil_texture)
 P <- gsub("silt loam", "silty loam", P)
 d$soil_texture <- P
 
@@ -540,276 +488,15 @@ i <- which(d$K_organic!=0 | d$N_organic!=0 |d$P_organic!=0)
 d$OM_used <- FALSE
 d$OM_used[i] <- TRUE
 
-#### fixing crop names
-crop <- strsplit(d$crop, "-|\\.\\.")
-max_len <- max(sapply(crop, length)) 
-split_padded <- lapply(crop, function(x) {
-   length(x) <- max_len
-   return(x)
-})
-crop <- as.data.frame(do.call(rbind, split_padded), stringsAsFactors = FALSE)
-d$crop <- tolower(trimws(crop$V1))
-P <- carobiner:::fix_name(d$crop)
-P <- gsub("tephrosia vogelii", "tephrosia", P)
-P <- gsub("macadamia", "macadamia nut", P)
-P <- gsub("gliricidia sepium", "gliricidia", P)
-P <- gsub("crotalaria grahamiana", "crotalaria", P)
-P <- gsub("^fallow", "none", P)
-P <- gsub("natural fallow", "none", P)
-P <- gsub("bambara nut", "bambara groundnut", P)
-P <- gsub("crotalaria spectabilis", "crotalaria", P)
-P <- gsub("brachiaria hybrid", "brachiaria", P)
-P <- gsub("cooking banana", "banana", P)
-P <- gsub("other millet", "millet", P)
-P <- gsub("panicum antidotale", "proso millet", P)
-P <- gsub("ethiopian eggplant", "eggplant", P)
-P <- gsub("passionfruit", "passion fruit", P)
-P <- gsub("solanum sp", "eggplant", P)
-P <- gsub("urochloa eminii", "congo grass", P)
-P <- gsub("fava bean", "faba bean", P)
-P <- gsub("tarenna sp", "tarenna", P)
-P <- gsub("butter bean", "lima bean", P)
-P <- gsub("fluted pumpkin", "pumpkin", P)
-P <- gsub("ryegrass sp", "ryegrass", P)
-P <- gsub("palm", "oil palm", P)
-P <- gsub("sugar cane", "sugarcane", P)
-P <- gsub("peas", "pea", P)
-P <- gsub("mangifera indica", "mango", P)
-P <- gsub("brachiaria brizantha", "brachiaria", P)
-P <- gsub("crotalaria ochroleuca", "crotalaria", P)
-P <- gsub("purple vetch", "vetch", P)
-P <- gsub("crotalaria juncea", "sunn hemp", P)
-P <- gsub("gliricidia sp\\.", "gliricidia", P)
-P <- gsub("ayocote bean", "runner bean", P)
-P <- gsub("brachiaria decumbens", "brachiaria", P)
-P <- gsub("helichrysum petiolare", "licorice", P)
-P <- gsub("ornithopus sativus", "serradella", P)
-P <- gsub("artichokes", "jerusalem artichoke", P)
-P <- gsub("acacia sp|acacia.*", "acacia", P)
-P <- gsub("acacia auriculiformis", "earleaf acacia", P)
-P <- gsub("flemingia sp.", "flemingia", P)
-P <- gsub("vigna.*unguiculata", "legume", P)
-P <- gsub("proso mille", "millet", P)
-P <- gsub("peanut|arachis pintoi", "groundnut", P)
-P <- gsub("rice bean", "rice", P)
-P <- gsub("tree cassava", "cassava", P)
-P <- gsub("water yam|white yam", "yam", P)
-P <- gsub("sweet potato", "sweetpotato", P)
-P <- gsub("durum wheat", "wheat", P)
-P <- gsub("banana sweet", "banana", P)
-P <- gsub("new cocoyam", "cocoyam", P)
-P <- gsub("chili|capsicum", "pepper", P)
-P <- gsub("canola", "rapeseed", P)
-P <- gsub("^oats|black oats", "oat", P)
-P <- gsub("^ryegrass$|westerwold ryegrass", "rye grass",  P)
-P <- gsub("grazing vetch|vicia villosa", "vetch", P)
-P <- gsub("clitoria ternatea", "pea", P)
-P <- gsub("calopogonium mucunoides", "calopo", P)
-P <- gsub("melia azedarach", "melia", P)
-P <- gsub("alnus acuminata", "alder", P)
-P <- gsub("casuarina equisetifolia", "casuarina", P)
-P <- gsub("ethiopian mustard", "mustard", P)
-P <- gsub("sudan grass", "sorghum", P)
-P <- gsub("guar gum", "guar", P)
-P <- gsub("sweetcane", "sugarcane", P)
-P <- gsub("glyricidia sepium|gliricida sepium", "gliricida", P)
-P <- gsub("sp|sp.", "", P)
-d$crop <- P
-
-
-crop_map <- c(
-   "gliricida" = "gliricidia",
-   "hyptiscigera" = "sesame",
-   "jointvetche" = "vetch",
-   "millett" = "millet",
-   "oil palm oil" = "oil palm",
-   "sennactabilis" = "senna actabilis", # tree
-   "terminalia ivoresensis" = "terminalia ivorensis",# tree
-   "drosanthemumciosum" = "drosanthemum floribundum", # not in carob
-   "eggplant." = "eggplant",
-   "squash (c.moschata)" = "squash",
-   "fodder (natural vegetation)" = "vegetable",
-   "carrot & parsnip" = "carrot",
-   "lemon & lime" = "lemon",
-   "peach & nectarine" = "peach",
-   "patula pine" = "pine",
-   "alder" = "alder", # tree not in carob
-   "arabica" = "arabica coffee",
-   "calopo" = "calopo", # not in carob
-   "common vetch" = "vetch",
-   "egyptian clover" = "berseem clover",
-   "fodder radish" = "radish",
-   "horsegram" = "horse gram", # not in carob
-   "indian pea" = "pea",
-   "kikuyu grass" = "kikuyu grass", # not in carob
-   "linseed" = "flax",
-   "niger" = "niger",
-   "oat" = "oats",
-   "rape" = "rapeseed",
-   "robusta" = "robusta coffee",
-   "silverleaf" = "silver leaf", # desmodium
-   "smutsfinger grass" = "smuts finger grass", # not in carob
-   "sunchoke" = "jerusalem artichoke",
-   "tick clover" = "clover",
-   "turkey berry" = "turkey berry",  # not in carob
-   "winter vetch" = "vetch",
-   "vetiver" = "vetiver grass", # not in carob
-   "acrocomia aculeata" = "Macauba palm",
-   "aeschynomene histrix" = "vetch",
-   "african nightshade" = "African nightshade",
-   "afzelia africana" = "African afzelia",
-   "albizia coriaria" = "Albizia",
-   "albizia falcataria" = "Falcataria",
-   "albizia gummifera" = "peacock flower tree",
-   "albizia harveyi" = "albizia",
-   "albizia lebbeck" = "siris tree",
-   "albizia versicolor" = "albizia",
-   "albizia zygia" = "albizia",
-   "alchornea cordifolia" = "christmas bush",
-   "alfalfa" = "lucerne",
-   "allanblackia floribunda" = "allanblackia",
-   "artocarpus heterophyllus" = "jackfruit",
-   "azadirachta indica" = "neem", # tree plant
-   "bauhinia reticulata" = "bauhinia", # not in carob
-   "brachiaria humidicola" = "koronivia grass", # not in carob
-   "calliandra calothyrsus" = "calliandra",  # not in carob
-   "calliandra houstoniana" = "calliandra",  # not in carob
-   "cashew nut" = "cashew",  # not in carob
-   "castor" = "castor bean",
-   "celtis mildbraedii" = "celtis",  # not in carob
-   "chloris gayana" = "rhodes grass",  # not in carob
-   "chloroleucon eurycyclum" = "chloroleucon",  # not in carob
-   "cleretum bellidiforme" = "livingstone daisy",  # not in carob
-   "cocksfoot" = "cocksfoot grass",  # not in carob
-   "cocoyam" = "taro",
-   "cordia africana" = "african cordia",  # not in carob
-   "cordia alliodora" = "laurel", # not in carob
-   "crotalaria breviflora" = "crotalaria",
-   "crotalaria ochrolueca" = "crotalaria",
-   "crotalaria paulina" = "crotalaria",
-   "crotalaria retusa" = "crotalaria",
-   "croton macrostachyus" = "broad-leaved croton",# not in carob
-   "cupressus lusitanica" = "mexican cypress", # not in carob
-   "dactyladenia barteri" = "dactyladenia",# not in carob
-   "desmodium intortum" = "green leaf", # not in carob
-   "desmodium uncinatum" = "Silver leaf", # not in carob
-   "dimorphotheca pluvialis" = "rain daisy", # not in carob
-   "dracaena steudneri" = "dracaena", #  not in carob
-   "drosanthemum floribundum" = "dewflower",
-   "drosanthemum striatum" = "dewflower",
-   "ehretia cymosa" = "ehretia",
-   "entada abyssinica" = "entada",
-   "entandrophragma angolense" = "tiama",
-   "entandrophragma cylindricum" = "sapele",
-   "eriosema ellipticum" = "eriosema",
-   "erythrina abyssinica" = "red-hot-poker tree",
-   "erythrina poeppigiana" = "immortelle tree",
-   "eucalyptus alba" = "White gum",
-   "eucalyptus deglupta" = "rainbow eucalyptus",
-   "eucalyptus globulus" = "blue gum",
-   "eucalyptus urograndis" = "eucalyptus hybrid",
-   "faidherbia albida" = "apple",
-   "felicia heterophylla" = "blue daisy",
-   "fernandoa madagascariensis" = "fernandoa",
-   "ficus exasperata" = "sandpaper tree",
-   "ficus natalensis" = "fig",
-   "ficus vasta" = "fig",
-   "flemingia" = "flemingia",
-   "flemingia macrophylla" = "flemingia",
-   "gazania krebsiana" = "gazania",
-   "geranium incanum" = "wild geranium",
-   "grevillea robusta" = "silky oak",
-   "guiera senegalensis" = "guiera",
-   "heliophyla coronopifolia" = "flax",
-   "hermannia pinnata" = "hermannia",
-   "inga densiflora" = "ice-cream bean",
-   "jatropha curcas" = "physic nut",
-   "juniperus procera" = "african pencil cedar",
-   "lampranthus multiradiatus" = "Lampranthus",
-   "leeks" = "leek",
-   "lessertia frutescens" = "cancer bush",
-   "leucaena diversifolia" = "leucaena",
-   "leucaena leucocephala" = "white leadtree",
-   "leucaena pallida" = "leucaena",
-   "macrotyloma daltonii" = "horse gram",
-   "maesopsis eminii" = "musizi",
-   "markhamia lutea" = "nile tulip tree",
-   "medicago scutellata" = "snail medic",
-   "medicago truncatula" = "barrel medic",
-   "milicia excelsa" = "iroko",
-   "milletia ferruginea" = "milletia",
-   "millettia ferruginea" = "milletia",
-   "mimosa caesalpiniifolia" = "mimosa tree",
-   "miscanthidium violoceum" = "miscanthidium grass",
-   "monopsis lutea" = "monopsis",
-   "moringa oleifera" = "moringa",
-   "neonotonia wightii" = "soybean",
-   "newbouldia laevis" = "boundary tree",
-   "olea welwitshii" = "olive",
-   "opuntia stricta" = "prickly pear",
-   "palisade grass" = "palisade grass",
-   "parkia biglobosa" = "african locust bean",
-   "pelargonium capitatum" = "pelargonium",
-   "peltophorum dubium" = "yellow poinciana",
-   "phoenix reclinata" = "wild date palm", 
-   "poupartia silvatica" = "poupartia",
-   "pouteria adolfi" = "pouteria",
-   "prunus africana" = "african cherry",
-   "pueraria phaseoloides" = "tropical kudzu",
-   "rhamnus prinoides" = "rhamnus",
-   "roella ciliata" = "roella",
-   "schefflera abyssinica" = "schefflera",
-   "senecio elegans" = "Purple",
-   "senna actabilis" = "senna",
-   "senna siamea" = "senna",
-   "sesbania bispinosa" = "sesbania",
-   "sesbania cannabina" = "sesbania",
-   "sesbania rostrata" = "sesbania",
-   "sesbania sesban" = "sesbania",
-   "spondias mombin" = "yellow mombin",
-   "steirodiscus tagetes" = "steirodiscus",
-   "stylosanthes capitata" = "stylosanthes",
-   "stylosanthes guianensis" = "stylosanthes",
-   "stylosanthes hamata" = "stylosanthes",
-   "stylosanthes macrocephala" = "stylosanthes",
-   "swiss chard" = "swiss chard",
-   "tectona grandis" = "teak",
-   "tephrosia candida" = "tephrosia",
-   "terminalia amazonia" = "terminalia",
-   "terminalia ivorensis" = "idigbo",
-   "terminalia superba" = "limba",
-   "tithonia diversifolia" = "sunflower",
-   "toona ciliata" = "australian red cedar",
-   "trifolium subterraneum" = "clover",
-   "urochloa decumbens" = "signal grass",
-   "vachellia karroo" = "Sweet thorn",
-   "vachellia seyal" = "red acacia",
-   "vachellia xanthophloea" = "fever tree",
-   "vepris dainellii" = "vepris",
-   "vetiver grass" = "vetiver",
-   "yacon" = "Yacon",
-   "ziziphus mauritiana" = "indian jujube"
-)
-
-i <- d$crop %in% names(crop_map)
-d$crop[i] <- crop_map[d$crop[i]]
-
-non_crop <- c(
-   "soil", "seed", "none",
-   "unspecified", "unknown plant",
-   "unspecified legume", "unspecified grass",
-   "unspecified fodder grass",
-   "unspecified tree",
-   "other fodder",
-   "fodder (natural vegetation),
-    unspecified cover crop"
-)
-
-d$crop[d$crop %in% non_crop ] <- NA
-
+# Map whole labels only. Leave mixtures and unresolved labels in crop_raw.
+d$crop_raw <- d$crop
+key <- function(x) tolower(trimws(x))
+crosswalk <- read.csv("report/audit/crop_labels.csv",check.names=FALSE,na.strings="")
+stopifnot(!anyDuplicated(crosswalk[["raw label"]]))
+d$crop <- crosswalk[["resolved product"]][match(key(d$crop_raw),crosswalk[["raw label"]])]
 ## Fixing planting method and implement
 
-P <- carobiner::fix_name(tolower(d$planting_method))
+P <- fix_name(tolower(d$planting_method))
 P <- gsub("unspecified", "unknown", P)
 P <- gsub("direct drilling/sowing", "direct seeding", P)
 P <- gsub("dibble stick", "dibbling", P)
@@ -838,7 +525,7 @@ P <- gsub("mline sowing", "line sowing", P)
 P <- gsub("direct seedingr", "direct seeding", P)
 d$planting_method <- P
 
-P <- carobiner::fix_name(d$planting_implement)
+P <- fix_name(d$planting_implement)
 P <- gsub("Unspecified", "unknown", P)
 P <- gsub("Tractor", "4 wheel tractor", P)
 P <- gsub("Animal labour", "animal", P)
@@ -848,20 +535,14 @@ P <- gsub("uu", "unknown", P)
 P <- gsub("planter|Planter", "jab planter", P)
 d$planting_implement <- P
 
-## Fixing longitude and latitude 
-
-d$longitude <- sub("(\\d*\\.\\d*?)\\.+", "\\1", d$longitude)## keep only the first decimal point
-P <- carobiner::fix_name(d$longitude)
-P <- gsub("-1.-0", NA, P)
-d$longitude <- trimws(P)
-d$longitude <- as.numeric(d$longitude)
-
-d$latitude <- sub("(\\d*\\.\\d*?)\\.+", "\\1", d$latitude)## keep only the first decimal point
-P <- carobiner::fix_name(d$latitude)
-P <- gsub("\\.+$", "", P)
-d$latitude <- P
-d$latitude <- as.numeric(d$latitude)
-
+# Do not repair ambiguous coordinate strings or discard valid precision.
+coord <- function(x,limit) {
+  z <- suppressWarnings(as.numeric(trimws(x)))
+  z[!is.finite(z) | abs(z)>limit] <- NA_real_
+  z
+}
+d$latitude <- coord(d$latitude,90)
+d$longitude <- coord(d$longitude,180)
 ### fixing location 
 loc <- strsplit(d$location, "\\.\\.")
 max_len <- max(sapply(loc, length)) 
@@ -871,7 +552,7 @@ split_padded <- lapply(loc, function(x) {
 })
 
 loc <- as.data.frame(do.call(rbind, split_padded), stringsAsFactors = FALSE)
-d$location <- carobiner::fix_name(loc$V1, "title")
+d$location <- fix_name(loc$V1, "title")
 
 #### Fixing maturity days
 md <- strsplit(d$maturity_days, "\\.+")
@@ -924,7 +605,7 @@ d$variety_traits <- gsub("NA", NA, Vtr$V1)
 
 ### Fixing irrigation method
 d$irrigation_method <- ifelse(grepl("Irrigation \\(Other\\)", d$irrigation_method), "Irrigation (Other)", d$irrigation_method)
-P <- carobiner::fix_name(d$irrigation_method)
+P <- fix_name(d$irrigation_method)
 P <- gsub("Drip Irrigation", "drip", P)
 P <- gsub("Irrigation \\(Other\\)", "unknown", P)
 P <- gsub("Flood \\(Complete\\)", "flood", P)
@@ -937,38 +618,12 @@ P <- gsub("Sprinkler Irrigation", "sprinkler", P)
 P <- gsub("NA", NA, P)
 d$irrigation_method <- P
 
-### Fixing Fertilizer
-
-### N
-P <- carobiner::fix_name(d$N_fertilizer)
-P <- gsub("NA.|.NA", "", P)
-P <- gsub("^\\.+", "", P)
-P <- gsub("\\.+", " ", P)
-d$N_fertilizer <- P
-
-d$N_fertilizer <- ifelse(grepl("999999|999", d$N_fertilizer), NA, d$N_fertilizer)
-d$N_fertilizer <- as.numeric(gsub("\\s.*", "", d$N_fertilizer))
-
-### P
-P <- carobiner::fix_name(d$P_fertilizer)
-P <- gsub("NA.|.NA", "", P)
-P <- gsub("^\\.+", "", P)
-P <- gsub("\\.+", " ", P)
-d$P_fertilizer <- P
-
-d$P_fertilizer <- ifelse(grepl("999999|999", d$P_fertilizer), NA, d$P_fertilizer)
-d$P_fertilizer <- as.numeric(gsub("\\s.*", "", d$P_fertilizer))
-
-### K
-P <- carobiner::fix_name(d$K_fertilizer)
-P <- gsub("NA.|.NA", "", P)
-P <- gsub("^\\.+", "", P)
-P <- gsub("\\.+", " ", P)
-d$K_fertilizer <- P
-
-d$K_fertilizer <- ifelse(grepl("999999|999", d$K_fertilizer), NA, d$K_fertilizer)
-d$K_fertilizer <- as.numeric(gsub("\\s.*", "", d$K_fertilizer))
-
+# Parse single values; do not truncate decimals or guess concatenated rates.
+for (k in c("N_fertilizer","P_fertilizer","K_fertilizer")) {
+  z <- suppressWarnings(as.numeric(trimws(d[[k]])))
+  z[!is.finite(z) | z<0 | z %in% c(999,999999)] <- NA_real_
+  d[[k]] <- z
+}
 ## Fixing herbicide product
 
 d$herbicide_product <- tolower(trimws(d$herbicide_product))
@@ -1081,39 +736,38 @@ d$insecticide_product[i] <- insecticide_map[d$insecticide_product[i]]
 ##############################################################
 #### Transforming response variable from long into wide format ##########
 
-proc <- function(f, dc){
-   
-   dc <- dc[dc$dataset_id==f,]
-   
-   ### Adding  step in the data to facilitate the transformation from long to wide 
-   df <- dc %>%
-      group_by(variable) %>%
-      mutate(id = row_number()) %>%
-      ungroup()
-   
-   df_wide <- df %>%
-      pivot_wider(
-         id_cols = names(df)[!grepl("value|variable", names(df))],
-         names_from = variable ,        
-         values_from = value       
-      )
-   df <- df_wide[order(df_wide$location), ]
-   df <- df[, colSums(!is.na(df)) > 0]
-   
-      
-   return(df)
-   
-}
-
-#### Append the data base on the study (B_code)
-ff <- unique(d$dataset_id)
-dw <- lapply(ff, function(y) proc(y, d))
-
-dwf <- do.call(carobiner::bindr, dw)
-
-i <- grepl(paste("Crop_Yield", "Soil_Organic_Carbon", "Soil_Total_Nitrogen", "Soil_Nitrogen", "Soil_Organic_Matter", "Carbon_Dioxide_Emissions", "Soil_Organic_Carbon_\\(Change\\)", "CO2_Equivalent_Emissions", "Variable_Cost_per_Unit_Product", "Aboveground_Biomass", "Pest_&_Pathogen_\\(Losses\\)", "Effective_Cation_Exchange_Capacity", "Methane_Emissions", "Nitrous_Oxide_Emissions", "Cation_Exchange_Capacity", "Erosion", "Labour_Cost", "Labour_Person_Hours", "Net_Return", "Soil_Carbon_Stocks", sep = "|"), names(dwf))
-names(dwf)[i] <- c("yield","soil_SOC", "soil_N_total", "soil_N", "soil_SOM", "emission_CO2", "soil_SOC_exch", "CO2_eq_emission", "variable_cost", "fwy_total", "pest_severity", "soil_CEC_eff", "emission_CH4", "emission_N2O", "soil_CEC", "soil_erosion", "labour_Cost", "labour", "net_benefit", "soil_C_stock")
-dwf$yield <- as.numeric(dwf$yield)
+# Preserve one row per source outcome; row order across variables is not a plot ID.
+d <- d[!is.na(d$variable) & nzchar(d$variable),]
+dwf <- tidyr::pivot_wider(d,names_from=variable,values_from=value)
+stopifnot(!anyDuplicated(dwf$era_source_row))
+outcomes <- c(
+  "Crop_Yield" = "yield",
+  "Soil_Organic_Carbon" = "soil_SOC",
+  "Soil_Total_Nitrogen" = "soil_N_total",
+  "Soil_Nitrogen" = "soil_N",
+  "Soil_Organic_Matter" = "soil_SOM",
+  "Carbon_Dioxide_Emissions" = "emission_CO2",
+  "Soil_Organic_Carbon_(Change)" = "soil_SOC_exch",
+  "CO2_Equivalent_Emissions" = "CO2_eq_emission",
+  "Variable_Cost_per_Unit_Product" = "variable_cost",
+  "Aboveground_Biomass" = "fwy_total",
+  "Pest_&_Pathogen_(Losses)" = "pest_severity",
+  "Effective_Cation_Exchange_Capacity" = "soil_CEC_eff",
+  "Methane_Emissions" = "emission_CH4",
+  "Nitrous_Oxide_Emissions" = "emission_N2O",
+  "Cation_Exchange_Capacity" = "soil_CEC",
+  "Erosion" = "soil_erosion",
+  "Labour_Cost" = "labour_Cost",
+  "Labour_Person_Hours" = "labour",
+  "Net_Return" = "net_benefit",
+  "Soil_Carbon_Stocks" = "soil_C_stock"
+)
+mapped <- match(names(dwf),names(outcomes))
+names(dwf)[!is.na(mapped)] <- unname(outcomes[mapped[!is.na(mapped)]])
+# Exact units only: case matters (Mg is not mg). Preserve unconverted source values.
+y <- suppressWarnings(as.numeric(dwf$yield_raw))
+scale <- c("kg/ha"=1,"Mg/ha"=1000,"t/ha"=1000,"g/m2"=10)
+dwf$yield <- ifelse(is.finite(y) & y>=0,y*unname(scale[trimws(dwf$yield_unit_raw)]),NA_real_)
 
 
 ### fixing tillage
@@ -1161,7 +815,7 @@ dwf$yield_part <- tolower(ifelse(grepl("Grain/Seed", dwf$yield_part), "grain",
 
 
 ### drop rows with missing crop 
-dwf <- dwf[!is.na(dwf$crop),]
+# Keep unresolved crop rows traceable in the exploratory output.
  
 
 #carobiner::write_files(path, meta, dwf)

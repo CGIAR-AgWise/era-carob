@@ -1,0 +1,767 @@
+raw label,partition,ERA wide rows,Carob wide rows,resolved product,decision
+,missing,40247,820,,missing or unspecified
+acacia albida delile,ERA only,2,0,,unmapped
+acacia angustissima,ERA only,2,0,,unmapped
+acacia angustissima-maize,ERA only,5,0,,compound or qualified label
+acacia auriculiformis,ERA only,1,0,,unmapped
+acacia crassicarpa,ERA only,2,0,,unmapped
+acacia decurrens,ERA only,4,0,,unmapped
+acacia leptocarpa,ERA only,2,0,,unmapped
+acacia mangium,ERA only,2,0,,unmapped
+acacia mellifera,ERA only,1,0,,unmapped
+acacia senegal,ERA only,1,0,,unmapped
+acacia sieberiana,ERA only,1,0,,unmapped
+acacia sieberiana..unspecified grass..fodder (natural vegetation),ERA only,4,0,,compound or qualified label
+acacia sp,ERA only,2,0,,unmapped
+acrocomia aculeata,ERA only,1,0,,unmapped
+adzuki bean,Carob only,0,4,,unmapped
+aeschynomene histrix,ERA only,1,0,jointvetche,ERA prod vocabulary
+african nightshade,ERA only,8,0,african nightshade,ERA prod vocabulary
+afzelia africana,ERA only,1,0,,unmapped
+albizia coriaria,ERA only,1,0,,unmapped
+albizia falcataria,ERA only,4,0,,unmapped
+albizia gummifera,ERA only,2,0,,unmapped
+albizia harveyi,ERA only,7,0,,unmapped
+albizia lebbeck,ERA only,3,0,,unmapped
+albizia versicolor,ERA only,7,0,,unmapped
+albizia zygia,ERA only,1,0,,unmapped
+albizia zygia-cocoa,ERA only,2,0,,compound or qualified label
+alchornea cordifolia,ERA only,1,0,,unmapped
+alfalfa,ERA only,99,0,alfalfa,ERA prod vocabulary
+allanblackia floribunda,ERA only,1,0,,unmapped
+alnus acuminata,ERA only,1,0,,unmapped
+amaranth,ERA only,114,0,amaranth,ERA prod vocabulary
+amaranth-cabbage-jute mallow-lettuce-maize,ERA only,8,0,,compound or qualified label
+amaranth..cabbage..cucumber..spinach..lettuce..asparagus..tomato,ERA only,6,0,,compound or qualified label
+amaranth..lettuce..cabbage..carrot & parsnip,ERA only,56,0,,compound or qualified label
+amaranth..maize..hibiscus..lettuce..cabbage..carrot & parsnip,ERA only,50,0,,compound or qualified label
+apple,both,30,34,apple,ERA prod vocabulary
+apricot,Carob only,0,6,apricot,ERA prod vocabulary
+arabica,ERA only,522,0,arabica,ERA prod vocabulary
+arabica-banana sweet,ERA only,32,0,,compound or qualified label
+arabica-macadamia,ERA only,42,0,,compound or qualified label
+arachis pintoi,ERA only,1,0,,unmapped
+artichokes,ERA only,1,0,artichokes,ERA prod vocabulary
+artocarpus heterophyllus,ERA only,1,0,,unmapped
+asparagus,ERA only,1,0,asparagus,ERA prod vocabulary
+avocado,ERA only,4,0,avocado,ERA prod vocabulary
+ayocote bean,ERA only,1,0,ayocote bean,ERA prod vocabulary
+azadirachta indica,ERA only,1,0,,unmapped
+bambara groundnut,Carob only,0,1,,unmapped
+bambara nut,ERA only,26,0,bambara nut,ERA prod vocabulary
+bamboo,ERA only,1,0,bamboo,ERA prod vocabulary
+bamboo-cassava,ERA only,24,0,,compound or qualified label
+bamboo-cowpea,ERA only,19,0,,compound or qualified label
+bamboo-maize,ERA only,20,0,,compound or qualified label
+banana sweet,ERA only,139,0,banana sweet,ERA prod vocabulary
+banana sweet-coffee,ERA only,11,0,,compound or qualified label
+banana sweet-cordia alliodora,ERA only,4,0,,compound or qualified label
+banana sweet..coffee..mangifera indica..maesopsis eminii..ficus natalensis..artocarpus heterophyllus..avocado,ERA only,1,0,,compound or qualified label
+barley,both,1679,1271,barley,ERA prod vocabulary
+barley-chickpea-lentil-wheat,ERA only,16,0,,compound or qualified label
+barley-chickpea-wheat,ERA only,31,0,,compound or qualified label
+barley-fava bean,ERA only,10,0,,compound or qualified label
+barley-maize,ERA only,4,0,,compound or qualified label
+barley-maize-soybean-wheat,ERA only,4,0,,compound or qualified label
+barley-peas-teff-wheat,ERA only,9,0,,compound or qualified label
+barley..teff..wheat..linseed..common bean..peas,ERA only,6,0,,compound or qualified label
+barley..wheat,ERA only,95,0,,compound or qualified label
+barley..wheat..common bean..egyptian clover,ERA only,1,0,,compound or qualified label
+barley..wheat..teff..indian pea..chickpea..lentil,ERA only,36,0,,compound or qualified label
+basil,ERA only,1,0,,unmapped
+bauhinia reticulata,ERA only,2,0,,unmapped
+beetroot,both,1,6,beetroot,ERA prod vocabulary
+bermudagrass,Carob only,0,72,,unmapped
+black gram,both,37,6,black gram,ERA prod vocabulary
+black gram-maize,ERA only,9,0,,compound or qualified label
+black oats,ERA only,292,0,black oats,ERA prod vocabulary
+black oats-common bean-common vetch-maize-pearl millet-radish-sunn hemp,ERA only,2,0,,compound or qualified label
+black oats-common bean-maize-pearl millet-pearl millet-radish-sunn hemp,ERA only,36,0,,compound or qualified label
+black oats-common vetch,ERA only,17,0,,compound or qualified label
+black oats-common vetch-cowpea-maize,ERA only,24,0,,compound or qualified label
+black oats-common vetch-guinea grass-maize-soybean,ERA only,36,0,,compound or qualified label
+black oats-common vetch-maize,ERA only,12,0,,compound or qualified label
+black oats-common vetch-maize-oats-soybean-wheat,ERA only,80,0,,compound or qualified label
+black oats-common vetch-soybean-wheat,ERA only,1,0,,compound or qualified label
+black oats-grape,ERA only,14,0,,compound or qualified label
+black oats-maize,ERA only,73,0,,compound or qualified label
+black oats-maize-soybean-wheat-white lupin,ERA only,3,0,,compound or qualified label
+blue lupin,both,15,15,blue lupin,ERA prod vocabulary
+brachiaria brizantha,ERA only,153,0,brachiaria brizantha,ERA prod vocabulary
+brachiaria decumbens,ERA only,36,0,brachiaria decumbens,ERA prod vocabulary
+brachiaria humidicola,ERA only,36,0,brachiaria humidicola,ERA prod vocabulary
+brachiaria hybrid,ERA only,110,0,brachiaria hybrid,ERA prod vocabulary
+brown mustard,Carob only,0,105,,unmapped
+buckwheat,Carob only,0,18,buckwheat,ERA prod vocabulary
+butter bean,ERA only,244,0,butter bean,ERA prod vocabulary
+cabbage,both,178,34,cabbage,ERA prod vocabulary
+cabbage-maize,ERA only,6,0,,compound or qualified label
+calabash,ERA only,6355,0,calabash,ERA prod vocabulary
+calliandra calothyrsus,ERA only,4,0,,unmapped
+calliandra calothyrsus-common bean-cowpea-lablab-maize,ERA only,24,0,,compound or qualified label
+calliandra calothyrsus..crotalaria grahamiana..crotalaria sp..crotalaria ochrolueca..tephrosia candida..velvet bean,ERA only,1,0,,compound or qualified label
+calliandra houstoniana,ERA only,1,0,,unmapped
+calopogonium mucunoides,ERA only,1,0,calopogonium mucunoides,ERA prod vocabulary
+canola,ERA only,243,0,canola,ERA prod vocabulary
+canola-potato-soybean-wheat,ERA only,7,0,,compound or qualified label
+capsicum,ERA only,84,0,capsicum,ERA prod vocabulary
+cardamom,ERA only,18,0,cardamom,ERA prod vocabulary
+carrot,both,106,28,carrot,ERA prod vocabulary
+carrot & parsnip,ERA only,1,0,,unmapped
+carrot..parsnip,ERA only,8,0,,compound or qualified label
+cashew nut,ERA only,20,0,cashew nut,ERA prod vocabulary
+cassava,both,2169,65032,cassava,ERA prod vocabulary
+cassava-fallow-maize,ERA only,6,0,,compound or qualified label
+cassava-leucaena leucocephala-maize,ERA only,6,0,,compound or qualified label
+cassava-maize,ERA only,72,0,,compound or qualified label
+cassava-maize-okra,ERA only,8,0,,compound or qualified label
+cassava-maize-pueraria phaseoloides,ERA only,6,0,,compound or qualified label
+cassava-pigeon pea,ERA only,4,0,,compound or qualified label
+castor,ERA only,18,0,castor,ERA prod vocabulary
+castor-guar gum-pearl millet,ERA only,30,0,,compound or qualified label
+casuarina equisetifolia,ERA only,1,0,,unmapped
+cauliflower,Carob only,0,48,,unmapped
+celtis mildbraedii,ERA only,1,0,,unmapped
+chamomile,ERA only,45,0,chamomile,ERA prod vocabulary
+chickpea,both,927,776,chickpea,ERA prod vocabulary
+chickpea-maize,ERA only,55,0,,compound or qualified label
+chili,ERA only,91,0,chili,ERA prod vocabulary
+chili pepper,Carob only,0,4,,unmapped
+chloris gayana,ERA only,39,0,,ambiguous vocabulary
+chloroleucon eurycyclum,ERA only,1,0,,unmapped
+cleretum bellidiforme,ERA only,1,0,,unmapped
+clitoria ternatea,ERA only,1,0,,unmapped
+cocksfoot,ERA only,1,0,cocksfoot,ERA prod vocabulary
+cocoa,ERA only,238,0,cocoa,ERA prod vocabulary
+coffee,both,2791,14,coffee,ERA prod vocabulary
+coffee-albizia coriaria,ERA only,3,0,,compound or qualified label
+coffee-albizia gummifera,ERA only,2,0,,compound or qualified label
+coffee-banana sweet,ERA only,27,0,,compound or qualified label
+coffee-chloroleucon eurycyclum,ERA only,2,0,,compound or qualified label
+coffee-coffee,ERA only,14,0,,compound or qualified label
+coffee-common bean,ERA only,3,0,,compound or qualified label
+coffee-cordia africana,ERA only,29,0,,compound or qualified label
+coffee-croton macrostachyus,ERA only,2,0,,compound or qualified label
+coffee-desmodium intortum,ERA only,5,0,,compound or qualified label
+coffee-dracaena steudneri,ERA only,2,0,,compound or qualified label
+coffee-ehretia cymosa,ERA only,2,0,,compound or qualified label
+coffee-erythrina poeppigiana,ERA only,13,0,,compound or qualified label
+coffee-erythrina poeppigiana-inga sp.,ERA only,2,0,,compound or qualified label
+coffee-erythrina poeppigiana-terminalia amazonia,ERA only,2,0,,compound or qualified label
+coffee-eucalyptus alba,ERA only,9,0,,compound or qualified label
+coffee-eucalyptus deglupta,ERA only,7,0,,compound or qualified label
+coffee-ficus vasta,ERA only,2,0,,compound or qualified label
+coffee-inga densiflora,ERA only,126,0,,compound or qualified label
+coffee-inga densiflora-solanum sp-.banana sweet,ERA only,2,0,,compound or qualified label
+coffee-macadamia,ERA only,77,0,,compound or qualified label
+coffee-millettia ferruginea,ERA only,2,0,,compound or qualified label
+coffee-olea welwitshii,ERA only,2,0,,compound or qualified label
+coffee-phoenix reclinata,ERA only,2,0,,compound or qualified label
+coffee-pouteria adolfi-friedericii,ERA only,2,0,,compound or qualified label
+coffee-prunus africana,ERA only,2,0,,compound or qualified label
+coffee-rubber,ERA only,4,0,,compound or qualified label
+coffee-schefflera abyssinica,ERA only,2,0,,compound or qualified label
+coffee-solanum sp-.banana sweet,ERA only,2,0,,compound or qualified label
+coffee-terminalia amazonia,ERA only,4,0,,compound or qualified label
+coffee-terminalia ivorensis,ERA only,7,0,,compound or qualified label
+coffee-unspecified,ERA only,6,0,,compound or qualified label
+coffee-urochloa decumbens,ERA only,3,0,,compound or qualified label
+coffee-vepris dainellii,ERA only,2,0,,compound or qualified label
+coffee..mango..avocado..olive..juniperus procera..acacia sp,ERA only,1,0,,compound or qualified label
+coffee..mango..papaya..banana sweet..kola nut,ERA only,1,0,,compound or qualified label
+common bean,both,5828,35996,common bean,ERA prod vocabulary
+common bean-common bean,ERA only,10,0,,compound or qualified label
+common bean-common bean-maize,ERA only,18,0,,compound or qualified label
+common bean-cowpea-gliricidia sepium-lablab-maize,ERA only,24,0,,compound or qualified label
+common bean-cowpea-lablab-maize,ERA only,9,0,,compound or qualified label
+common bean-cowpea-lablab-maize-pigeon pea,ERA only,23,0,,compound or qualified label
+common bean-crotalaria sp.-maize,ERA only,2,0,,compound or qualified label
+common bean-fallow-maize,ERA only,2,0,,compound or qualified label
+common bean-kikuyu grass-soybean,ERA only,1,0,,compound or qualified label
+common bean-lablab-maize,ERA only,2,0,,compound or qualified label
+common bean-maize,ERA only,205,0,,compound or qualified label
+common bean-maize-peas,ERA only,2,0,,compound or qualified label
+common bean-maize-sorghum-sweet potato,ERA only,10,0,,compound or qualified label
+common bean-maize-wheat,ERA only,17,0,,compound or qualified label
+common bean-mung bean,ERA only,4,0,,compound or qualified label
+common bean-sorghum,ERA only,24,0,,compound or qualified label
+common bean-wheat,ERA only,9,0,,compound or qualified label
+common bean..sorghum..teff..barley..wheat..maize..chickpea,ERA only,3,0,,compound or qualified label
+common vetch,ERA only,26,0,common vetch,ERA prod vocabulary
+common vetch-black oats,ERA only,13,0,,compound or qualified label
+common vetch-cowpea-maize,ERA only,22,0,,compound or qualified label
+common vetch-maize,ERA only,40,0,,compound or qualified label
+congo grass,ERA only,40,0,congo grass,ERA prod vocabulary
+congo grass-cotton-pearl millet,ERA only,130,0,,compound or qualified label
+congo grass-crotalaria ochroleuca-maize-soybean,ERA only,3,0,,compound or qualified label
+congo grass-maize-soybean,ERA only,28,0,,compound or qualified label
+congo grass-soybean,ERA only,6,0,,compound or qualified label
+cooking banana,ERA only,356,0,cooking banana,ERA prod vocabulary
+cordia africana,ERA only,6,0,,unmapped
+cordia alliodora,ERA only,1,0,,unmapped
+cotton,both,887,457,cotton,ERA prod vocabulary
+cotton-crotalaria ochroleuca-fallow-maize-ruzigrass-soybean,ERA only,10,0,,compound or qualified label
+cotton-fallow,ERA only,230,0,,compound or qualified label
+cotton-fallow-sorghum-soybean,ERA only,8,0,,compound or qualified label
+cotton-groundnut-sorghum,ERA only,2,0,,compound or qualified label
+cotton-maize,ERA only,434,0,,compound or qualified label
+cotton-maize-sunn hemp,ERA only,6,0,,compound or qualified label
+cotton-mung bean,ERA only,4,0,,compound or qualified label
+cotton-sorghum,ERA only,6,0,,compound or qualified label
+cotton-wheat,ERA only,37,0,,compound or qualified label
+cowpea,both,12085,3312,cowpea,ERA prod vocabulary
+cowpea-fallow,ERA only,19,0,,compound or qualified label
+cowpea-fallow-maize,ERA only,24,0,,compound or qualified label
+cowpea-gliricidia sepium-maize,ERA only,211,0,,compound or qualified label
+cowpea-leucaena leucocephala,ERA only,127,0,,compound or qualified label
+cowpea-leucaena leucocephala-maize,ERA only,91,0,,compound or qualified label
+cowpea-maize,ERA only,288,0,,compound or qualified label
+cowpea-maize-pearl millet-wheat,ERA only,10,0,,compound or qualified label
+cowpea-maize-pigeon pea,ERA only,3,0,,compound or qualified label
+cowpea-maize-rice-velvet bean,ERA only,2,0,,compound or qualified label
+cowpea-maize-wheat,ERA only,13,0,,compound or qualified label
+cowpea-other millet,ERA only,10,0,,compound or qualified label
+cowpea-pearl millet,ERA only,95,0,,compound or qualified label
+cowpea-pigeon pea,ERA only,22,0,,compound or qualified label
+cowpea-rice,ERA only,3,0,,compound or qualified label
+cowpea-rice-wheat,ERA only,3,0,,compound or qualified label
+cowpea-sorghum,ERA only,68,0,,compound or qualified label
+cowpea-ziziphus mauritiana,ERA only,1,0,,compound or qualified label
+cowpea...cowpea...sorghum...sorghum...sorghum...sorghum,ERA only,27,0,,compound or qualified label
+cowpea..pigeon pea,ERA only,1,0,,compound or qualified label
+cowpea..soybean..pigeon pea,ERA only,1,0,,compound or qualified label
+crambe,Carob only,0,2,,unmapped
+crotalaria,Carob only,0,35,,unmapped
+crotalaria breviflora,ERA only,1,0,crotalaria breviflora,ERA prod vocabulary
+crotalaria grahamiana,ERA only,17,0,,unmapped
+crotalaria juncea,ERA only,21,0,sunn hemp,ERA prod vocabulary
+crotalaria ochroleuca,ERA only,12,0,crotalaria ochroleuca,ERA prod vocabulary
+crotalaria ochrolueca,ERA only,18,0,,unmapped
+crotalaria paulina,ERA only,1,0,crotalaria paulina,ERA prod vocabulary
+crotalaria paulina-maize,ERA only,35,0,,compound or qualified label
+crotalaria retusa,ERA only,1,0,,unmapped
+crotalaria sp,ERA only,2,0,,unmapped
+crotalaria sp.,ERA only,10,0,crotalaria sp.,ERA prod vocabulary
+crotalaria sp.-maize,ERA only,2,0,,compound or qualified label
+crotalaria spectabilis,ERA only,4,0,,unmapped
+croton macrostachyus,ERA only,3,0,,unmapped
+cucumber,both,2,20,cucumber,ERA prod vocabulary
+cupressus lusitanica,ERA only,1,0,,unmapped
+dactyladenia barteri,ERA only,2,0,,unmapped
+date,ERA only,816,0,date,ERA prod vocabulary
+desho grass,ERA only,10,0,desho grass,ERA prod vocabulary
+desmodium intortum,ERA only,13,0,desmodium intortum,ERA prod vocabulary
+desmodium intortum-maize,ERA only,5,0,,compound or qualified label
+desmodium uncinatum,ERA only,1,0,silverleaf,ERA prod vocabulary
+dimorphotheca pluvialis,ERA only,1,0,,unmapped
+dracaena steudneri,ERA only,1,0,,unmapped
+drosanthemum floribundum,ERA only,1,0,,unmapped
+drosanthemum speciosum,ERA only,1,0,,unmapped
+drosanthemum striatum,ERA only,1,0,,unmapped
+durum wheat,both,936,212,durum wheat,ERA prod vocabulary
+durum wheat-hairy vetch-lentil-teff,ERA only,5,0,,compound or qualified label
+durum wheat-lentil-teff,ERA only,11,0,,compound or qualified label
+durum wheat-maize,ERA only,8,0,,compound or qualified label
+durum wheat...wheat,ERA only,22,0,,compound or qualified label
+eggplant,ERA only,142,0,eggplant,ERA prod vocabulary
+egyptian clover,ERA only,60,0,egyptian clover,ERA prod vocabulary
+egyptian clover-rice-wheat,ERA only,3,0,,compound or qualified label
+ehretia cymosa,ERA only,1,0,,unmapped
+endive,Carob only,0,4,endive,ERA prod vocabulary
+entada abyssinica,ERA only,1,0,,unmapped
+entandrophragma angolense,ERA only,1,0,,unmapped
+entandrophragma cylindricum,ERA only,1,0,,unmapped
+eriosema ellipticum,ERA only,1,0,,unmapped
+erythrina abyssinica,ERA only,1,0,,unmapped
+erythrina poeppigiana,ERA only,5,0,,unmapped
+ethiopian eggplant,ERA only,67,0,ethiopian eggplant,ERA prod vocabulary
+ethiopian mustard,ERA only,37,0,ethiopian mustard,ERA prod vocabulary
+ethiopian mustard-maize,ERA only,32,0,,compound or qualified label
+eucalyptus alba,ERA only,1,0,,unmapped
+eucalyptus deglupta,ERA only,1,0,,unmapped
+eucalyptus globulus,ERA only,1,0,,unmapped
+eucalyptus globulus..fodder (natural vegetation),ERA only,4,0,,compound or qualified label
+eucalyptus globulus..fodder (natural vegetation)..cordia africana,ERA only,2,0,,compound or qualified label
+eucalyptus urograndis,ERA only,1,0,,unmapped
+faba bean,Carob only,0,1346,fava bean,ERA prod vocabulary
+faidherbia albida,ERA only,14,0,faidherbia albida,ERA prod vocabulary
+fallow,ERA only,28,0,,unmapped
+fallow-maize,ERA only,45,0,,compound or qualified label
+fallow-maize-ruzigrass-soybean,ERA only,10,0,,compound or qualified label
+fallow-medicago truncatula-wheat,ERA only,3,0,,compound or qualified label
+fallow-pearl millet,ERA only,8,0,,compound or qualified label
+fallow-rice,ERA only,12,0,,compound or qualified label
+fallow-sorghum,ERA only,3,0,,compound or qualified label
+fallow-soybean,ERA only,14,0,,compound or qualified label
+fava bean,ERA only,1164,0,fava bean,ERA prod vocabulary
+fava bean-grape,ERA only,6,0,,compound or qualified label
+felicia heterophylla,ERA only,1,0,,unmapped
+fennel,ERA only,128,0,fennel,ERA prod vocabulary
+fenugreek,ERA only,16,0,fenugreek,ERA prod vocabulary
+fenugreek-fava bean,ERA only,12,0,,compound or qualified label
+fernandoa madagascariensis,ERA only,1,0,,unmapped
+ficus exasperata,ERA only,1,0,,unmapped
+ficus natalensis,ERA only,2,0,,unmapped
+ficus vasta,ERA only,1,0,,unmapped
+fig,both,1,6,fig,ERA prod vocabulary
+finger millet,both,869,45,finger millet,ERA prod vocabulary
+finger millet-common vetch,ERA only,6,0,,compound or qualified label
+finger millet-desmodium intortum,ERA only,3,0,,compound or qualified label
+finger millet-groundnut,ERA only,33,0,,compound or qualified label
+finger millet-purple vetch,ERA only,3,0,,compound or qualified label
+finger millet..sorghum,ERA only,2,0,,compound or qualified label
+flax,Carob only,0,73,flax,ERA prod vocabulary
+flemingia macrophylla,ERA only,1,0,,unmapped
+flemingia sp-.maize,ERA only,6,0,,compound or qualified label
+flemingia sp.,ERA only,6,0,,unmapped
+fluted pumpkin,ERA only,24,0,fluted pumpkin,ERA prod vocabulary
+fodder (natural vegetation),ERA only,54,0,,unmapped
+fodder (natural vegetation)..vachellia seyal,ERA only,2,0,,compound or qualified label
+fodder radish,ERA only,20,0,fodder radish,ERA prod vocabulary
+garlic,ERA only,267,0,garlic,ERA prod vocabulary
+garlic-fava bean,ERA only,14,0,,compound or qualified label
+garlic-onion-pepper,ERA only,6,0,,compound or qualified label
+gazania krebsiana,ERA only,1,0,,unmapped
+geranium incanum,ERA only,1,0,,unmapped
+ginger,ERA only,195,0,ginger,ERA prod vocabulary
+gliricida sepium,ERA only,1,0,,unmapped
+gliricidia,both,1,36,,unmapped
+gliricidia sepium,ERA only,54,0,,unmapped
+gliricidia sepium-maize,ERA only,5,0,,compound or qualified label
+gliricidia sp-.maize,ERA only,5,0,,compound or qualified label
+gliricidia sp-.pepper-cardamom,ERA only,3,0,,compound or qualified label
+gliricidia sp.,ERA only,8,0,,unmapped
+glyricidia sepium,ERA only,1,0,glyricidia sepium,ERA prod vocabulary
+glyricidia sepium-maize,ERA only,1,0,,compound or qualified label
+gomenzer,Carob only,0,24,,unmapped
+grape,both,490,10,grape,ERA prod vocabulary
+grape-hairy vetch,ERA only,9,0,,compound or qualified label
+grape-hairy vetch-triticale,ERA only,18,0,,compound or qualified label
+grape-rye-fava bean,ERA only,9,0,,compound or qualified label
+grape-triticale,ERA only,9,0,,compound or qualified label
+grass pea,Carob only,0,6,,unmapped
+grazing vetch,ERA only,1,0,,unmapped
+grevillea robusta,ERA only,70,0,,unmapped
+groundnut,both,1605,6835,groundnut,ERA prod vocabulary
+groundnut-maize,ERA only,50,0,,compound or qualified label
+groundnut-maize-pigeon pea,ERA only,11,0,,compound or qualified label
+groundnut-other fodder-pearl millet,ERA only,5,0,,compound or qualified label
+groundnut-pearl millet,ERA only,13,0,,compound or qualified label
+groundnut...sweet potato...groundnut...sweet potato...soybean...soybean,ERA only,27,0,,compound or qualified label
+groundnut..soybean..common bean,ERA only,1,0,,compound or qualified label
+groundnut..soybean..common bean..maize,ERA only,2,0,,compound or qualified label
+guar gum,ERA only,35,0,guar gum,ERA prod vocabulary
+guiera senegalensis,ERA only,1,0,,unmapped
+guinea grass,ERA only,31,0,guinea grass,ERA prod vocabulary
+guinea grass-maize-pigeon pea,ERA only,3,0,,compound or qualified label
+guinea grass-maize-soybean,ERA only,2,0,,compound or qualified label
+hairy vetch,both,54,4,hairy vetch,ERA prod vocabulary
+hairy vetch-maize,ERA only,2,0,,compound or qualified label
+hairy vetch-maize-soybean-wheat,ERA only,4,0,,compound or qualified label
+hairy vetch-sorghum-soybean-wheat,ERA only,4,0,,compound or qualified label
+hazelnut,Carob only,0,2,hazelnut,ERA prod vocabulary
+helichrysum petiolare,ERA only,1,0,,unmapped
+heliophyla coronopifolia,ERA only,1,0,,unmapped
+hermannia pinnata,ERA only,1,0,,unmapped
+hibiscus,ERA only,88,0,hibiscus,ERA prod vocabulary
+hibiscus-common bean,ERA only,6,0,,compound or qualified label
+hibiscus-common bean-maize,ERA only,3,0,,compound or qualified label
+hibiscus-maize,ERA only,5,0,,compound or qualified label
+horsegram,ERA only,2,0,horsegram,ERA prod vocabulary
+horsegram-sorghum-sunflower,ERA only,30,0,,compound or qualified label
+huckleberry,ERA only,58,0,huckleberry,ERA prod vocabulary
+hyptis spicigera,ERA only,1,0,,unmapped
+indian pea,ERA only,40,0,indian pea,ERA prod vocabulary
+indigofera sp,ERA only,1,0,,unmapped
+inga densiflora,ERA only,5,0,,unmapped
+inga sp.,ERA only,1,0,,unmapped
+jack bean,ERA only,27,0,jack bean,ERA prod vocabulary
+jack bean-maize,ERA only,18,0,,compound or qualified label
+jatropha curcas,ERA only,20,0,jatropha,ERA prod vocabulary
+jicama,Carob only,0,2,,unmapped
+jointvetche,ERA only,2,0,jointvetche,ERA prod vocabulary
+juniperus procera,ERA only,1,0,,unmapped
+jute mallow,ERA only,316,0,jute mallow,ERA prod vocabulary
+jute mallow-potato-soybean-wheat,ERA only,3,0,,compound or qualified label
+jute mallow-rice-wheat,ERA only,5,0,,compound or qualified label
+kale,both,77,2,kale,ERA prod vocabulary
+khat,ERA only,1,0,khat,ERA prod vocabulary
+khat-afzelia africana-milletia ferruginea,ERA only,1,0,,compound or qualified label
+kidney bean,Carob only,0,182,,unmapped
+kikuyu grass,ERA only,5,0,kikuyu grass,ERA prod vocabulary
+kola nut,ERA only,4,0,kola nut,ERA prod vocabulary
+lablab,both,702,43,lablab,ERA prod vocabulary
+lablab-maize,ERA only,10,0,,compound or qualified label
+lablab-maize-rice,ERA only,80,0,,compound or qualified label
+lablab-pearl millet,ERA only,70,0,,compound or qualified label
+lablab-sorghum,ERA only,53,0,,compound or qualified label
+lampranthus multiradiatus,ERA only,1,0,,unmapped
+leek,Carob only,0,8,,unmapped
+leeks,ERA only,1,0,leeks,ERA prod vocabulary
+lemon,ERA only,1,0,lemon,ERA prod vocabulary
+lemon & lime,ERA only,3,0,,unmapped
+lentil,both,821,564,lentil,ERA prod vocabulary
+lentil-rice,ERA only,48,0,,compound or qualified label
+lessertia frutescens,ERA only,1,0,,unmapped
+lettuce,both,29,54,lettuce,ERA prod vocabulary
+leucaena diversifolia,ERA only,2,0,,unmapped
+leucaena leucocephala,ERA only,70,0,leucaena leucocephala,ERA prod vocabulary
+leucaena leucocephala-maize,ERA only,43,0,,compound or qualified label
+leucaena leucocephala-maize-cassava,ERA only,2,0,,compound or qualified label
+leucaena pallida,ERA only,1,0,,unmapped
+linseed,ERA only,13,0,linseed,ERA prod vocabulary
+lucerne,Carob only,0,73,alfalfa,ERA prod vocabulary
+lupin,ERA only,57,0,lupin,ERA prod vocabulary
+lupin-fava bean,ERA only,16,0,,compound or qualified label
+macadamia,ERA only,765,0,macadamia,ERA prod vocabulary
+macadamia-arabica,ERA only,139,0,,compound or qualified label
+macadamia-coffee,ERA only,16,0,,compound or qualified label
+macrotyloma daltonii,ERA only,1,0,,unmapped
+maesopsis eminii,ERA only,2,0,,unmapped
+maize,both,70100,53390,maize,ERA prod vocabulary
+maize-albizia harveyi,ERA only,1,0,,compound or qualified label
+maize-albizia versicolor,ERA only,1,0,,compound or qualified label
+maize-amaranth,ERA only,10,0,,compound or qualified label
+maize-ayocote bean,ERA only,2,0,,compound or qualified label
+maize-banana sweet,ERA only,6,0,,compound or qualified label
+maize-calliandra calothyrsus,ERA only,10,0,,compound or qualified label
+maize-calliandra calothyrsus-napier grass,ERA only,10,0,,compound or qualified label
+maize-cassava,ERA only,96,0,,compound or qualified label
+maize-cassava-leucaena leucocephala,ERA only,4,0,,compound or qualified label
+maize-cassava-pigeon pea,ERA only,4,0,,compound or qualified label
+maize-common bean,ERA only,174,0,,compound or qualified label
+maize-common bean-mung bean,ERA only,4,0,,compound or qualified label
+maize-common bean-napier grass,ERA only,12,0,,compound or qualified label
+maize-common bean-squash,ERA only,4,0,,compound or qualified label
+maize-common bean-unspecified tree,ERA only,5,0,,compound or qualified label
+maize-congo grass,ERA only,8,0,,compound or qualified label
+maize-cowpea,ERA only,374,0,,compound or qualified label
+maize-cowpea-cassava-sesame,ERA only,1,0,,compound or qualified label
+maize-crotalaria juncea,ERA only,5,0,,compound or qualified label
+maize-crotalaria sp.,ERA only,8,0,,compound or qualified label
+maize-desmodium intortum,ERA only,8,0,,compound or qualified label
+maize-desmodium uncinatum,ERA only,6,0,,compound or qualified label
+maize-desmodium uncinatum-napier grass,ERA only,9,0,,compound or qualified label
+maize-fava bean,ERA only,7,0,,compound or qualified label
+maize-flemingia sp.,ERA only,6,0,,compound or qualified label
+maize-gliricidia sepium,ERA only,25,0,,compound or qualified label
+maize-gliricidia sp.,ERA only,28,0,,compound or qualified label
+maize-grevillea robusta,ERA only,36,0,,compound or qualified label
+maize-groundnut,ERA only,68,0,,compound or qualified label
+maize-guinea grass,ERA only,8,0,,compound or qualified label
+maize-hairy vetch,ERA only,6,0,,compound or qualified label
+maize-horsegram,ERA only,2,0,,compound or qualified label
+maize-jack bean,ERA only,35,0,,compound or qualified label
+maize-lablab,ERA only,55,0,,compound or qualified label
+maize-leucaena leucocephala,ERA only,15,0,,compound or qualified label
+maize-leucaena leucocephala-napier grass,ERA only,10,0,,compound or qualified label
+maize-maize,ERA only,8,0,,compound or qualified label
+maize-mung bean,ERA only,17,0,,compound or qualified label
+maize-mung bean-common bean,ERA only,4,0,,compound or qualified label
+maize-napier grass,ERA only,19,0,,compound or qualified label
+maize-natural fallow,ERA only,42,0,,compound or qualified label
+maize-oats,ERA only,49,0,,compound or qualified label
+maize-oats-soybean-wheat,ERA only,72,0,,compound or qualified label
+maize-okra,ERA only,8,0,,compound or qualified label
+maize-okra-cowpea,ERA only,8,0,,compound or qualified label
+maize-palisade grass-soybean,ERA only,1,0,,compound or qualified label
+maize-pearl millet,ERA only,8,0,,compound or qualified label
+maize-pearl millet-common bean,ERA only,8,0,,compound or qualified label
+maize-pearl millet-common bean-sorghum,ERA only,8,0,,compound or qualified label
+maize-pearl millet-pigeon pea-soybean,ERA only,45,0,,compound or qualified label
+maize-peas,ERA only,4,0,,compound or qualified label
+maize-pigeon pea,ERA only,213,0,,compound or qualified label
+maize-potato,ERA only,8,0,,compound or qualified label
+maize-pumpkin,ERA only,2,0,,compound or qualified label
+maize-rice,ERA only,2,0,,compound or qualified label
+maize-rice-rice bean,ERA only,2,0,,compound or qualified label
+maize-rice-stylosanthes capitata,ERA only,2,0,,compound or qualified label
+maize-rice-stylosanthes guianensis,ERA only,80,0,,compound or qualified label
+maize-sesbania rostrata,ERA only,16,0,,compound or qualified label
+maize-sesbania sesban,ERA only,9,0,,compound or qualified label
+maize-silverleaf,ERA only,4,0,,compound or qualified label
+maize-sorghum,ERA only,38,0,,compound or qualified label
+maize-soybean,ERA only,194,0,,compound or qualified label
+maize-stylosanthes capitata,ERA only,2,0,,compound or qualified label
+maize-sunn hemp,ERA only,22,0,,compound or qualified label
+maize-sweet potato,ERA only,3,0,,compound or qualified label
+maize-tephrosia candida,ERA only,60,0,,compound or qualified label
+maize-tephrosia vogelii,ERA only,7,0,,compound or qualified label
+maize-triticale,ERA only,2,0,,compound or qualified label
+maize-unspecified legume,ERA only,26,0,,compound or qualified label
+maize-urochloa eminii,ERA only,16,0,,compound or qualified label
+maize-velvet bean,ERA only,33,0,,compound or qualified label
+maize-wheat,ERA only,907,0,,compound or qualified label
+maize-yam,ERA only,2,0,,compound or qualified label
+maize..barley..teff..wheat..common bean,ERA only,2,0,,compound or qualified label
+maize..common bean,ERA only,2,0,,compound or qualified label
+maize..cowpea,ERA only,4,0,,compound or qualified label
+maize..cowpea..lablab,ERA only,1,0,,compound or qualified label
+maize..cowpea..lablab..pigeon pea,ERA only,1,0,,compound or qualified label
+maize..cowpea..pigeon pea,ERA only,22,0,,compound or qualified label
+maize..groundnut..common bean,ERA only,3,0,,compound or qualified label
+maize..sorghum..finger millet,ERA only,4,0,,compound or qualified label
+maize..sorghum..wheat..barley..rape..niger..teff,ERA only,5,0,,compound or qualified label
+maize..wheat,ERA only,6,0,,compound or qualified label
+mangifera indica,ERA only,1,0,mango,ERA prod vocabulary
+mangifera indica..maesopsis eminii..ficus natalensis..artocarpus heterophyllus..avocado,ERA only,1,0,,compound or qualified label
+mango,ERA only,31,0,mango,ERA prod vocabulary
+mango..papaya..lemon & lime..orange..banana sweet..kola nut,ERA only,1,0,,compound or qualified label
+markhamia lutea,ERA only,3,0,,unmapped
+medicago scutellata,ERA only,2,0,,unmapped
+medicago scutellata-grape,ERA only,6,0,,compound or qualified label
+medicago truncatula,ERA only,8,0,,unmapped
+medicago truncatula-grape,ERA only,22,0,,compound or qualified label
+melia azedarach,ERA only,1,0,,unmapped
+melon,both,25,18,melon,ERA prod vocabulary
+milicia excelsa,ERA only,1,0,,unmapped
+milicia excelsa-cocoa,ERA only,2,0,,compound or qualified label
+millet,Carob only,0,46,,unmapped
+milletia ferruginea,ERA only,1,0,,unmapped
+millettia ferruginea,ERA only,1,0,,unmapped
+mimosa caesalpiniifolia,ERA only,1,0,,unmapped
+miscanthidium violoceum,ERA only,1,0,miscanthidium violoceum,ERA prod vocabulary
+monopsis lutea,ERA only,1,0,,unmapped
+moringa,ERA only,32,0,moringa,ERA prod vocabulary
+moringa oleifera,ERA only,5,0,moringa,ERA prod vocabulary
+mung bean,both,129,70,mung bean,ERA prod vocabulary
+mung bean-common bean,ERA only,3,0,,compound or qualified label
+mung bean-rice-wheat,ERA only,56,0,,compound or qualified label
+mustard,Carob only,0,4,,unmapped
+napier grass,ERA only,94,0,napier grass,ERA prod vocabulary
+natural fallow,ERA only,237,0,,unmapped
+natural fallow-soybean,ERA only,54,0,,compound or qualified label
+neonotonia wightii,ERA only,1,0,,unmapped
+new cocoyam,ERA only,96,0,new cocoyam,ERA prod vocabulary
+newbouldia laevis,ERA only,2,0,,unmapped
+newbouldia laevis-cocoa,ERA only,2,0,,compound or qualified label
+niger,ERA only,1,0,niger,ERA prod vocabulary
+oats,both,460,209,oats,ERA prod vocabulary
+oats-grape,ERA only,14,0,,compound or qualified label
+oats-wheat,ERA only,28,0,,compound or qualified label
+oats..wheat..teff..barley,ERA only,5,0,,compound or qualified label
+okra,ERA only,310,0,okra,ERA prod vocabulary
+okra-cowpea,ERA only,8,0,,compound or qualified label
+olea welwitshii,ERA only,1,0,,unmapped
+olive,ERA only,77,0,olive,ERA prod vocabulary
+onion,both,1530,103,onion,ERA prod vocabulary
+onion-rice,ERA only,4,0,,compound or qualified label
+opuntia stricta,ERA only,30,0,opuntia stricta,ERA prod vocabulary
+orange,ERA only,25,0,orange,ERA prod vocabulary
+orange-cassava,ERA only,20,0,,compound or qualified label
+orange-maize,ERA only,22,0,,compound or qualified label
+orange-pineapple,ERA only,22,0,,compound or qualified label
+ornithopus sativus,ERA only,3,0,,unmapped
+ornithopus sativus-grape,ERA only,8,0,,compound or qualified label
+other fodder,ERA only,3,0,other fodder,ERA prod vocabulary
+other millet,ERA only,18,0,other millet,ERA prod vocabulary
+palisade grass,ERA only,239,0,palisade grass,ERA prod vocabulary
+palisade grass-soybean,ERA only,54,0,,compound or qualified label
+palm,ERA only,1,0,,unmapped
+palm oil,ERA only,42,0,palm oil,ERA prod vocabulary
+panicum antidotale,ERA only,96,0,panicum antidotale,ERA prod vocabulary
+papaya,ERA only,2,0,papaya,ERA prod vocabulary
+parkia biglobosa,ERA only,20,0,,unmapped
+parsnip,ERA only,1,0,parsnip,ERA prod vocabulary
+passionfruit,ERA only,22,0,passionfruit,ERA prod vocabulary
+patula pine,ERA only,6,0,patula pine,ERA prod vocabulary
+pea,Carob only,0,3507,,unmapped
+peach & nectarine,ERA only,59,0,peach & nectarine,ERA prod vocabulary
+pearl millet,both,4666,115,pearl millet,ERA prod vocabulary
+pearl millet-cowpea,ERA only,34,0,,compound or qualified label
+pearl millet-cowpea-ziziphus mauritiana,ERA only,13,0,,compound or qualified label
+pearl millet-sesbania rostrata,ERA only,70,0,,compound or qualified label
+pearl millet-soybean,ERA only,54,0,,compound or qualified label
+pearl millet-ziziphus mauritiana,ERA only,1,0,,compound or qualified label
+pearl millet..bauhinia reticulata,ERA only,1,0,,compound or qualified label
+pearl millet..sweet potato..common bean,ERA only,3,0,,compound or qualified label
+peas,ERA only,140,0,peas,ERA prod vocabulary
+pelargonium capitatum,ERA only,1,0,,unmapped
+peltophorum dubium,ERA only,1,0,,unmapped
+pennycress,Carob only,0,215,,unmapped
+pepper,both,179,56,pepper,ERA prod vocabulary
+pepper-gliricidia sp.,ERA only,3,0,,compound or qualified label
+pepper-grevillea robusta,ERA only,3,0,,compound or qualified label
+pepper-grevillea robusta-cardamom,ERA only,3,0,,compound or qualified label
+phoenix reclinata,ERA only,1,0,,unmapped
+pigeon pea,both,810,1207,pigeon pea,ERA prod vocabulary
+pigeon pea-cowpea,ERA only,7,0,,compound or qualified label
+pigeon pea-maize,ERA only,47,0,,compound or qualified label
+pigeon pea-soybean,ERA only,54,0,,compound or qualified label
+pigeon pea-sweet potato,ERA only,3,0,,compound or qualified label
+pineapple,ERA only,40,0,pineapple,ERA prod vocabulary
+pomegranate,both,79,2,pomegranate,ERA prod vocabulary
+potato,both,2257,3076,potato,ERA prod vocabulary
+potato-butter bean,ERA only,227,0,,compound or qualified label
+potato-common bean,ERA only,24,0,,compound or qualified label
+potato-lablab,ERA only,245,0,,compound or qualified label
+potato-lupin,ERA only,6,0,,compound or qualified label
+potato-peas,ERA only,25,0,,compound or qualified label
+potato-soybean-wheat,ERA only,5,0,,compound or qualified label
+potato-velvet bean,ERA only,8,0,,compound or qualified label
+poupartia silvatica,ERA only,1,0,,unmapped
+poupartia silvatica..fernandoa madagascariensis..tarenna sp,ERA only,1,0,,compound or qualified label
+pouteria adolfi-friedericii,ERA only,1,0,,compound or qualified label
+prunus africana,ERA only,1,0,,unmapped
+pueraria phaseoloides,ERA only,6,0,pueraria phaseoloides,ERA prod vocabulary
+pumpkin,both,23,2,pumpkin,ERA prod vocabulary
+purple vetch,ERA only,5,0,purple vetch,ERA prod vocabulary
+quinoa,ERA only,394,0,quinoa,ERA prod vocabulary
+radish,ERA only,21,0,radish,ERA prod vocabulary
+rape,ERA only,1039,0,rape,ERA prod vocabulary
+rapeseed,Carob only,0,841,,unmapped
+red clover,ERA only,9,0,red clover,ERA prod vocabulary
+rhamnus prinoides,ERA only,1,0,,unmapped
+rice,both,22252,21783,rice,ERA prod vocabulary
+rice bean,ERA only,1,0,rice bean,ERA prod vocabulary
+rice-sesbania bispinosa,ERA only,28,0,,compound or qualified label
+rice-sesbania bispinosa-wheat,ERA only,12,0,,compound or qualified label
+rice-sesbania cannabina-wheat,ERA only,18,0,,compound or qualified label
+rice-soybean,ERA only,27,0,,compound or qualified label
+rice-wheat,ERA only,283,0,,compound or qualified label
+robusta,ERA only,53,0,robusta,ERA prod vocabulary
+roella ciliata,ERA only,1,0,,unmapped
+rubber,ERA only,156,0,rubber,ERA prod vocabulary
+rubber-cocoa,ERA only,46,0,,compound or qualified label
+rubber-coffee,ERA only,47,0,,compound or qualified label
+rubber-cooking banana,ERA only,108,0,,compound or qualified label
+rubber-kola nut,ERA only,46,0,,compound or qualified label
+rubber-lemon,ERA only,48,0,,compound or qualified label
+rye,both,7,92,rye,ERA prod vocabulary
+rye-grape,ERA only,14,0,,compound or qualified label
+ryegrass sp,ERA only,11,0,ryegrass sp,ERA prod vocabulary
+safflower,both,27,25,safflower,ERA prod vocabulary
+schefflera abyssinica,ERA only,1,0,,unmapped
+seed,ERA only,8,0,,unmapped
+senecio elegans,ERA only,1,0,,unmapped
+senna siamea,ERA only,28,0,,unmapped
+senna siamea-maize,ERA only,18,0,,compound or qualified label
+senna spectabilis,ERA only,4,0,,unmapped
+sesame,ERA only,591,0,sesame,ERA prod vocabulary
+sesame-pearl millet,ERA only,16,0,,compound or qualified label
+sesbania bispinosa,ERA only,3,0,,unmapped
+sesbania cannabina,ERA only,2,0,,unmapped
+sesbania rostrata,ERA only,2,0,,unmapped
+sesbania rostrata-sorghum,ERA only,53,0,,compound or qualified label
+sesbania sesban,ERA only,14,0,,unmapped
+sesbania sp.,ERA only,1,0,,unmapped
+shea nut,ERA only,1,0,shea nut,ERA prod vocabulary
+silverleaf,ERA only,1,0,silverleaf,ERA prod vocabulary
+smutsfinger grass,ERA only,40,0,smutsfinger grass,ERA prod vocabulary
+soil,ERA only,5,0,,unmapped
+soil..wheat..barley..teff..finger millet..common bean,ERA only,4,0,,compound or qualified label
+solanum sp.,ERA only,1,0,,unmapped
+sorghum,both,16233,5398,sorghum,ERA prod vocabulary
+sorghum-congo grass,ERA only,9,0,,compound or qualified label
+sorghum-cowpea,ERA only,92,0,,compound or qualified label
+sorghum-groundnut,ERA only,6,0,,compound or qualified label
+sorghum-guinea grass,ERA only,4,0,,compound or qualified label
+sorghum-mung bean,ERA only,6,0,,compound or qualified label
+sorghum-palisade grass,ERA only,4,0,,compound or qualified label
+sorghum-pigeon pea,ERA only,3,0,,compound or qualified label
+sorghum-soybean,ERA only,72,0,,compound or qualified label
+sorghum-wheat,ERA only,16,0,,compound or qualified label
+sorghum..teff,ERA only,8,0,,compound or qualified label
+sorghum..teff..barley..maize..wheat..common bean..chickpea,ERA only,4,0,,compound or qualified label
+soybean,both,5640,19853,soybean,ERA prod vocabulary
+soybean-congo grass,ERA only,1,0,,compound or qualified label
+soybean-guinea grass,ERA only,1,0,,compound or qualified label
+soybean-maize,ERA only,64,0,,compound or qualified label
+soybean-sunflower,ERA only,51,0,,compound or qualified label
+soybean-wheat,ERA only,122,0,,compound or qualified label
+spinach,both,7,68,spinach,ERA prod vocabulary
+spondias mombin,ERA only,1,0,,unmapped
+squash (c.moschata),ERA only,8,0,squash (c.moschata),ERA prod vocabulary
+steirodiscus tagetes,ERA only,1,0,,unmapped
+strawberry,both,31,16,strawberry,ERA prod vocabulary
+stylosanthes capitata,ERA only,2,0,stylosanthes capitata,ERA prod vocabulary
+stylosanthes guianensis,ERA only,22,0,stylosanthes guianensis,ERA prod vocabulary
+stylosanthes hamata,ERA only,1,0,stylosanthes hamata,ERA prod vocabulary
+stylosanthes macrocephala,ERA only,1,0,stylosanthes macrocephala,ERA prod vocabulary
+subterranean clover,ERA only,1,0,subterranean clover,ERA prod vocabulary
+sudan grass,both,33,28,sudan grass,ERA prod vocabulary
+sugar beet,both,194,8,sugar beet,ERA prod vocabulary
+sugar cane,ERA only,675,0,sugar cane,ERA prod vocabulary
+sugar cane..potato..tomato..cabbage..banana sweet..orange..lemon & lime..onion..pepper..coffee,ERA only,6,0,,compound or qualified label
+sugarcane,Carob only,0,37,sugar cane,ERA prod vocabulary
+sunchoke,ERA only,1,0,sunchoke,ERA prod vocabulary
+sunflower,both,224,57,sunflower,ERA prod vocabulary
+sunn hemp,ERA only,350,0,sunn hemp,ERA prod vocabulary
+sweet potato,ERA only,662,0,sweet potato,ERA prod vocabulary
+sweetcane,ERA only,4,0,sweetcane,ERA prod vocabulary
+sweetpotato,Carob only,0,94,sweet potato,ERA prod vocabulary
+swiss chard,ERA only,13,0,swiss chard,ERA prod vocabulary
+tall fescue,ERA only,42,0,tall fescue,ERA prod vocabulary
+tarenna sp,ERA only,1,0,,unmapped
+taro,ERA only,281,0,taro,ERA prod vocabulary
+tea,ERA only,251,0,tea,ERA prod vocabulary
+tectona grandis,ERA only,1,0,,unmapped
+teff,both,1103,1233,teff,ERA prod vocabulary
+teff-lupin,ERA only,7,0,,compound or qualified label
+tephrosia candida,ERA only,7,0,tephrosia candida,ERA prod vocabulary
+tephrosia sp,ERA only,1,0,,unmapped
+tephrosia sp..eriosema ellipticum..indigofera sp..macrotyloma daltonii..neonotonia wightii,ERA only,1,0,,compound or qualified label
+tephrosia vogelii,ERA only,11,0,,unmapped
+terminalia amazonia,ERA only,2,0,,unmapped
+terminalia ivorensis,ERA only,1,0,,unmapped
+terminalia ivoresensis,ERA only,2,0,,unmapped
+terminalia superba,ERA only,1,0,,unmapped
+tick clover sp,ERA only,2,0,tick clover sp,ERA prod vocabulary
+tithonia diversifolia,ERA only,1,0,,unmapped
+tobacco,Carob only,0,1,tobacco,ERA prod vocabulary
+tomato,both,4003,220,tomato,ERA prod vocabulary
+tomato-kale,ERA only,2,0,,compound or qualified label
+tomato-maize,ERA only,2,0,,compound or qualified label
+tomato-onion,ERA only,2,0,,compound or qualified label
+tomato..artichokes..beetroot..capsicum..eggplant..leeks..radish..spinach..waterleaf..swiss chard,ERA only,1,0,,compound or qualified label
+toona ciliata,ERA only,1,0,,unmapped
+tree cassava,ERA only,1,0,tree cassava,ERA prod vocabulary
+trifolium subterraneum,ERA only,2,0,subterranean clover,ERA prod vocabulary
+trifolium subterraneum-grape,ERA only,6,0,,compound or qualified label
+triticale,both,14,8,triticale,ERA prod vocabulary
+tritordeum,Carob only,0,4,,unmapped
+turkey berry,ERA only,49,0,turkey berry,ERA prod vocabulary
+turmeric,ERA only,65,0,turmeric,ERA prod vocabulary
+unknown plant,ERA only,79,0,,unmapped
+unspecified,ERA only,6,0,,missing or unspecified
+unspecified cover crop,ERA only,2,0,,unmapped
+unspecified fodder grass,ERA only,26,0,,unmapped
+unspecified grass,ERA only,1,0,,unmapped
+unspecified legume,ERA only,8,0,,unmapped
+unspecified tree,ERA only,3,0,,unmapped
+urochloa decumbens,ERA only,1,0,urochloa decumbens,ERA prod vocabulary
+urochloa eminii,ERA only,8,0,urochloa eminii,ERA prod vocabulary
+vachellia karroo,ERA only,1,0,,unmapped
+vachellia seyal,ERA only,2,0,,unmapped
+vachellia xanthophloea,ERA only,1,0,,unmapped
+vegetables,Carob only,0,1,,unmapped
+velvet bean,ERA only,112,0,velvet bean,ERA prod vocabulary
+vepris dainellii,ERA only,1,0,,unmapped
+vetch,Carob only,0,415,,unmapped
+vetiver,ERA only,1,0,vetiver,ERA prod vocabulary
+vetiver grass,ERA only,1,0,vetiver grass,ERA prod vocabulary
+vetiver grass-maize-sweet potato,ERA only,4,0,,compound or qualified label
+vicia villosa,ERA only,2,0,hairy vetch,ERA prod vocabulary
+vicia villosa-grape,ERA only,8,0,,compound or qualified label
+water yam,ERA only,16,0,water yam,ERA prod vocabulary
+waterleaf,ERA only,7,0,waterleaf,ERA prod vocabulary
+watermelon,both,4,6,watermelon,ERA prod vocabulary
+watermelon-maize,ERA only,1,0,,compound or qualified label
+westerwold ryegrass,ERA only,1,0,westerwold ryegrass,ERA prod vocabulary
+wheat,both,8875,15465,wheat,ERA prod vocabulary
+wheat-barley,ERA only,8,0,,compound or qualified label
+wheat-sesbania sesban,ERA only,4,0,,compound or qualified label
+wheat...wheat...fava bean...fava bean,ERA only,8,0,,compound or qualified label
+wheat..teff..maize..barley..fava bean,ERA only,2,0,,compound or qualified label
+white lupin,both,1,1607,white lupin,ERA prod vocabulary
+white mustard,Carob only,0,1,,unmapped
+white yam,ERA only,1,0,white yam,ERA prod vocabulary
+winter vetch,ERA only,3,0,winter vetch,ERA prod vocabulary
+winter vetch-grape,ERA only,6,0,,compound or qualified label
+yacon,ERA only,70,0,yacon,ERA prod vocabulary
+yam,both,569,10,yam,ERA prod vocabulary
+yam-maize,ERA only,12,0,,compound or qualified label
+yam-pigeon pea,ERA only,21,0,,compound or qualified label
+yellow lupin,Carob only,0,51,,unmapped
+ziziphus mauritiana,ERA only,1,0,,unmapped
+zucchini,both,419,4,zucchini,ERA prod vocabulary
