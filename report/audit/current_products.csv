@@ -1,0 +1,162 @@
+crop,era,carob
+african nightshade,TRUE,FALSE
+alfalfa,TRUE,TRUE
+amaranth,TRUE,FALSE
+apple,TRUE,TRUE
+apricot,FALSE,TRUE
+arabica,TRUE,FALSE
+bambara nut,TRUE,FALSE
+banana sweet,TRUE,FALSE
+barley,TRUE,TRUE
+beetroot,FALSE,TRUE
+black gram,TRUE,TRUE
+black oats,TRUE,FALSE
+blue lupin,TRUE,TRUE
+brachiaria brizantha,TRUE,FALSE
+brachiaria decumbens,TRUE,FALSE
+brachiaria humidicola,TRUE,FALSE
+brachiaria hybrid,TRUE,FALSE
+buckwheat,FALSE,TRUE
+butter bean,TRUE,FALSE
+cabbage,TRUE,TRUE
+calabash,TRUE,FALSE
+canola,TRUE,FALSE
+capsicum,TRUE,FALSE
+cardamom,TRUE,FALSE
+carrot,TRUE,TRUE
+cashew nut,TRUE,FALSE
+cassava,TRUE,TRUE
+castor,TRUE,FALSE
+chamomile,TRUE,FALSE
+chickpea,TRUE,TRUE
+chili,TRUE,FALSE
+cocksfoot,TRUE,FALSE
+cocoa,TRUE,FALSE
+coffee,TRUE,TRUE
+common bean,TRUE,TRUE
+common vetch,TRUE,FALSE
+congo grass,TRUE,FALSE
+cooking banana,TRUE,FALSE
+cotton,TRUE,TRUE
+cowpea,TRUE,TRUE
+crotalaria ochroleuca,TRUE,FALSE
+crotalaria sp.,TRUE,FALSE
+cucumber,FALSE,TRUE
+date,TRUE,FALSE
+desho grass,TRUE,FALSE
+desmodium intortum,TRUE,FALSE
+durum wheat,TRUE,TRUE
+eggplant,TRUE,FALSE
+egyptian clover,TRUE,FALSE
+endive,FALSE,TRUE
+ethiopian eggplant,TRUE,FALSE
+ethiopian mustard,TRUE,FALSE
+faidherbia albida,TRUE,FALSE
+fava bean,TRUE,TRUE
+fennel,TRUE,FALSE
+fenugreek,TRUE,FALSE
+fig,FALSE,TRUE
+finger millet,TRUE,TRUE
+flax,FALSE,TRUE
+fluted pumpkin,TRUE,FALSE
+fodder radish,TRUE,FALSE
+garlic,TRUE,FALSE
+ginger,TRUE,FALSE
+grape,TRUE,TRUE
+groundnut,TRUE,TRUE
+guar gum,TRUE,FALSE
+guinea grass,TRUE,FALSE
+hairy vetch,TRUE,TRUE
+hazelnut,FALSE,TRUE
+hibiscus,TRUE,FALSE
+huckleberry,TRUE,FALSE
+indian pea,TRUE,FALSE
+jack bean,TRUE,FALSE
+jatropha,TRUE,FALSE
+jute mallow,TRUE,FALSE
+kale,TRUE,TRUE
+khat,TRUE,FALSE
+kikuyu grass,TRUE,FALSE
+lablab,TRUE,TRUE
+lentil,TRUE,TRUE
+lettuce,TRUE,TRUE
+leucaena leucocephala,TRUE,FALSE
+linseed,TRUE,FALSE
+lupin,TRUE,FALSE
+macadamia,TRUE,FALSE
+maize,TRUE,TRUE
+mango,TRUE,FALSE
+melon,TRUE,TRUE
+moringa,TRUE,FALSE
+mung bean,TRUE,TRUE
+napier grass,TRUE,FALSE
+new cocoyam,TRUE,FALSE
+oats,TRUE,TRUE
+okra,TRUE,FALSE
+olive,TRUE,FALSE
+onion,TRUE,TRUE
+opuntia stricta,TRUE,FALSE
+orange,TRUE,FALSE
+other fodder,TRUE,FALSE
+other millet,TRUE,FALSE
+palisade grass,TRUE,FALSE
+palm oil,TRUE,FALSE
+panicum antidotale,TRUE,FALSE
+passionfruit,TRUE,FALSE
+patula pine,TRUE,FALSE
+peach & nectarine,TRUE,FALSE
+pearl millet,TRUE,TRUE
+peas,TRUE,FALSE
+pepper,TRUE,TRUE
+pigeon pea,TRUE,TRUE
+pineapple,TRUE,FALSE
+pomegranate,TRUE,TRUE
+potato,TRUE,TRUE
+pumpkin,TRUE,TRUE
+purple vetch,TRUE,FALSE
+quinoa,TRUE,FALSE
+radish,TRUE,FALSE
+rape,TRUE,FALSE
+red clover,TRUE,FALSE
+rice,TRUE,TRUE
+robusta,TRUE,FALSE
+rubber,TRUE,FALSE
+rye,FALSE,TRUE
+ryegrass sp,TRUE,FALSE
+safflower,TRUE,TRUE
+sesame,TRUE,FALSE
+smutsfinger grass,TRUE,FALSE
+sorghum,TRUE,TRUE
+soybean,TRUE,TRUE
+spinach,TRUE,TRUE
+squash (c.moschata),TRUE,FALSE
+strawberry,TRUE,TRUE
+stylosanthes capitata,TRUE,FALSE
+stylosanthes guianensis,TRUE,FALSE
+sudan grass,TRUE,TRUE
+sugar beet,TRUE,TRUE
+sugar cane,TRUE,TRUE
+sunflower,TRUE,TRUE
+sunn hemp,TRUE,FALSE
+sweet potato,TRUE,TRUE
+sweetcane,TRUE,FALSE
+swiss chard,TRUE,FALSE
+tall fescue,TRUE,FALSE
+taro,TRUE,FALSE
+tea,TRUE,FALSE
+teff,TRUE,TRUE
+tobacco,FALSE,TRUE
+tomato,TRUE,TRUE
+triticale,TRUE,TRUE
+turkey berry,TRUE,FALSE
+turmeric,TRUE,FALSE
+urochloa eminii,TRUE,FALSE
+velvet bean,TRUE,FALSE
+water yam,TRUE,FALSE
+waterleaf,TRUE,FALSE
+watermelon,TRUE,TRUE
+wheat,TRUE,TRUE
+white lupin,FALSE,TRUE
+yacon,TRUE,FALSE
+yam,TRUE,TRUE
+zucchini,TRUE,TRUE

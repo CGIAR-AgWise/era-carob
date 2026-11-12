@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "For review: cite the exact Git commit and the original source datasets. No version DOI has been published for this candidate."
+title: "ERA × Carob: agronomic data transformation and SF-001 validation"
+type: software
+authors:
+  - family-names: Ngakou
+    given-names: Cedric
+  - family-names: Joshi
+    given-names: Namita
+repository-code: "https://github.com/CGIAR-AgWise/era-carob"

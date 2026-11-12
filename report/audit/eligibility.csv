@@ -1,0 +1,9 @@
+test,ERA Data.Out rows,Carob wide rows
+exact planting date,16363,121558
+nonnegative yield convertible to kg/ha,42283,221165
+plausible planting date,0,121536
+resolved crop,95639,240559
+rows,110534,246993
+screened yield rows outside publication overlap,0,104542
+valid coordinate pair,105862,242037
+valid location and date,0,120656
