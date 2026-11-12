@@ -1,0 +1,634 @@
+source,crop_raw,crop,rows
+carob,"",,23
+carob,adzuki bean,,4
+carob,apple,apple,34
+carob,apricot,apricot,6
+carob,bambara groundnut,,1
+carob,barley,barley,1271
+carob,beetroot,beetroot,6
+carob,bermudagrass,,72
+carob,black gram,black gram,6
+carob,blue lupin,blue lupin,15
+carob,brown mustard,,105
+carob,buckwheat,buckwheat,18
+carob,cabbage,cabbage,34
+carob,carrot,carrot,28
+carob,cassava,cassava,65032
+carob,cauliflower,,48
+carob,chickpea,chickpea,776
+carob,chili pepper,,4
+carob,coffee,coffee,14
+carob,common bean,common bean,35996
+carob,cotton,cotton,457
+carob,cowpea,cowpea,3312
+carob,crambe,,2
+carob,crotalaria,,35
+carob,cucumber,cucumber,20
+carob,durum wheat,durum wheat,212
+carob,endive,endive,4
+carob,faba bean,fava bean,1346
+carob,fig,fig,6
+carob,finger millet,finger millet,45
+carob,flax,flax,73
+carob,gliricidia,,36
+carob,gomenzer,,24
+carob,grape,grape,10
+carob,grass pea,,6
+carob,groundnut,groundnut,6835
+carob,hairy vetch,hairy vetch,4
+carob,hazelnut,hazelnut,2
+carob,jicama,,2
+carob,kale,kale,2
+carob,kidney bean,,182
+carob,lablab,lablab,43
+carob,leek,,8
+carob,lentil,lentil,564
+carob,lettuce,lettuce,54
+carob,lucerne,alfalfa,73
+carob,maize,maize,53390
+carob,melon,melon,18
+carob,millet,,46
+carob,mung bean,mung bean,70
+carob,mustard,,4
+carob,oats,oats,209
+carob,onion,onion,103
+carob,pea,,3507
+carob,pearl millet,pearl millet,115
+carob,pennycress,,215
+carob,pepper,pepper,56
+carob,pigeon pea,pigeon pea,1207
+carob,pomegranate,pomegranate,2
+carob,potato,potato,3076
+carob,pumpkin,pumpkin,2
+carob,rapeseed,,841
+carob,rice,rice,21783
+carob,rye,rye,92
+carob,safflower,safflower,25
+carob,sorghum,sorghum,5398
+carob,soybean,soybean,19853
+carob,spinach,spinach,68
+carob,strawberry,strawberry,16
+carob,sudan grass,sudan grass,28
+carob,sugar beet,sugar beet,8
+carob,sugarcane,sugar cane,37
+carob,sunflower,sunflower,57
+carob,sweetpotato,sweet potato,94
+carob,teff,teff,1233
+carob,tobacco,tobacco,1
+carob,tomato,tomato,220
+carob,triticale,triticale,8
+carob,tritordeum,,4
+carob,vegetables,,1
+carob,vetch,,415
+carob,watermelon,watermelon,6
+carob,wheat,wheat,15465
+carob,white lupin,white lupin,1607
+carob,white mustard,,1
+carob,yam,yam,10
+carob,yellow lupin,,51
+carob,zucchini,zucchini,4
+carob,,,797
+era,Acacia angustissima-Maize,,6
+era,Acacia decurrens,,4
+era,Acacia sieberiana..Unspecified Grass..Fodder (Natural Vegetation),,4
+era,African Nightshade,african nightshade,4
+era,Albizia harveyi,,6
+era,Albizia versicolor,,6
+era,Albizia zygia-Cocoa,,2
+era,Alfalfa,alfalfa,98
+era,Amaranth,amaranth,120
+era,Amaranth-Cabbage-Jute Mallow-Lettuce-Maize,,16
+era,Amaranth..Cabbage..Cucumber..Spinach..Lettuce..Asparagus..Tomato,,12
+era,Amaranth..Lettuce..Cabbage..Carrot & Parsnip,,30
+era,Amaranth..Maize..Hibiscus..Lettuce..Cabbage..Carrot & Parsnip,,30
+era,Apple,apple,30
+era,Arabica,arabica,328
+era,Arabica-Banana Sweet,,60
+era,Arabica-Macadamia,,60
+era,Bambara Nut,bambara nut,24
+era,Bamboo-Cassava,,26
+era,Bamboo-Cowpea,,26
+era,Bamboo-Maize,,26
+era,Banana Sweet,banana sweet,139
+era,Banana Sweet-Coffee,,15
+era,Banana Sweet-Cordia alliodora,,4
+era,Barley,barley,922
+era,Barley-Chickpea-Lentil-Wheat,,8
+era,Barley-Chickpea-Wheat,,34
+era,Barley-Fava Bean,,10
+era,Barley-Maize,,4
+era,Barley-Maize-Soybean-Wheat,,8
+era,Barley-Peas-Teff-Wheat,,12
+era,Barley..Teff..Wheat..Linseed..Common Bean..Peas,,6
+era,Barley..Wheat,,113
+era,Barley..Wheat..Teff..Indian Pea..Chickpea..Lentil,,36
+era,Black Gram,black gram,36
+era,Black Gram-Maize,,9
+era,Black oats,black oats,274
+era,Black oats-Common Bean-Common Vetch-Maize-Pearl Millet-Radish-Sunn Hemp,,2
+era,Black oats-Common Bean-Maize-Pearl millet-Pearl Millet-Radish-Sunn Hemp,,51
+era,Black oats-Common Vetch,,17
+era,Black oats-Common Vetch-Cowpea-Maize,,24
+era,Black oats-Common Vetch-Guinea Grass-Maize-Soybean,,36
+era,Black oats-Common Vetch-Maize,,12
+era,Black oats-Common Vetch-Maize-Oats-Soybean-Wheat,,86
+era,Black oats-Common Vetch-Soybean-Wheat,,1
+era,Black oats-Grape,,7
+era,Black oats-Maize,,74
+era,Black oats-Maize-Soybean-Wheat-White Lupin,,3
+era,Blue Lupin,blue lupin,15
+era,Brachiaria brizantha,brachiaria brizantha,54
+era,Brachiaria decumbens,brachiaria decumbens,12
+era,Brachiaria humidicola,brachiaria humidicola,12
+era,Brachiaria hybrid,brachiaria hybrid,116
+era,Butter Bean,butter bean,100
+era,Cabbage,cabbage,152
+era,Cabbage-Maize,,6
+era,Calabash,calabash,115
+era,Calliandra calothyrsus-Common Bean-Cowpea-Lablab-Maize,,36
+era,Canola,canola,256
+era,Canola-Potato-Soybean-Wheat,,20
+era,Capsicum,capsicum,59
+era,Cardamom,cardamom,18
+era,Carrot,carrot,112
+era,Carrot..Parsnip,,8
+era,Cashew Nut,cashew nut,20
+era,Cassava,cassava,1590
+era,Cassava-Fallow-Maize,,6
+era,Cassava-Leucaena leucocephala-Maize,,6
+era,Cassava-Maize,,72
+era,Cassava-Maize-Okra,,16
+era,Cassava-Maize-Pueraria phaseoloides,,6
+era,Cassava-Pigeon Pea,,4
+era,Castor,castor,20
+era,Castor-Guar Gum-Pearl Millet,,36
+era,Chamomile,chamomile,45
+era,Chickpea,chickpea,422
+era,Chickpea-Maize,,87
+era,Chili,chili,104
+era,Chloris gayana,,15
+era,Cocksfoot,cocksfoot,3
+era,Cocoa,cocoa,236
+era,Coffee,coffee,779
+era,Coffee-Albizia coriaria,,6
+era,Coffee-Albizia gummifera,,2
+era,Coffee-Banana Sweet,,27
+era,Coffee-Chloroleucon eurycyclum,,2
+era,Coffee-Coffee,,22
+era,Coffee-Common Bean,,4
+era,Coffee-Cordia africana,,29
+era,Coffee-Croton macrostachyus,,2
+era,Coffee-Desmodium intortum,,6
+era,Coffee-Dracaena steudneri,,2
+era,Coffee-Ehretia cymosa,,2
+era,Coffee-Erythrina poeppigiana,,13
+era,Coffee-Erythrina poeppigiana-Inga sp.,,2
+era,Coffee-Erythrina poeppigiana-Terminalia amazonia,,2
+era,Coffee-Eucalyptus alba,,23
+era,Coffee-Eucalyptus deglupta,,7
+era,Coffee-Ficus vasta,,2
+era,Coffee-Inga densiflora,,90
+era,Coffee-Inga densiflora-Solanum sp-.Banana Sweet,,2
+era,Coffee-Macadamia,,142
+era,Coffee-Millettia ferruginea,,2
+era,Coffee-Olea welwitshii,,2
+era,Coffee-Phoenix reclinata,,2
+era,Coffee-Pouteria adolfi-friedericii,,2
+era,Coffee-Prunus africana,,2
+era,Coffee-Rubber,,8
+era,Coffee-Schefflera abyssinica,,2
+era,Coffee-Solanum sp-.Banana Sweet,,2
+era,Coffee-Terminalia amazonia,,4
+era,Coffee-Terminalia ivorensis,,7
+era,Coffee-Unspecified,,9
+era,Coffee-Urochloa decumbens,,4
+era,Coffee-Vepris dainellii,,2
+era,Coffee..Mango..Avocado..Olive..Juniperus procera..Acacia sp,,1
+era,Coffee..Mango..Papaya..Banana Sweet..Kola Nut,,1
+era,Common Bean,common bean,3170
+era,Common Bean-Common Bean,,11
+era,Common Bean-Common Bean-Maize,,21
+era,Common Bean-Cowpea-Gliricidia sepium-Lablab-Maize,,30
+era,Common Bean-Cowpea-Lablab-Maize,,12
+era,Common Bean-Cowpea-Lablab-Maize-Pigeon Pea,,36
+era,Common Bean-Crotalaria sp.-Maize,,2
+era,Common Bean-Fallow-Maize,,2
+era,Common Bean-Kikuyu Grass-Soybean,,2
+era,Common Bean-Lablab-Maize,,2
+era,Common Bean-Maize,,250
+era,Common Bean-Maize-Peas,,2
+era,Common Bean-Maize-Sorghum-Sweet Potato,,20
+era,Common Bean-Maize-Wheat,,22
+era,Common Bean-Mung Bean,,6
+era,Common Bean-Sorghum,,24
+era,Common Bean-Wheat,,16
+era,Common Bean..Sorghum..Teff..Barley..Wheat..Maize..Chickpea,,4
+era,Common Vetch,common vetch,17
+era,Common Vetch-Black oats,,13
+era,Common Vetch-Cowpea-Maize,,24
+era,Common Vetch-Maize,,38
+era,Congo Grass,congo grass,24
+era,Congo Grass-Cotton-Pearl Millet,,30
+era,Congo Grass-Crotalaria ochroleuca-Maize-Soybean,,1
+era,Congo Grass-Maize-Soybean,,28
+era,Congo Grass-Soybean,,2
+era,Cooking Banana,cooking banana,394
+era,Cotton,cotton,577
+era,Cotton-Crotalaria ochroleuca-Fallow-Maize-Ruzigrass-Soybean,,5
+era,Cotton-Fallow,,65
+era,Cotton-Fallow-Sorghum-Soybean,,5
+era,Cotton-Groundnut-Sorghum,,2
+era,Cotton-Maize,,253
+era,Cotton-Maize-Sunn Hemp,,6
+era,Cotton-Mung Bean,,4
+era,Cotton-Sorghum,,12
+era,Cotton-Wheat,,48
+era,Cowpea,cowpea,2937
+era,Cowpea-Fallow,,20
+era,Cowpea-Fallow-Maize,,28
+era,Cowpea-Gliricidia sepium-Maize,,224
+era,Cowpea-Leucaena leucocephala,,130
+era,Cowpea-Leucaena leucocephala-Maize,,94
+era,Cowpea-Maize,,303
+era,Cowpea-Maize-Pearl Millet-Wheat,,20
+era,Cowpea-Maize-Pigeon Pea,,4
+era,Cowpea-Maize-Rice-Velvet Bean,,2
+era,Cowpea-Maize-Wheat,,40
+era,Cowpea-Other Millet,,12
+era,Cowpea-Pearl Millet,,96
+era,Cowpea-Pigeon Pea,,20
+era,Cowpea-Rice,,6
+era,Cowpea-Rice-Wheat,,3
+era,Cowpea-Sorghum,,68
+era,Cowpea-Ziziphus mauritiana,,2
+era,Cowpea...Cowpea...Sorghum...Sorghum...Sorghum...Sorghum,,27
+era,Crotalaria grahamiana,,12
+era,Crotalaria juncea,sunn hemp,12
+era,Crotalaria ochroleuca,crotalaria ochroleuca,9
+era,Crotalaria ochrolueca,,13
+era,Crotalaria paulina-Maize,,39
+era,Crotalaria sp.,crotalaria sp.,8
+era,Crotalaria sp.-Maize,,2
+era,Crotalaria spectabilis,,1
+era,Date,date,126
+era,Desho Grass,desho grass,10
+era,Desmodium intortum,desmodium intortum,6
+era,Desmodium intortum-Maize,,11
+era,Durum Wheat,durum wheat,440
+era,Durum Wheat-Hairy Vetch-Lentil-Teff,,5
+era,Durum Wheat-Lentil-Teff,,15
+era,Durum Wheat-Maize,,16
+era,Durum Wheat...Wheat,,24
+era,Eggplant,eggplant,121
+era,Egyptian Clover,egyptian clover,60
+era,Egyptian Clover-Rice-Wheat,,3
+era,Ethiopian Eggplant,ethiopian eggplant,35
+era,Ethiopian Mustard,ethiopian mustard,36
+era,Ethiopian Mustard-Maize,,45
+era,Eucalyptus globulus..Fodder (Natural Vegetation),,12
+era,Eucalyptus globulus..Fodder (Natural Vegetation)..Cordia africana,,6
+era,Faidherbia albida,faidherbia albida,9
+era,Fallow,,36
+era,Fallow-Maize,,47
+era,Fallow-Maize-Ruzigrass-Soybean,,5
+era,Fallow-Medicago truncatula-Wheat,,4
+era,Fallow-Pearl Millet,,9
+era,Fallow-Rice,,14
+era,Fallow-Sorghum,,3
+era,Fallow-Soybean,,7
+era,Fava Bean,fava bean,834
+era,Fava Bean-Grape,,3
+era,Fennel,fennel,118
+era,Fenugreek,fenugreek,12
+era,Fenugreek-Fava Bean,,20
+era,Finger Millet,finger millet,862
+era,Finger Millet-Common Vetch,,6
+era,Finger Millet-Desmodium intortum,,12
+era,Finger Millet-Groundnut,,40
+era,Finger Millet-Purple Vetch,,3
+era,Finger Millet..Sorghum,,2
+era,Flemingia sp.,,3
+era,Fluted Pumpkin,fluted pumpkin,24
+era,Fodder (Natural Vegetation),,53
+era,Fodder (Natural Vegetation)..Vachellia seyal,,6
+era,Fodder Radish,fodder radish,16
+era,Garlic,garlic,227
+era,Garlic-Fava Bean,,20
+era,Garlic-Onion-Pepper,,12
+era,Ginger,ginger,102
+era,Gliricidia sepium,,33
+era,Gliricidia sepium-Maize,,10
+era,Gliricidia sp-.Pepper-Cardamom,,3
+era,Gliricidia sp.,,6
+era,Glyricidia sepium-Maize,,3
+era,Grape,grape,280
+era,Grape-Hairy Vetch,,9
+era,Grape-Hairy Vetch-Triticale,,18
+era,Grape-Rye-Fava Bean,,9
+era,Grape-Triticale,,9
+era,Grevillea robusta,,68
+era,Groundnut,groundnut,1310
+era,Groundnut-Maize,,45
+era,Groundnut-Maize-Pigeon Pea,,16
+era,Groundnut-Other Fodder-Pearl Millet,,6
+era,Groundnut-Pearl Millet,,15
+era,Groundnut...Sweet Potato...Groundnut...Sweet Potato...Soybean...Soybean,,27
+era,Groundnut..Soybean..Common Bean..Maize,,8
+era,Guar Gum,guar gum,36
+era,Guinea Grass,guinea grass,18
+era,Guinea Grass-Maize-Pigeon Pea,,4
+era,Guinea Grass-Maize-Soybean,,2
+era,Hairy Vetch,hairy vetch,40
+era,Hairy Vetch-Maize,,2
+era,Hairy Vetch-Maize-Soybean-Wheat,,4
+era,Hairy Vetch-Sorghum-Soybean-Wheat,,4
+era,Hibiscus,hibiscus,69
+era,Hibiscus-Common Bean,,6
+era,Hibiscus-Common Bean-Maize,,3
+era,Hibiscus-Maize,,6
+era,Horsegram-Sorghum-Sunflower,,30
+era,Huckleberry,huckleberry,36
+era,Indian Pea,indian pea,43
+era,Jack Bean,jack bean,19
+era,Jack Bean-Maize,,18
+era,Jatropha curcas,jatropha,20
+era,Jute Mallow,jute mallow,181
+era,Jute Mallow-Potato-Soybean-Wheat,,3
+era,Jute Mallow-Rice-Wheat,,15
+era,Jute mallow,jute mallow,132
+era,Kale,kale,77
+era,Khat,khat,2
+era,Khat-Afzelia africana-Milletia ferruginea,,2
+era,Kikuyu Grass,kikuyu grass,6
+era,Lablab,lablab,394
+era,Lablab-Maize,,10
+era,Lablab-Maize-Rice,,16
+era,Lablab-Pearl Millet,,70
+era,Lablab-Sorghum,,54
+era,Lentil,lentil,349
+era,Lentil-Rice,,68
+era,Lettuce,lettuce,26
+era,Leucaena leucocephala,leucaena leucocephala,50
+era,Leucaena leucocephala-Maize,,43
+era,Leucaena leucocephala-Maize-Cassava,,2
+era,Linseed,linseed,12
+era,Lupin,lupin,47
+era,Lupin-Fava Bean,,20
+era,Macadamia,macadamia,203
+era,Macadamia-Arabica,,176
+era,Macadamia-Coffee,,16
+era,Maize,maize,37303
+era,Maize-Albizia harveyi,,4
+era,Maize-Albizia versicolor,,4
+era,Maize-Amaranth,,10
+era,Maize-Ayocote bean,,2
+era,Maize-Banana Sweet,,9
+era,Maize-Calliandra calothyrsus,,10
+era,Maize-Calliandra calothyrsus-Napier Grass,,10
+era,Maize-Cassava,,96
+era,Maize-Cassava-Leucaena leucocephala,,4
+era,Maize-Cassava-Pigeon Pea,,4
+era,Maize-Common Bean,,230
+era,Maize-Common Bean-Mung Bean,,8
+era,Maize-Common Bean-Napier Grass,,12
+era,Maize-Common Bean-Squash,,4
+era,Maize-Common Bean-Unspecified Tree,,10
+era,Maize-Congo Grass,,8
+era,Maize-Cowpea,,396
+era,Maize-Cowpea-Cassava-Sesame,,1
+era,Maize-Crotalaria juncea,,9
+era,Maize-Crotalaria sp.,,8
+era,Maize-Desmodium intortum,,8
+era,Maize-Desmodium uncinatum,,6
+era,Maize-Desmodium uncinatum-Napier Grass,,9
+era,Maize-Fava Bean,,7
+era,Maize-Flemingia sp.,,6
+era,Maize-Gliricidia sepium,,25
+era,Maize-Gliricidia sp.,,28
+era,Maize-Grevillea robusta,,36
+era,Maize-Groundnut,,78
+era,Maize-Guinea Grass,,8
+era,Maize-Hairy Vetch,,6
+era,Maize-Horsegram,,2
+era,Maize-Jack Bean,,35
+era,Maize-Lablab,,61
+era,Maize-Leucaena leucocephala,,16
+era,Maize-Leucaena leucocephala-Napier Grass,,10
+era,Maize-Maize,,4
+era,Maize-Mung Bean,,21
+era,Maize-Mung Bean-Common Bean,,8
+era,Maize-Napier Grass,,19
+era,Maize-Natural Fallow,,45
+era,Maize-Oats,,87
+era,Maize-Oats-Soybean-Wheat,,48
+era,Maize-Okra,,8
+era,Maize-Okra-Cowpea,,8
+era,Maize-Palisade Grass-Soybean,,1
+era,Maize-Pearl Millet,,8
+era,Maize-Pearl Millet-Common Bean,,8
+era,Maize-Pearl Millet-Common Bean-Sorghum,,8
+era,Maize-Pearl Millet-Pigeon Pea-Soybean,,45
+era,Maize-Peas,,4
+era,Maize-Pigeon Pea,,198
+era,Maize-Potato,,32
+era,Maize-Pumpkin,,2
+era,Maize-Rice,,2
+era,Maize-Rice-Rice Bean,,2
+era,Maize-Rice-Stylosanthes capitata,,2
+era,Maize-Rice-Stylosanthes guianensis,,16
+era,Maize-Sesbania rostrata,,16
+era,Maize-Sesbania sesban,,13
+era,Maize-Silverleaf,,4
+era,Maize-Sorghum,,38
+era,Maize-Soybean,,181
+era,Maize-Stylosanthes capitata,,2
+era,Maize-Sunn Hemp,,16
+era,Maize-Sweet Potato,,9
+era,Maize-Tephrosia candida,,76
+era,Maize-Tephrosia vogelii,,13
+era,Maize-Triticale,,2
+era,Maize-Unspecified Legume,,41
+era,Maize-Urochloa eminii,,16
+era,Maize-Velvet Bean,,36
+era,Maize-Wheat,,244
+era,Maize-Yam,,2
+era,Maize-pigeon pea,,4
+era,Maize..Barley..Teff..Wheat..Common Bean,,4
+era,Maize..Common Bean,,2
+era,Maize..Cowpea,,4
+era,Maize..Cowpea..Pigeon Pea,,42
+era,Maize..Groundnut..Common Bean,,3
+era,Maize..Sorghum..Finger Millet,,12
+era,Maize..Sorghum..Wheat..Barley..Rape..Niger..Teff,,10
+era,Maize..Wheat,,24
+era,Mangifera indica..Maesopsis eminii..Ficus natalensis..Artocarpus heterophyllus..Avocado,,1
+era,Mango,mango,29
+era,Mango..Papaya..Lemon & Lime..Orange..Banana Sweet..Kola Nut,,1
+era,Medicago scutellata-Grape,,3
+era,Medicago truncatula-Grape,,11
+era,Melon,melon,24
+era,Milicia excelsa-Cocoa,,2
+era,Moringa,moringa,32
+era,Moringa oleifera,moringa,4
+era,Mung Bean,mung bean,118
+era,Mung Bean-Common Bean,,6
+era,Mung Bean-Rice-Wheat,,66
+era,Napier Grass,napier grass,76
+era,Natural Fallow,,205
+era,Natural Fallow-Soybean,,18
+era,New Cocoyam,new cocoyam,100
+era,Newbouldia laevis-Cocoa,,2
+era,Oats,oats,211
+era,Oats-Grape,,7
+era,Oats-Wheat,,36
+era,Oats..Wheat..Teff..Barley,,11
+era,Okra,okra,316
+era,Okra-Cowpea,,8
+era,Olive,olive,76
+era,Onion,onion,799
+era,Onion-Rice,,6
+era,Opuntia stricta,opuntia stricta,30
+era,Orange,orange,12
+era,Orange-Cassava,,12
+era,Orange-Maize,,12
+era,Orange-Pineapple,,12
+era,Ornithopus sativus-Grape,,4
+era,Other Fodder,other fodder,6
+era,Other Millet,other millet,26
+era,Palisade Grass,palisade grass,69
+era,Palisade Grass-Soybean,,18
+era,Palm Oil,palm oil,42
+era,Panicum antidotale,panicum antidotale,18
+era,Parkia biglobosa,,20
+era,Passionfruit,passionfruit,22
+era,Patula Pine,patula pine,6
+era,Peach & Nectarine,peach & nectarine,61
+era,Pearl Millet,pearl millet,4603
+era,Pearl Millet-Cowpea,,38
+era,Pearl Millet-Cowpea-Ziziphus mauritiana,,14
+era,Pearl Millet-Sesbania rostrata,,70
+era,Pearl Millet-Soybean,,18
+era,Pearl Millet-Ziziphus mauritiana,,2
+era,Pearl Millet..Sweet Potato..Common Bean,,8
+era,Peas,peas,157
+era,Pepper,pepper,132
+era,Pepper-Gliricidia sp.,,3
+era,Pepper-Grevillea robusta,,3
+era,Pepper-Grevillea robusta-Cardamom,,3
+era,Pigeon Pea,pigeon pea,555
+era,Pigeon Pea-Cowpea,,8
+era,Pigeon Pea-Maize,,61
+era,Pigeon Pea-Soybean,,18
+era,Pigeon Pea-Sweet Potato,,4
+era,Pineapple,pineapple,34
+era,Pomegranate,pomegranate,34
+era,Potato,potato,1531
+era,Potato-Butter Bean,,96
+era,Potato-Common Bean,,26
+era,Potato-Lablab,,104
+era,Potato-Lupin,,18
+era,Potato-Peas,,26
+era,Potato-Soybean-Wheat,,12
+era,Potato-Velvet Bean,,15
+era,Pumpkin,pumpkin,13
+era,Purple Vetch,purple vetch,4
+era,Quinoa,quinoa,394
+era,Radish,radish,17
+era,Rape,rape,323
+era,Red Clover,red clover,9
+era,Rice,rice,7666
+era,Rice-Sesbania bispinosa,,55
+era,Rice-Sesbania bispinosa-Wheat,,12
+era,Rice-Sesbania cannabina-Wheat,,18
+era,Rice-Soybean,,27
+era,Rice-Wheat,,348
+era,Robusta,robusta,52
+era,Rubber,rubber,142
+era,Rubber-Cocoa,,51
+era,Rubber-Coffee,,51
+era,Rubber-Cooking Banana,,54
+era,Rubber-Kola Nut,,51
+era,Rubber-Lemon,,51
+era,Rye-Grape,,7
+era,Ryegrass sp,ryegrass sp,9
+era,Safflower,safflower,30
+era,Seed,,2
+era,Senna siamea,,24
+era,Senna siamea-Maize,,18
+era,Sesame,sesame,587
+era,Sesame-Pearl Millet,,16
+era,Sesbania rostrata-Sorghum,,54
+era,Smutsfinger Grass,smutsfinger grass,40
+era,Soil,,4
+era,Soil..Wheat..Barley..Teff..Finger Millet..Common Bean,,12
+era,Sorghum,sorghum,5823
+era,Sorghum-Congo Grass,,36
+era,Sorghum-Cowpea,,92
+era,Sorghum-Groundnut,,12
+era,Sorghum-Guinea Grass,,4
+era,Sorghum-Mung Bean,,15
+era,Sorghum-Palisade Grass,,4
+era,Sorghum-Pigeon Pea,,12
+era,Sorghum-Soybean,,54
+era,Sorghum-Wheat,,26
+era,Sorghum..Teff,,8
+era,Sorghum..Teff..Barley..Maize..Wheat..Common Bean..Chickpea,,8
+era,Soybean,soybean,3600
+era,Soybean-Congo Grass,,1
+era,Soybean-Guinea Grass,,1
+era,Soybean-Maize,,79
+era,Soybean-Sunflower,,18
+era,Soybean-Wheat,,130
+era,Spinach,spinach,5
+era,Squash (C.Moschata),squash (c.moschata),6
+era,Strawberry,strawberry,31
+era,Stylosanthes capitata,stylosanthes capitata,1
+era,Stylosanthes guianensis,stylosanthes guianensis,18
+era,Sudan grass,sudan grass,36
+era,Sugar Beet,sugar beet,195
+era,Sugar Cane,sugar cane,682
+era,Sugar Cane..Potato..Tomato..Cabbage..Banana Sweet..Orange..Lemon & Lime..Onion..Pepper..Coffee,,8
+era,Sunflower,sunflower,189
+era,Sunn Hemp,sunn hemp,29
+era,Sweet Potato,sweet potato,606
+era,Sweetcane,sweetcane,6
+era,Swiss Chard,swiss chard,18
+era,Tall Fescue,tall fescue,43
+era,Taro,taro,196
+era,Tea,tea,206
+era,Teff,teff,883
+era,Teff-Lupin,,27
+era,Tephrosia vogelii,,3
+era,Tomato,tomato,758
+era,Tomato-Kale,,2
+era,Tomato-Maize,,2
+era,Tomato-Onion,,2
+era,Tomato..Artichokes..Beetroot..Capsicum..Eggplant..Leeks..Radish..Spinach..Waterleaf..Swiss Chard,,2
+era,Trifolium subterraneum-Grape,,3
+era,Triticale,triticale,8
+era,Turkey berry,turkey berry,17
+era,Turmeric,turmeric,25
+era,Unknown Plant,,80
+era,Unspecified,,6
+era,Unspecified Fodder Grass,,27
+era,Urochloa eminii,urochloa eminii,7
+era,Vachellia karroo,,3
+era,Velvet Bean,velvet bean,56
+era,Vetiver Grass-Maize-Sweet Potato,,8
+era,Vicia villosa-Grape,,4
+era,Water Yam,water yam,16
+era,Waterleaf,waterleaf,6
+era,Watermelon,watermelon,4
+era,Watermelon-Maize,,1
+era,Wheat,wheat,6209
+era,Wheat-Barley,,8
+era,Wheat-Sesbania sesban,,6
+era,Wheat...Wheat...Fava Bean...Fava Bean,,16
+era,Wheat..Teff..Maize..Barley..Fava Bean,,2
+era,Winter Vetch-Grape,,3
+era,Yacon,yacon,70
+era,Yam,yam,332
+era,Yam-Maize,,12
+era,Yam-Pigeon Pea,,36
+era,Zucchini,zucchini,75
+era,,,4358

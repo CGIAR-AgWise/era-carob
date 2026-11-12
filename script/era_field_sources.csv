@@ -1,0 +1,104 @@
+field,era_table,era_variable,notes
+K_fertilizer,Data.Out,F.KI; F.K2O; F.I.Unit,"Elemental nutrient application in kg/ha, with source-unit conversion. Oxide fallback uses fraction 0.8301."
+K_organic,Data.Out,F.KO; F.O.Unit,Elemental organic nutrient rate in kg/ha.
+N_fertilizer,Data.Out,F.NI; F.I.Unit,"Elemental nutrient application in kg/ha, with source-unit conversion."
+N_organic,Data.Out,F.NO; F.O.Unit,Elemental organic nutrient rate in kg/ha.
+OM_used,Data.Out,F.NO; F.PO; F.KO; F.O.Unit,Positive evidence from organic nutrient rates. Unknown remains missing.
+P_fertilizer,Data.Out,F.PI; F.P2O5; F.I.Unit,"Elemental nutrient application in kg/ha, with source-unit conversion. Oxide fallback uses fraction 0.4364."
+P_organic,Data.Out,F.PO; F.O.Unit,Elemental organic nutrient rate in kg/ha.
+control_T,Data.Out,T.Control,Derived flag using the recorded control marker.
+country,Data.Out,Country,
+crop,Data.Out,P.Product,Whole-label mapping to ERA product vocabulary. Unresolved identities remain missing.
+crop_raw,Data.Out,P.Product,Original crop label before harmonisation. Includes mixtures.
+crop_rotation,Data.Out,R.Prod.Seq,
+dataset_id,Data.Out,B.Code,
+depth_bottom,Soil.Out,Soil.Lower,
+depth_top,Soil.Out,Soil.Upper,
+elevation,Data.Out,Site.Elevation,
+era_carbon_stock_mg_ha,Data.Out,Out.Subind; ED.Mean.T; Out.Unit,"Soil Carbon Stocks outcome, converted to Mg/ha."
+era_chemical_amount_raw,Chems.Out,C.Amount,Original chemical record from matched management attributes.
+era_chemical_name_raw,Chems.Out,C.Name,Original chemical record from matched management attributes.
+era_chemical_type_raw,Chems.Out,C.Type,Original chemical record from matched management attributes.
+era_chemical_unit_raw,Chems.Out,C.Unit,Original chemical record from matched management attributes.
+era_control_raw,Data.Out,T.Control,Recorded comparator/control marker.
+era_data_location,Data.Out,ED.Data.Loc,"Locator in the primary source, e.g. table or figure."
+era_error_type_raw,Data.Out,ED.Error.Type,Recorded error statistic.
+era_irrigation_amount_raw,Irrig.Method,I.Amount,Original irrigation amount; includes unsupported units.
+era_irrigation_level_raw,Data.Out,I.Level.Name,Source irrigation treatment level.
+era_irrigation_method_raw,Data.Out,I.Method,Original irrigation method.
+era_irrigation_unit_raw,Irrig.Method,I.Unit,Original irrigation unit.
+era_n_replicates,Data.Out,ED.Reps; T.Reps,"Whole positive count. Uses outcome replication count when present, otherwise treatment replication count."
+era_outcome_error_raw,Data.Out,ED.Error,Recorded arm-level uncertainty. Interpret with era_error_type_raw and the source paper.
+era_outcome_raw,Data.Out,Out.Subind,Outcome as recorded before harmonisation.
+era_outcome_reps_raw,Data.Out,ED.Reps,Recorded outcome replication count.
+era_season_raw,Data.Out,Time,Recorded season text; may identify multiple seasons.
+era_site_map_raw,Data.Out,Site.MAP,Site mean annual precipitation. Kept separately from growing-season rain.
+era_soc_stock_mg_ha,Data.Out,Out.Subind; ED.Mean.T; Out.Unit,"Soil Organic Carbon recorded as a stock, converted to Mg/ha."
+era_treatment_reps_raw,Data.Out,T.Reps,Recorded treatment replication count.
+era_unit_raw,Data.Out,Out.Unit,Unit of the original outcome.
+era_value_raw,Data.Out,ED.Mean.T,Value as recorded; interpret with era_outcome_raw and era_unit_raw.
+fungicide_amount,Chems.Out,C.Type; C.Amount; C.Unit,Converts explicit active ingredient mass per hectare to kg/ha.
+fungicide_product,Chems.Out,C.Type; C.Name; C.Name.Type,Only chemical-classified names are retained.
+fungicide_used,Chems.Out,C.Type,Requires positive evidence for this chemical class; omitted/other classes remain unknown.
+harvest_date,Data.Out,PD.Harvest.End,
+herbicide_amount,Chems.Out,C.Type; C.Amount; C.Unit,Converts explicit active ingredient mass per hectare to kg/ha.
+herbicide_implement,Chems.Out,C.Type; C.Mechanization,Requires positive evidence for this chemical class; omitted/other classes remain unknown.
+herbicide_product,Chems.Out,C.Type; C.Name; C.Name.Type,Only chemical-classified names are retained.
+herbicide_used,Chems.Out,C.Type,Requires positive evidence for this chemical class; omitted/other classes remain unknown.
+insecticide_amount,Chems.Out,C.Type; C.Amount; C.Unit,Converts explicit active ingredient mass per hectare to kg/ha.
+insecticide_implement,Chems.Out,C.Type; C.Mechanization,Requires positive evidence for this chemical class; omitted/other classes remain unknown.
+insecticide_product,Chems.Out,C.Type; C.Name; C.Name.Type,Only chemical-classified names are retained.
+insecticide_used,Chems.Out,C.Type,Requires positive evidence for this chemical class; omitted/other classes remain unknown.
+intercrops,Data.Out,IN.Prod,
+irrigated,Data.Out + Irrig.Method,I.Amount; I.Method; I.Level.Name,"Combines method, amount and explicit rainfed/no-irrigation evidence. Conflicts and unknowns remain missing."
+irrigation_amount,Irrig.Method,I.Amount; I.Unit,Only supported seasonal irrigation depth in mm/season.
+irrigation_dates,Irrig.Method,I.Date.Start; I.Date.Gen,
+irrigation_method,Data.Out,I.Method,
+is_survey,Data.Out,Site.Type,
+land_prep_implement,Till.Out,T.Mechanization,
+land_prep_method,Till.Out,T.Method; Till.Other,
+latitude,Data.Out,Site.LatD,Numeric latitude retains source precision if within range.
+location,Data.Out,Site.ID,
+longitude,Data.Out,Site.LonD,Numeric longitude retains source precision if within range.
+maturity_days,Data.Out,V.Maturity,
+on_farm,Data.Out,Site.Type,
+plant_density,Plant.Method,Plant.Density; Plant.Density.Unit,
+planting_date,Data.Out,PD.Plant.Variable; PD.Plant.Start; Time,Only a validated planting date may be carried into this field.
+planting_date_raw,Data.Out,PD.Plant.Start; PD.Plant.Variable,Source date before season checks.
+planting_implement,Plant.Method,Plant.Mechanization,
+planting_method,Plant.Method,Plant.Method,
+plot_area,Data.Out,EX.HPlot.Size,
+reference,Data.Out,B.Author.Last,
+row_spacing,Plant.Method,Plant.Row,
+seed_density,Plant.Method,Plant.Density; Plant.Density.Unit,
+seed_rate,Plant.Method,Plant.Density; Plant.Density.Unit,
+soil_CEC,Data.Out,ED.Mean.T; Out.Subind = Cation Exchange Capacity; Out.Unit,Converts recognised concentration units to cmol/kg.
+soil_EC,Soil.Out,Soil.EC; Soil.Out.Unit,Converts recognised units of matched soil measurements.
+soil_N_total,Data.Out,ED.Mean.T; Out.Subind = Soil Total Nitrogen; Out.Unit,Converts recognised concentration units to mg/kg.
+soil_P_total,Soil.Out,Soil.TP; Soil.Out.Unit,Converts recognised units of matched soil measurements.
+soil_SOC,Data.Out,ED.Mean.T; Out.Subind = Soil Organic Carbon; Out.Unit,Converts recognised concentration units to percent by mass.
+soil_SOM,Data.Out,ED.Mean.T; Out.Subind = Soil Organic Matter; Out.Unit,Converts recognised concentration units to percent by mass.
+soil_bd,Soil.Out,Soil.BD; Soil.Out.Unit,Converts recognised units of matched soil measurements.
+soil_clay,Soil.Out,CLY; Soil.Out.Unit,Converts recognised units of matched soil measurements.
+soil_depth,Soil.Out,Soil.Upper; Soil.Lower,
+soil_pH,Soil.Out,Soil.pH,
+soil_sand,Soil.Out,SND; Soil.Out.Unit,Converts recognised units of matched soil measurements.
+soil_silt,Soil.Out,SLT; Soil.Out.Unit,Converts recognised units of matched soil measurements.
+soil_texture,Data.Out,Site.Soil.Texture,
+source,Archive provenance,archive identity,ERA or Carob source archive.
+source_row,Archive provenance,archive row ordinal,One-based row number in pinned Data.Out or Carob wide file. Pair with source.
+temp,Data.Out,Time.Clim.Temp.Mean,
+tmax,Data.Out,Time.Clim.Temp.Max,
+tmin,Data.Out,Time.Clim.Temp.Min,
+transplanting_date,Data.Out,PD.Plant.Variable; PD.Plant.Start,
+treatment,Data.Out,T.Name; F.Level.Name,
+uri,Data.Out,B.DOI,
+variable,Data.Out,Out.Subind,ERA outcome label with spaces replaced by underscores.
+variety,Data.Out,V.Var; ED.Variety,
+variety_traits,Data.Out,V.Trait1; V.Trait2; V.Trait3,
+variety_type,Data.Out,V.Type,
+yield,Data.Out,Out.Subind; ED.Mean.T; Out.Unit,Nonnegative scalar yields with recognised source units converted to kg/ha.
+yield_part,Data.Out,ED.Product.Comp; ED.Product.Comp.L1,Whole harvest-part labels on Crop Yield. Ambiguous labels including corm and Tuber/Root remain missing.
+yield_part_raw,Data.Out,ED.Product.Comp; ED.Product.Comp.L1,Detailed source harvest part including corms and qualified labels.
+yield_raw,Data.Out,Out.Subind; ED.Mean.T,Original value for Crop Yield.
+yield_unit_raw,Data.Out,Out.Subind; Out.Unit,Original case-sensitive yield unit.

@@ -33,7 +33,9 @@ def group(k,a,b):
 
 master=json.loads(next(cache.glob("era_master_codes*.json")).read_text())
 look=defaultdict(set)
-alias={"sweetpotato":"sweet potato","faba bean":"fava bean","sugarcane":"sugar cane","lucerne":"alfalfa","peanut":"groundnut"}
+with Path("script/crop_aliases.csv").open() as aliases:
+    alias = {row["alias"]: row["product"] for row in csv.DictReader(aliases)}
+
 def spelling(x): return alias.get(x,x)
 for r in master["prod"]:
     if r.get("Product.Type")!="Plant": continue

@@ -2,6 +2,7 @@
 library(dplyr)
 library(tidyr)
 source("script/pinned.R")
+source("script/agronomy.R")
 era_merge <- jsonlite::fromJSON(one_input("agronomic_*.json"))
 era_master <- jsonlite::fromJSON(one_input("era_master_codes*.json"))
 # Source ordinal is stable only within the pinned ERA archive.
@@ -69,7 +70,7 @@ d1 <- data.frame(
    soil_depth= paste0(r2$Soil.Upper, "-", r2$Soil.Lower),
    B.Code= r2$B.Code,
    variable= r2$variable,
-   value= r2$value
+   value= map_site_measure(r2$variable,r2$value,r2$Unit)
 )
 
 # Only one distinct value per measured variable at the same site and depth.
@@ -87,6 +88,7 @@ df <- rb[!grepl("^NA\\*\\*NA$", rb$Product.Type),]
 #df$control <- ifelse(grepl("Yes", substr(df$T.Control, 1, 3)), TRUE, FALSE)
 #df$treatment <- ifelse(is.na(df$T.Name) & !is.na(df$F.Level.Name), df$F.Level.Name, df$T.Name)
 
+df$era_outcome_raw <- df$Out.Subind
 df$Out.Subind <- gsub(" ", "_", df$Out.Subind)
 cols <- c("PD.Plant.Start", "PD.Plant.End", "PD.Harvest.Start", "PD.Harvest.End")
 df[cols] <- lapply(df[cols], unclass)
@@ -95,16 +97,33 @@ d <- data.frame(
    yield_raw=ifelse(df$Out.Subind=="Crop_Yield", df$ED.Mean.T, NA),
    yield_unit_raw=ifelse(df$Out.Subind=="Crop_Yield", df$Out.Unit, NA),
    era_source_row=df$era_source_row,
+   era_outcome_raw=df$era_outcome_raw,
+   era_value_raw=df$ED.Mean.T,
+   era_unit_raw=df$Out.Unit,
+   era_data_location=df$ED.Data.Loc,
+   era_season_raw=df$Time,
+   era_outcome_error_raw=df$ED.Error,
+   era_error_type_raw=df$ED.Error.Type,
+   era_control_raw=df$T.Control,
+   era_treatment_reps_raw=df$T.Reps,
+   era_outcome_reps_raw=df$ED.Reps,
+   era_n_replicates=ifelse(is.na(df$ED.Reps),whole_reps(df$T.Reps),whole_reps(df$ED.Reps)),
+   era_site_map_raw=df$Site.MAP,
+   era_irrigation_amount_raw=df$I.Amount,
+   era_irrigation_unit_raw=df$I.Unit,
+   era_irrigation_method_raw=df$I.Method,
+   era_irrigation_level_raw=df$I.Level.Name,
    uri=df$B.DOI,
    reference= df$B.Author.Last,
    dataset_id= df$B.Code,
    location= df$Site.ID,
-   on_farm= grepl("on-farm", tolower(df$Site.Type)),
+   on_farm= ifelse(df$Site.Type %in% c("Farm","Researcher Managed & On-farm"),TRUE,
+               ifelse(df$Site.Type %in% c("Station","Researcher Managed & Research Facility"),FALSE,NA)),
    is_survey = grepl("survey", tolower(df$Site.Type)),
    country= df$Country,
    latitude= df$Site.LatD,
    longitude= df$Site.LonD,
-   rain= df$Site.MAP,
+   rain= NA_real_, # Site.MAP is a long-term annual mean.
    #temp= df$Site.MAT,
    elevation= df$Site.Elevation,
    soil_texture= df$Site.Soil.Texture,
@@ -117,7 +136,7 @@ d <- data.frame(
    dsign= df$EX.Design,
    plot_area= df$EX.HPlot.Size,
    treatment= ifelse(is.na(df$T.Name) & !is.na(df$F.Level.Name), df$F.Level.Name, df$T.Name),
-   control_T= ifelse(grepl("Yes", substr(df$T.Control, 1, 3)), TRUE, FALSE),
+   control_T= unname(c("Yes"=TRUE,"No"=FALSE)[df$T.Control]),
    crop= df$P.Product,
    harvest_start= df$PD.Harvest.Start,
    harvest_date= df$PD.Harvest.End,
@@ -130,26 +149,24 @@ d <- data.frame(
    variable= df$Out.Subind,
    yield_part= ifelse(is.na(df$ED.Product.Comp) & !is.na(df$ED.Product.Comp.L1), df$ED.Product.Comp.L1, df$ED.Product.Comp),
    value= df$ED.Mean.T,
-   rep= ifelse(is.na(df$T.Reps) & !is.na(df$ED.Reps), df$ED.Reps, df$T.Reps),
+   rep= NA_integer_, # ERA counts replicates; Carob rep identifies an individual replicate.
    #df$T.Residue.Prev,
    variety= ifelse(is.na(df$V.Var) & !is.na(df$ED.Variety), df$ED.Variety, df$V.Var),
    variety_traits = ifelse(is.na(df$V.Trait1) & !is.na(df$V.Trait2), df$V.Trait2,
                     ifelse(is.na(df$V.Trait2) & !is.na(df$V.Trait3), df$V.Trait3, df$V.Trait1)), 
    variety_type = df$V.Type,
    maturity_days= df$V.Maturity,
-   N_organic= df$F.NO,
-   P_organic= df$F.PO,
-   K_organic= df$F.KO,
-   N_fertilizer= df$F.NI,
-   P_fertilizer= ifelse(is.na(df$F.PI)& !is.na(df$F.P2O5), df$F.P2O5, df$F.PI),
-   K_fertilizer= ifelse(is.na(df$F.KI)& !is.na(df$F.K2O),  df$F.K2O, df$F.KI),
-   #fert_org_unit= df$F.O.Unit,
-   #fert_Io_unit= df$F.I.Unit,
-   irrigation_amount= df$I.Amount,
+   N_organic= fertilizer_rate(df$F.NO,df$F.O.Unit),
+   P_organic= fertilizer_rate(df$F.PO,df$F.O.Unit),
+   K_organic= fertilizer_rate(df$F.KO,df$F.O.Unit),
+   N_fertilizer= fertilizer_rate(df$F.NI,df$F.I.Unit),
+   P_fertilizer= fertilizer_rate(df$F.PI,df$F.I.Unit,df$F.P2O5,element_fraction=0.4364),
+   K_fertilizer= fertilizer_rate(df$F.KI,df$F.I.Unit,df$F.K2O,element_fraction=0.8301),
+   irrigation_amount= convert_measure(df$I.Amount,df$I.Unit,c("mm/season"=1)),
    irrigation_method= df$I.Method,
    irrigation_dates= ifelse(is.na(df$I.Date.Start) & !is.na(df$I.Date.Gen), df$I.Date.Gen, df$I.Date.Start),
    irrigation_dates_end= df$I.Date.End,
-   irrigated= !is.na(df$I.Amount) & df$I.Amount != 0,
+   irrigated= irrigation_flag(df$I.Amount,df$I.Method,df$I.Level.Name),
    planting_method= df$Plant.Method,
    planting_implement= df$Plant.Mechanization,
    plant_density= df$Plant.Density,
@@ -157,33 +174,10 @@ d <- data.frame(
    row_spacing= df$Plant.Row,
    intercrops=df$IN.Prod,
    crop_rotation= df$R.Prod.Seq,
-   herbicide_used= ifelse(grepl("Herbicide", df$C.Type), TRUE, FALSE),
-   herbicide_method= ifelse(grepl("Herbicide", df$C.Type), df$C.App.Method, "none"),
-   herbicide_implement= ifelse(grepl("Herbicide", df$C.Type), df$C.Mechanization, "none"),
-   herbicide_amount= ifelse(grepl("Herbicide", df$C.Type),df$C.Amount, 0),
-   herbicide_product= ifelse(grepl("Herbicide", df$C.Type), df$C.Name, "none"),
-   
-   
-   insecticide_used= ifelse(grepl("Insecticide|Bioinsecticide", df$C.Type), TRUE, FALSE),
-   insecticide_method= ifelse(grepl("Insecticide|Bioinsecticide", df$C.Type), df$C.App.Method, "none"), 
-   insecticide_implement= ifelse(grepl("Insecticide|Bioinsecticide", df$C.Type), df$C.Mechanization, "none"), 
-   insecticide_amount= ifelse(grepl("Insecticide|Bioinsecticide", df$C.Type), df$C.Amount, 0), 
-   insecticide_product= ifelse(grepl("Insecticide|Bioinsecticide", df$C.Type), df$C.Name, "none"),
-   
-   
-   fungicide_used= ifelse(grepl("Fungicide|Biofungicide", df$C.Type), TRUE, FALSE),
-   fungicide_method= ifelse(grepl("Fungicide|Biofungicide", df$C.Type), df$C.App.Method, "none"), 
-   fungicide_implement= ifelse(grepl("Fungicide|Biofungicide", df$C.Type), df$C.Mechanization, "none"), 
-   fungicide_amount= ifelse(grepl("Fungicide|Biofungicide", df$C.Type), df$C.Amount, 0), 
-   fungicide_product= ifelse(grepl("Fungicide|Biofungicide", df$C.Type), df$C.Name, "none"),
-   
-   
-   pesticide_used= ifelse(grepl("Biopesticide", df$C.Type), TRUE, FALSE),
-   pesticide_method= ifelse(grepl("Biopesticide", df$C.Type), df$C.App.Method, "none"), 
-   pesticide_implement= ifelse(grepl("Biopesticide", df$C.Type), df$C.Mechanization, "none"), 
-   pesticide_amount= ifelse(grepl("Biopesticide", df$C.Type), df$C.Amount, 0), 
-   pesticide_product= ifelse(grepl("Biopesticide", df$C.Type), df$C.Name, "none"),
-   
+   era_chemical_type_raw=df$C.Type,
+   era_chemical_name_raw=df$C.Name,
+   era_chemical_amount_raw=df$C.Amount,
+   era_chemical_unit_raw=df$C.Unit,
    soil_clay= df$soil_clay,
    soil_depth= df$soil_depth,
    soil_sand= df$soil_sand,
@@ -195,6 +189,24 @@ d <- data.frame(
    product_type = df$Product.Type
 )
 
+
+# A positive chemical record supports use of its class only. An omitted
+# chemical, an unclassified treatment or a record for another class is unknown.
+classes <- list(herbicide="Herbicide", insecticide=c("Insecticide","Bioinsecticide"),
+                fungicide=c("Fungicide","Biofungicide"),pesticide="Biopesticide")
+for (kind in names(classes)) {
+  documented <- df$C.Type %in% classes[[kind]]
+  quantity <- suppressWarnings(as.numeric(df$C.Amount))
+  d[[paste0(kind,"_used")]] <- ifelse(documented & (is.na(quantity) | quantity>0),TRUE,NA)
+  d[[paste0(kind,"_method")]] <- ifelse(documented,df$C.App.Method,NA_character_)
+  d[[paste0(kind,"_implement")]] <- ifelse(documented,df$C.Mechanization,NA_character_)
+  # The Carob amount is kg active ingredient/ha. Product mass or volume alone
+  # does not establish the amount of active ingredient.
+  d[[paste0(kind,"_amount")]] <- ifelse(documented,
+      convert_measure(df$C.Amount,df$C.Unit,c("g a.i./ha"=.001,"kg a.i./ha"=1)),NA_real_)
+  d[[paste0(kind,"_product")]] <- ifelse(documented & df$C.Name.Type %in% "Chemical",
+                                         tolower(trimws(df$C.Name)),NA_character_)
+}
 
 ### product type
 prod <- strsplit(d$product_type, "\\*+")
@@ -210,17 +222,6 @@ d$product_type <- gsub("NA", NA, prod$V1)
 ##### livestock
 lvsk <- d[which(d$product_type=="Animal"),]
 d <- d[!grepl("Animal", d$product_type),]
-
-### fixing rain value and type
-
-rain <- strsplit(d$rain, "-|\\.+")
-max_len <- max(sapply(rain, length)) 
-split_padded <- lapply(rain, function(x) {
-   length(x) <- max_len
-   return(x)
-})
-rain <- as.data.frame(do.call(rbind, split_padded), stringsAsFactors = FALSE)
-d$rain <- as.numeric(gsub("NA", NA, rain$V1))
 
 ### fixing elevation value and type
 
@@ -244,19 +245,11 @@ d$soil_texture <- P
 depth <- as.data.frame(do.call(rbind, strsplit(d$soil_depth, "-")))
 d$depth_bottom <- as.numeric(gsub("NA", NA, trimws(depth$V2)))
 d$depth_top <- as.numeric(gsub("NA", NA, trimws(depth$V1)))
-### fixing seed density unit 
-
-d$seed_rate <- d$seed_density <- NA
-d$seed_density <- ifelse(grepl("^kg seed/ha$|^seeds/ha$|seed clusters/ha", d$units), d$plant_density,
-                         ifelse(grepl("seed/m2|kg seed/m2|grains/m2|seeds/m2|seeds/m",d$units), d$plant_density*10000, d$seed_density))  
-
-d$seed_rate <- ifelse(grepl("kg/ha", d$units), d$plant_density, d$seed_rate)
-d$plant_density <- ifelse(grepl("plants/m3|plants/m6|plants/m|plants/m4|plants/m2|plants/m5|plants/m7|hill/m2", d$units), d$plant_density*10000, d$plant_density) 
-
-i <- !is.na(d$seed_density) | !is.na(d$seed_rate)  
-d$plant_density[i] <- NA
+# Count per area, seed mass per area and emerged plant density are separate.
+d$seed_rate <- convert_measure(d$plant_density,d$units,c("kg seed/ha"=1,"kg/ha"=1,"kg seed/m2"=10000))
+d$seed_density <- convert_measure(d$plant_density,d$units,c("seeds/ha"=1,"seeds/m2"=10000,"seed/m2"=10000,"grains/m2"=10000))
+d$plant_density <- convert_measure(d$plant_density,d$units,c("plants/ha"=1,"plants/m2"=10000))
 d$units <- NULL
-
 
 rotation <- strsplit(d$crop_rotation, "\\|+|\\.+")
 max_len <- max(sapply(rotation, length)) 
@@ -344,7 +337,7 @@ crop_rotation_map <- c(
 i <- d$crop_rotation %in% names(crop_rotation_map)
 d$crop_rotation[i] <- crop_rotation_map[d$crop_rotation[i]]
 
-d$treatment_type <- ifelse(grepl("TRUE", d$control_T), "control", "treatment")
+d$treatment_type <- ifelse(d$control_T, "control", "treatment")
 
 ### Fixing country
 d$country <- ifelse(grepl("Uganda", d$country), "Uganda", 
@@ -485,15 +478,14 @@ d$intercrops[i] <- inter_crop_map[d$intercrops[i]]
 
 
 i <- which(d$K_organic!=0 | d$N_organic!=0 |d$P_organic!=0)
-d$OM_used <- FALSE
+d$OM_used <- NA
 d$OM_used[i] <- TRUE
 
 # Map whole labels only. Leave mixtures and unresolved labels in crop_raw.
 d$crop_raw <- d$crop
-key <- function(x) tolower(trimws(x))
-crosswalk <- read.csv("report/audit/crop_labels.csv",check.names=FALSE,na.strings="")
+crosswalk <- current_crop_crosswalk(era_master,d$crop)
 stopifnot(!anyDuplicated(crosswalk[["raw label"]]))
-d$crop <- crosswalk[["resolved product"]][match(key(d$crop_raw),crosswalk[["raw label"]])]
+d$crop <- crosswalk[["resolved product"]][match(crop_key(d$crop_raw),crosswalk[["raw label"]])]
 ## Fixing planting method and implement
 
 P <- fix_name(tolower(d$planting_method))
@@ -618,157 +610,26 @@ P <- gsub("Sprinkler Irrigation", "sprinkler", P)
 P <- gsub("NA", NA, P)
 d$irrigation_method <- P
 
-# Parse single values; do not truncate decimals or guess concatenated rates.
-for (k in c("N_fertilizer","P_fertilizer","K_fertilizer")) {
-  z <- suppressWarnings(as.numeric(trimws(d[[k]])))
-  z[!is.finite(z) | z<0 | z %in% c(999,999999)] <- NA_real_
-  d[[k]] <- z
-}
-## Fixing herbicide product
-
-d$herbicide_product <- tolower(trimws(d$herbicide_product))
-herbicide_map <- c(
-   "acetanilide" = "butachlor",  
-   "altrazine" = "atrazine",
-   "bispyribac sodium" = "bispyribac-sodium",
-   "bullet" = "atrazine",      
-   "butachlor" = "butachlor",
-   "buty ester" = "2,4-d",
-   "chlorimuron" = "chlorimuron-ethyl", # not in carob
-   "diclofop-methyl" = "diclofop-methyl", # not in carob
-   "dual" = "metolachlor",
-   "dual gold" = "s-metolachlor",
-   "ethoxisulfuron" = "ethoxysulfuron", # not in carob
-   "fenoxaprop" = "fenoxaprop-p-ethyl",
-   "florasulam" = "florasulam",
-   "fluaifop-butyl" = "fluazifop-butyl",
-   "fluazifop-p-butyl" = "fluazifop-p-butyl",
-   "flumetsulam" = "flumetsulam", # not in carob
-   "fomesafen" = "fomesafen", # not in carob
-   "furadan 5g" = "carbofuran",  # not in carob
-   "gramoxone" = "paraquat dichloride",
-   "imazaquin" = "imazaquin", # not in carob
-   "imazethapyr" = "imazethapyr, ammonium salt",
-   "l-l'-dimethyl-4,4'-bipyridinium" = "paraquat dichloride",
-   "lasso" = "alachlor",
-   "metsulfuron-methyl" = "metsulfuron",
-   "mustang 306 se" = "florasulam", 
-   "n-(phosphono-methyl) glycine" = "glyphosate",
-   "paraquat" = "paraquat dichloride",
-   "primagram" = "unknown",   # 
-   "prosulfuron" = "prosulfuron", # Not in carob
-   "quizalofop-p-ethyl" = "quizalofop-p-ethyl", # not in carob
-   "stomp" = "pendimethalin",
-   "sulfentrazone" = "sulfentrazone",
-   "thifensulfuron-methyl" = "thifensulfuron-methyl",# not in carob
-   "topic (15wp)" = "clodinafop",
-   "unspecified" = "unknown",
-   "weedall" = "glyphosate"
-)
-
-i <- d$herbicide_product %in% names(herbicide_map)
-d$herbicide_product[i] <- herbicide_map[d$herbicide_product[i]]
-
-### Fixing fungicide
-d$fungicide_product <- tolower(trimws(d$fungicide_product))
-
-fungicide_map <- c(
-   "apron plus" = "mefenoxam; fludioxonil",
-   "bayleton 25 wp" = "triadimefon",
-   "bonsoin" = "chlorothalonil;cymoxanil",
-   "carbendazim + thiram" = "carbendazim; thiram", # carbendazim: Not in carob
-   "fox" = "prothioconazole;trifloxystrobin",
-   "malathion" = NA,# insecticide
-   "manzate d" = "mancozeb",
-   "maxim" = "fludioxonil",
-   "maxim xl" = "mefenoxam; fludioxonil",
-   "nativo" = "tebuconazole; trifloxystrobin",
-   "nobel 25 wp" = "triadimefon",
-   "opera" = "pyraclostrobin; epoxiconazole",
-   "pencycuron" = "pencycuron",
-   "potassium silicate" = "potassium silicate",
-   "propiconazole" = "propiconazole",
-   "pyraclostrobin" = "pyraclostrobin",
-   "ridomilgold mz 68 wg" = "metalaxyl-m; mancozeb",
-   "rizolex-t50" = "tolclofos-methyl; thiram",
-   "sphere max" = "trifloxystrobin;cyproconazole",
-   "unspecified" = "unknown",
-   "vitavax" = "carboxin"
-)
-
-i <- d$fungicide_product %in% names(fungicide_map)
-d$fungicide_product[i] <- fungicide_map[d$fungicide_product[i]]
-
-
-## Fixing insecticide
-
-d$insecticide_product <- tolower(trimws(d$insecticide_product))
-
-insecticide_map <- c(
-   "abamectin" = "abamectin",
-   "ampligo" = "chlorantraniliprole; lambda-cyhalothrin",
-   "belt" = "flubendiamide",
-   "bestox" = "alpha-cypermethrin",
-   "bulldock" = "beta-cyfluthrin",
-   "cyhalothrin" = "lambda-cyhalothrin",
-   "cypadem" = "cypermethrin",
-   "cyproconazole" = NA, # fungicide, not insecticide
-   "dipterex" = "trichlorfon",
-   "fenvalerate" = "fenvalerate",
-   "imidacloprid" = "imidacloprid",
-   "karate" = "lambda-cyhalothrin",
-   "nuvacron" = "monocrotophos",
-   "pirimicarb" = "pirimicarb",
-   "sulfuramid" = "sulfuramid", # not in carob
-   "termex" = "imidacloprid;bifenthrin",
-   "thiodan" = "endosulfan",
-   "thunder" = "thiamethoxam;tolfenpyrad",
-   "trichlorophon" = "trichlorfon",
-   "unspecified" = "unknown",
-   "vetox 85" = "carbaryl",
-   "warrant power" = "gamma-cyhalothrin"
-)
-
-i <- d$insecticide_product %in% names(insecticide_map)
-d$insecticide_product[i] <- insecticide_map[d$insecticide_product[i]]
-
-
 ##############################################################
 #### Transforming response variable from long into wide format ##########
 
 # Preserve one row per source outcome; row order across variables is not a plot ID.
 d <- d[!is.na(d$variable) & nzchar(d$variable),]
-dwf <- tidyr::pivot_wider(d,names_from=variable,values_from=value)
+dwf <- d
 stopifnot(!anyDuplicated(dwf$era_source_row))
-outcomes <- c(
-  "Crop_Yield" = "yield",
-  "Soil_Organic_Carbon" = "soil_SOC",
-  "Soil_Total_Nitrogen" = "soil_N_total",
-  "Soil_Nitrogen" = "soil_N",
-  "Soil_Organic_Matter" = "soil_SOM",
-  "Carbon_Dioxide_Emissions" = "emission_CO2",
-  "Soil_Organic_Carbon_(Change)" = "soil_SOC_exch",
-  "CO2_Equivalent_Emissions" = "CO2_eq_emission",
-  "Variable_Cost_per_Unit_Product" = "variable_cost",
-  "Aboveground_Biomass" = "fwy_total",
-  "Pest_&_Pathogen_(Losses)" = "pest_severity",
-  "Effective_Cation_Exchange_Capacity" = "soil_CEC_eff",
-  "Methane_Emissions" = "emission_CH4",
-  "Nitrous_Oxide_Emissions" = "emission_N2O",
-  "Cation_Exchange_Capacity" = "soil_CEC",
-  "Erosion" = "soil_erosion",
-  "Labour_Cost" = "labour_Cost",
-  "Labour_Person_Hours" = "labour",
-  "Net_Return" = "net_benefit",
-  "Soil_Carbon_Stocks" = "soil_C_stock"
-)
-mapped <- match(names(dwf),names(outcomes))
-names(dwf)[!is.na(mapped)] <- unname(outcomes[mapped[!is.na(mapped)]])
-# Exact units only: case matters (Mg is not mg). Preserve unconverted source values.
-y <- suppressWarnings(as.numeric(dwf$yield_raw))
-scale <- c("kg/ha"=1,"Mg/ha"=1000,"t/ha"=1000,"g/m2"=10)
-dwf$yield <- ifelse(is.finite(y) & y>=0,y*unname(scale[trimws(dwf$yield_unit_raw)]),NA_real_)
-
+dwf$yield <- convert_measure(dwf$yield_raw,dwf$yield_unit_raw,mass_area)
+for (rule in list(
+    list("Soil_Organic_Carbon","soil_SOC",percent_mass),
+    list("Soil_Organic_Matter","soil_SOM",percent_mass),
+    list("Soil_Total_Nitrogen","soil_N_total",nitrogen_mgkg),
+    # ERA Soil Nitrogen leaves the N fraction unspecified. Carob soil_N requires extractable N.
+    list("Cation_Exchange_Capacity","soil_CEC",c("cmol/kg"=1,"cmolc/kg"=1,"meq/100g"=1)),
+    list("Soil_Organic_Carbon","era_soc_stock_mg_ha",carbon_stock),
+    list("Soil_Carbon_Stocks","era_carbon_stock_mg_ha",carbon_stock))) {
+  selected <- which(dwf$variable==rule[[1]])
+  dwf[[rule[[2]]]] <- NA_real_
+  dwf[[rule[[2]]]][selected] <- convert_measure(dwf$value[selected],dwf$era_unit_raw[selected],rule[[3]])
+}
 
 ### fixing tillage
 dwf$land_prep_method <- ifelse(is.na(dwf$land_prep_method) & !is.na(dwf$tillage), "tillage", dwf$land_prep_method)
@@ -798,29 +659,9 @@ dwf$tillage <- NULL
 
 
 
-### Yield part 
-
-dwf$yield_part <- tolower(ifelse(grepl("Grain/Seed", dwf$yield_part), "grain", 
-                  ifelse(grepl("Pods", dwf$yield_part), "pod",
-                  ifelse(grepl("Fruit", dwf$yield_part), "fruit", 
-                  ifelse(grepl("Tuber/Root|Bulb", dwf$yield_part), "roots",
-                  ifelse(grepl("Corm|Cormel|corn", dwf$yield_part), "grain",
-                  ifelse(grepl("Wood", dwf$yield_part), "wood",
-                  ifelse(grepl("Stem/Stalks|^Stalks$", dwf$yield_part), "stems",
-                  ifelse(grepl("Whole Plant|Stalks\\+Leaves", dwf$yield_part), "aboveground biomass",
-                  ifelse(grepl("Biomass|Haulm", dwf$yield_part), "biomass",
-                  ifelse(grepl("Unspecified|Gum/Sap|Cane|gh", dwf$yield_part), "none",
-                  ifelse(grepl("Fibre|Suga", dwf$yield_part), "fibres",
-                  ifelse(grepl("Nuts", dwf$yield_part), "pod", dwf$yield_part)))))))))))))
-
-
-### drop rows with missing crop 
-# Keep unresolved crop rows traceable in the exploratory output.
- 
-
-#carobiner::write_files(path, meta, dwf)
-
-
-
-
-
+# Preserve the detailed component even when no Carob category is justified.
+dwf$yield_part_raw <- dwf$yield_part
+dwf$yield_part <- ifelse(dwf$variable=="Crop_Yield",map_harvest_part(dwf$yield_part_raw),NA_character_)
+era_provenance_cols <- c(setdiff(grep("^era_",names(dwf),value=TRUE),"era_source_row"),"yield_part_raw","control_T")
+dwf$variable <- NULL
+dwf$value <- NULL

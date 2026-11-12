@@ -370,6 +370,25 @@ harmonisation uses the bundled master codes dated
 file labelled v1.0. The observation counts come from the agronomic JSON.
 The proposed v0.1 version refers to the ERA–Carob pipeline. <a href="audit/inputs.json">Pinned archive and SHA-256</a></p>
 </div>
+<div id="build-and-inspect-the-candidate" class="section level3">
+<h3>Build and inspect the candidate</h3>
+<p>Use the PR revision while the changes are under review. From a
+terminal with Git, curl, Python 3 and R installed:</p>
+<pre class="sh"><code>git clone https://github.com/CGIAR-AgWise/era-carob.git
+cd era-carob
+git fetch origin refs/pull/2/head
+git switch --detach FETCH_HEAD
+git rev-parse HEAD
+Rscript -e &#39;install.packages(c(&quot;dplyr&quot;,&quot;tidyr&quot;,&quot;stringr&quot;,&quot;jsonlite&quot;,&quot;data.table&quot;), repos=&quot;https://cloud.r-project.org&quot;)&#39;
+export SF001_INPUTS=&quot;$PWD/downloaded_data/sf001&quot;
+python3 audit/prepare.py &quot;$SF001_INPUTS&quot;
+Rscript audit/build.R
+Rscript -e &#39;d &lt;- as.data.frame(readRDS(file.path(Sys.getenv(&quot;SF001_INPUTS&quot;),&quot;sf001-review.rds&quot;))); print(table(d$source)); print(head(d[c(&quot;source&quot;,&quot;source_row&quot;,&quot;dataset_id&quot;,&quot;crop_raw&quot;,&quot;crop&quot;,&quot;yield&quot;)]))&#39;</code></pre>
+<p>Preparation verifies the two archives. The build resolves crops
+against the supplied ERA vocabulary, checks each retained row against
+its source and writes the review dataset locally. For the June replay,
+exact snapshot checks and workbook generation, follow the <a href="audit/RELEASE.md#reproduce">reproduction instructions</a>.</p>
+</div>
 <div id="what-the-pinned-comparison-measures" class="section level3">
 <h3>What the pinned comparison measures</h3>
 <p>Each retained ERA row has a distinct ordinal in the source archive’s
@@ -483,7 +502,7 @@ counts and decisions on both sides. Bamboo–maize is a compound, not
 another crop; variety names require parent crop context. Do not assign
 yield to the first member of a mixture or conflate rice bean with rice.
 Ambiguous and unknown labels stay unresolved. Missing crop accounts for
-40,247 ERA and 820 Carob rows in the historical replay. <a href="report/audit/current_products.csv">Current product list</a></p>
+40,247 ERA and 820 Carob rows in the historical replay. <a href="report/audit/current_products.csv">Current product list</a> and <a href="report/audit/current_crop_labels.csv">current label counts</a></p>
 </div>
 <div id="why-the-historical-totals-changed" class="section level3">
 <h3>Why the historical totals changed</h3>
@@ -506,6 +525,25 @@ unambiguous complete lookup keys, keeps the source ordinal through
 reshaping and flags unresolved crops. This sacrifices ambiguous
 attributes to preserve outcome identity. Review treatment, replication
 and unit assumptions before analysis.</p>
+</div>
+<div id="reusing-treatment-means" class="section level3">
+<h3>Reusing treatment means</h3>
+<p>Study AC0017 illustrates what the merged data can support. In Malawi,
+maize grain yield averaged 3,990 kg/ha under pit planting plus mulch and
+1,840 kg/ha under farmer practice. The <strong>2,150 kg/ha
+difference</strong> agrees with the paper’s table across nine seasons.
+Treat the pair as one study-period contrast. The reported replication
+count and arm errors alone cannot establish its sampling variance. For
+NN0421, the ERA figure extraction and the paper’s results text disagree.
+Review that discrepancy before pooling the contrast. <a href="report/audit/meta_example.md">Worked examples and primary
+sources</a></p>
+<p>The <a href="report/era_carob_mapping.xlsx">schema workbook</a> gives
+field sources and the number of populated rows. The candidate preserves
+ERA’s original outcome, value, unit, uncertainty and harvest-part label
+beside harmonised fields. Soil carbon concentration and stock have
+different units. An irrigation method can establish irrigation use even
+when the water quantity is unknown. ERA’s mean annual site rainfall has
+its own field because Carob defines rainfall over the crop season.</p>
 </div>
 <div id="climate-and-model-readiness" class="section level3">
 <h3>Climate and model readiness</h3>

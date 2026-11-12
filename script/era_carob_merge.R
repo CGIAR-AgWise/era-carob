@@ -7,17 +7,14 @@ stopifnot(!anyDuplicated(names(carob)),!anyDuplicated(names(dwf)),!anyDuplicated
 carob$source_row <- seq_len(nrow(carob))
 dwf$source_row <- dwf$era_source_row
 carob$crop_raw <- carob$crop
-key <- function(x) tolower(trimws(x))
-carob$crop <- crosswalk[["resolved product"]][match(key(carob$crop_raw), crosswalk[["raw label"]])]
+carob_crosswalk <- current_crop_crosswalk(era_master,carob$crop_raw)
+carob$crop <- carob_crosswalk[["resolved product"]][match(crop_key(carob$crop_raw), carob_crosswalk[["raw label"]])]
 # Preserve suspect planting dates for source checking; exclude them from model fields.
 dwf$planting_date_raw <- dwf$planting_date
 time <- era_merge$Data.Out$Time[dwf$source_row]
-year <- sub("^([0-9]{4})([.][0-9]+)?$","\\1",time)
-valid <- grepl("^[0-9]{4}-[0-9]{2}-[0-9]{2}$",dwf$planting_date) &
-         substr(dwf$planting_date,1,4)==year
-dwf$planting_date[is.na(valid) | !valid] <- NA_character_
+dwf$planting_date <- season_planting_date(dwf$planting_date_raw,time)
 common <- intersect(names(carob),names(dwf))
-prov <- c("uri","yield_raw","yield_unit_raw","planting_date_raw")
+prov <- unique(c("uri","yield_raw","yield_unit_raw","planting_date_raw",era_provenance_cols))
 keep <- union(common, intersect(prov,names(dwf)))
 crows <- nrow(carob); erows <- nrow(dwf)
 # Preserve date precision as text; partial Carob dates cannot be converted to Date.

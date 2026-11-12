@@ -8,7 +8,7 @@ The 12 May 2025 agronomy bundle contains the observation input `agronomic_majest
 
 ## Reproduce
 
-Clone the repository with its history (the replay reads the June transform with Git). From repository root, with network access, Python 3.9+, Git, curl, R and Pandoc:
+Check out the PR revision using the [README commands](../README.md#build-and-inspect-the-candidate). Keep the repository history for the June replay. From repository root, with network access, Python 3.9+, Git, curl, R and Pandoc:
 
 ```sh
 export SF001_INPUTS="$PWD/downloaded_data/sf001"
@@ -17,10 +17,13 @@ Rscript audit/replay.R "$SF001_INPUTS"
 Rscript audit/extract.R "$SF001_INPUTS"
 python3 audit/compare.py "$SF001_INPUTS"
 Rscript audit/build.R
+Rscript audit/check_snapshot.R "$SF001_INPUTS/sf001-review.rds"
+Rscript script/era_carob_mapping.R
+Rscript audit/meta_example.R
 Rscript -e 'rmarkdown::render("README.Rmd"); rmarkdown::render("README.Rmd",output_format="html_document")'
 ```
 
-Install R packages dplyr, tidyr, jsonlite, stringr, data.table, knitr and rmarkdown. [Tested environment](session.txt). The historical replay pins LC_COLLATE=C and two carobiner helpers by Git commit. It reuses the original transform without its mutable download preamble; it does not use the older March RData in ERA_data. Allow several GB of RAM. The historical output RDS and corrected sf001-review.rds stay in the cache. [Archive URLs and SHA-256](inputs.json) fail closed on replacement. ERA tarball also matches historical Git blob 52076f1b8e78268a4d4e42235ec5339508c398eb. The Carob archive is the agronomy CC collection with internal files dated 4 June, not the later 202606 or latest collection. Preserve the pinned bytes internally if URLs change.
+Install R packages dplyr, tidyr, jsonlite, stringr, data.table, knitr, rmarkdown and openxlsx. [Tested environment](session.txt). The historical replay pins LC_COLLATE=C and two carobiner helpers by Git commit. It reuses the original transform without its mutable download preamble; it does not use the older March RData in ERA_data. Allow several GB of RAM. The historical output RDS and corrected sf001-review.rds stay in the cache. [Archive URLs and SHA-256](inputs.json) fail closed on replacement. ERA tarball also matches historical Git blob 52076f1b8e78268a4d4e42235ec5339508c398eb. The Carob archive is the agronomy CC collection with internal files dated 4 June, not the later 202606 or latest collection. Preserve the pinned bytes internally if URLs change.
 
 ## Validation and limitations
 
@@ -39,4 +42,18 @@ Install R packages dplyr, tidyr, jsonlite, stringr, data.table, knitr and rmarkd
 
 Citation pending approval: Cedric Ngakou and Namita Joshi, *ERA × Carob: agronomic data transformation and SF-001 validation*, CGIAR Sustainable Farming Science Program (IITA and Alliance of Bioversity International and CIAT), repository and exact reviewed commit. No publication date or DOI assigned. See [CITATION.cff](../CITATION.cff).
 
-For a climate handoff, run `Rscript audit/check_climate.R sf001-review.rds climate.csv coverage.csv` using the proposed schema in that script. Each feature must give the original point coordinates (not the cell centroid), date, window, variable, units, cell ID and provider version. The check rejects changed source points, unmatched dates, duplicate feature windows and invalid values. Its coverage denominator is all retained rows, split by source/country/crop/planting year. It cannot verify cell selection, weather values, units or feature windows against an absent climate product.
+## Assemble the review package
+
+From a clean checkout run `python3 audit/package_review.py HEAD sf001-v0.1-review.tar.gz`. The command reads the file list and contents at the specified commit and prints its SHA-256. The package contains the workbook, worked examples, scripts and aggregate checks. Source archives and the combined RDS stay in the local input cache. The [package manifest](package-files.txt) defines the review archive.
+
+## Climate handoff
+
+Namita and the model user supply a feature-window CSV with one row per specified variable and the following columns:
+
+| Column | Meaning |
+|---|---|
+| variable, units, provider_version | Feature identifier, physical units and pinned source version, matching the extraction |
+| start_anchor, end_anchor | Each independently takes `planting` or `harvest` |
+| start_days, end_days | Signed integer offsets in calendar days from the corresponding observed date, inclusive |
+
+Run `Rscript audit/check_climate.R candidate.rds climate.csv feature_windows.csv coverage.csv`. Each climate record gives source and source_row, original point coordinates, planting date, start and end dates, variable, units, value, grid ID and provider version. The checker derives the expected dates from the source row and the feature definition. A one-year shift fails even when both submitted dates are internally consistent. Coverage counts include zero matches for a specified feature absent from the handoff. Each denominator includes all retained rows in its source, country, crop and year group. A separate comparison against the provider grid is needed to verify the extracted values. The synthetic example in `audit/test_climate.R` demonstrates the interface. Production window definitions and weather observations are pending.

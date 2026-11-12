@@ -20,6 +20,30 @@ labelled v1.0. The observation counts come from the agronomic JSON. The
 proposed v0.1 version refers to the ERA–Carob pipeline. [Pinned archive
 and SHA-256](audit/inputs.json)
 
+### Build and inspect the candidate
+
+Use the PR revision while the changes are under review. From a terminal
+with Git, curl, Python 3 and R installed:
+
+``` sh
+git clone https://github.com/CGIAR-AgWise/era-carob.git
+cd era-carob
+git fetch origin refs/pull/2/head
+git switch --detach FETCH_HEAD
+git rev-parse HEAD
+Rscript -e 'install.packages(c("dplyr","tidyr","stringr","jsonlite","data.table"), repos="https://cloud.r-project.org")'
+export SF001_INPUTS="$PWD/downloaded_data/sf001"
+python3 audit/prepare.py "$SF001_INPUTS"
+Rscript audit/build.R
+Rscript -e 'd <- as.data.frame(readRDS(file.path(Sys.getenv("SF001_INPUTS"),"sf001-review.rds"))); print(table(d$source)); print(head(d[c("source","source_row","dataset_id","crop_raw","crop","yield")]))'
+```
+
+Preparation verifies the two archives. The build resolves crops against
+the supplied ERA vocabulary, checks each retained row against its source
+and writes the review dataset locally. For the June replay, exact
+snapshot checks and workbook generation, follow the [reproduction
+instructions](audit/RELEASE.md#reproduce).
+
 ### What the pinned comparison measures
 
 Each retained ERA row has a distinct ordinal in the source archive’s
@@ -69,7 +93,8 @@ variety names require parent crop context. Do not assign yield to the
 first member of a mixture or conflate rice bean with rice. Ambiguous and
 unknown labels stay unresolved. Missing crop accounts for 40,247 ERA and
 820 Carob rows in the historical replay. [Current product
-list](report/audit/current_products.csv)
+list](report/audit/current_products.csv) and [current label
+counts](report/audit/current_crop_labels.csv)
 
 ### Why the historical totals changed
 
@@ -94,6 +119,26 @@ starts with outcomes, attaches only unambiguous complete lookup keys,
 keeps the source ordinal through reshaping and flags unresolved crops.
 This sacrifices ambiguous attributes to preserve outcome identity.
 Review treatment, replication and unit assumptions before analysis.
+
+### Reusing treatment means
+
+Study AC0017 illustrates what the merged data can support. In Malawi,
+maize grain yield averaged 3,990 kg/ha under pit planting plus mulch and
+1,840 kg/ha under farmer practice. The **2,150 kg/ha difference** agrees
+with the paper’s table across nine seasons. Treat the pair as one
+study-period contrast. The reported replication count and arm errors
+alone cannot establish its sampling variance. For NN0421, the ERA figure
+extraction and the paper’s results text disagree. Review that
+discrepancy before pooling the contrast. [Worked examples and primary
+sources](report/audit/meta_example.md)
+
+The [schema workbook](report/era_carob_mapping.xlsx) gives field sources
+and the number of populated rows. The candidate preserves ERA’s original
+outcome, value, unit, uncertainty and harvest-part label beside
+harmonised fields. Soil carbon concentration and stock have different
+units. An irrigation method can establish irrigation use even when the
+water quantity is unknown. ERA’s mean annual site rainfall has its own
+field because Carob defines rainfall over the crop season.
 
 ### Climate and model readiness
 
