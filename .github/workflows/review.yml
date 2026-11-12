@@ -1,5 +1,9 @@
 name: SF-001 review checks
-on: [pull_request, workflow_dispatch]
+on:
+  pull_request:
+  workflow_dispatch:
+  push:
+    branches: [sf001/pinned-audit]
 permissions:
   contents: read
 jobs:
