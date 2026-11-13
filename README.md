@@ -132,6 +132,8 @@ extraction and the paper’s results text disagree. Review that
 discrepancy before pooling the contrast. [Worked examples and primary
 sources](report/audit/meta_example.md)
 
+Use the [field dictionary](report/field_dictionary.xlsx) or its [CSV edition](report/field_dictionary.csv) for definitions, units, source coverage and study-specific exceptions. It compares the merged fields with [Terminag](https://github.com/controvoc/terminag) and links the contributing [Carob project](https://github.com/carob-data).
+
 The [schema workbook](report/era_carob_mapping.xlsx) gives field sources
 and the number of populated rows. The candidate preserves ERA’s original
 outcome, value, unit, uncertainty and harvest-part label beside

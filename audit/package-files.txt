@@ -36,6 +36,8 @@ report/audit/publication_links.csv
 report/audit/summary.json
 report/audit/yield_units.csv
 report/era_carob_mapping.xlsx
+report/field_dictionary.csv
+report/field_dictionary.xlsx
 script/agronomy.R
 script/crop_aliases.csv
 script/era_carob.R
