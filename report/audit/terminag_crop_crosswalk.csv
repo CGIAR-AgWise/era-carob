@@ -1,74 +1,74 @@
 crop,match_basis,terminag_name,matched_field,matched_value,era_latin_names,same_taxon_candidates
-african nightshade,No listed match,,,,solanum nigrum,
+african nightshade,Vocabulary gap,,,,solanum nigrum,
 alfalfa,Listed synonym,lucerne,altname,alfalfa,medicago sativa,lucerne
 amaranth,Exact name,amaranth,name,amaranth,amaranthus sp,amaranth
 apple,Exact name,apple,name,apple,malus domestica,apple
 apricot,Exact name,apricot,name,apricot,prunus armeniaca,apricot
 arabica,ERA taxon match,arabica coffee,ERA Latin.Name → Terminag sciname,Coffea arabica,coffea arabica,arabica coffee
 bambara nut,ERA taxon match,bambara groundnut,ERA Latin.Name → Terminag sciname,Vigna subterranea,vigna subterranea,bambara groundnut
-banana sweet,No listed match,,,,musa sp,
+banana sweet,Cedric review,,,,musa sp,
 barley,Exact name,barley,name,barley,hordeum vulgare,barley
 beetroot,Exact name,beetroot,name,beetroot,beta vulgaris,beetroot; chard; sugar beet
 black gram,Exact name,black gram,name,black gram,vigna mungo,black gram; urd bean
 black oats,Exact name,black oats,name,black oats,avena strigosa,black oats
 blue lupin,Exact name,blue lupin,name,blue lupin,lupinus angustifolius,blue lupin; narrow leafed lupin
-brachiaria brizantha,No listed match,,,,brachiaria brizantha,
-brachiaria decumbens,No listed match,,,,brachiaria decumbens,
-brachiaria humidicola,No listed match,,,,brachiaria humidicola,
-brachiaria hybrid,No listed match,,,,brachiaria hybrid,
+brachiaria brizantha,Broader crop group,brachiaria,Original ERA record review,Source identifies brachiaria brizantha. Use brachiaria for group discovery while retaining the ERA label and taxon.,brachiaria brizantha,
+brachiaria decumbens,Broader crop group,brachiaria,Original ERA record review,Source identifies brachiaria decumbens. Use brachiaria for group discovery while retaining the ERA label and taxon.,brachiaria decumbens,
+brachiaria humidicola,Broader crop group,brachiaria,Original ERA record review,Source identifies brachiaria humidicola. Use brachiaria for group discovery while retaining the ERA label and taxon.,brachiaria humidicola,
+brachiaria hybrid,Broader crop group,brachiaria,Original ERA record review,Source identifies brachiaria hybrid. Use brachiaria for group discovery while retaining the ERA label and taxon.,brachiaria hybrid,
 buckwheat,Exact name,buckwheat,name,buckwheat,fagopyrum esculentum,buckwheat
 butter bean,Listed synonym,lima bean,altname,butter bean,phaseolus lunatus,lima bean
 cabbage,Exact name,cabbage,name,cabbage,brassica oleracea,brussels sprouts; cabbage; cauliflower; kale; kohlrabi
 calabash,Listed synonym,bottle gourd,altname,calabash,lagenaria siceraria,bottle gourd
 canola,Listed synonym,rapeseed,altname,canola,brassica napus,rapeseed; rutabaga
-capsicum,Review taxon / product,,,,capsicum annuum,bell pepper
+capsicum,Cedric review,,,,capsicum annuum,bell pepper
 cardamom,Exact name,cardamom,name,cardamom,elettaria cardamomum,
 carrot,Exact name,carrot,name,carrot,daucus carota,carrot
 cashew nut,ERA taxon match,cashew,ERA Latin.Name → Terminag sciname,Anacardium occidentale,anacardium occidentale,cashew
 cassava,Exact name,cassava,name,cassava,manihot esculenta,cassava
 castor,ERA taxon match,castor bean,ERA Latin.Name → Terminag sciname,Ricinus communis,ricinus communis,castor bean
-chamomile,No listed match,,,,matricaria chamomilla,
+chamomile,Vocabulary gap,,,,matricaria chamomilla,
 chickpea,Exact name,chickpea,name,chickpea,cicer arietinum,
-chili,No listed match,,,,capsicum sp,
-cocksfoot,No listed match,,,,dactylis glomerata,
+chili,Source-supported match,chili pepper,Original ERA record review,The CJ0151 paper identifies hot pepper (Capsicum frutescens).,capsicum sp,
+cocksfoot,Vocabulary gap,,,,dactylis glomerata,
 cocoa,Exact name,cocoa,name,cocoa,theobroma cacao,cocoa
 coffee,Exact name,coffee,name,coffee,coffea sp,
 common bean,Exact name,common bean,name,common bean,phaseolus vulgaris,common bean; green bean; kidney bean
-common vetch,No listed match,,,,vicia sativa,
-congo grass,No listed match,,,,brachiaria ruziziensis,
-cooking banana,No listed match,,,,musa sp,
+common vetch,Broader crop group,vetch,Original ERA record review,Source identifies vicia sativa. Use vetch for group discovery while retaining the ERA label and taxon.,vicia sativa,
+congo grass,Broader crop group,brachiaria,Original ERA record review,Source identifies brachiaria ruziziensis. Use brachiaria for group discovery while retaining the ERA label and taxon.,brachiaria ruziziensis,
+cooking banana,Cedric review,,,,musa sp,
 cotton,Exact name,cotton,name,cotton,gossypium sp,
 cowpea,Exact name,cowpea,name,cowpea,vigna unguiculata,cowpea
-crotalaria ochroleuca,No listed match,,,,crotalaria ochroleuca,
-crotalaria sp.,No listed match,,,,crotalaria sp.,
+crotalaria ochroleuca,Broader crop group,crotalaria,Original ERA record review,Source identifies crotalaria ochroleuca. Use crotalaria for group discovery while retaining the ERA label and taxon.,crotalaria ochroleuca,
+crotalaria sp.,Source-supported match,crotalaria,Original ERA record review,"Source identifies Crotalaria at genus level, matching the scope of the Terminag entry.",crotalaria sp.,
 cucumber,Exact name,cucumber,name,cucumber,cucumis sativus,cucumber
 date,Exact name,date,name,date,phoenix dactylifera,date
-desho grass,No listed match,,,,pennisetum pedicellatum,
-desmodium intortum,No listed match,,,,desmodium intortum,
+desho grass,Vocabulary gap,,,,pennisetum pedicellatum,
+desmodium intortum,Broader crop group,desmodium,Original ERA record review,Source identifies desmodium intortum. Use desmodium for group discovery while retaining the ERA label and taxon.,desmodium intortum,
 durum wheat,Exact name,durum wheat,name,durum wheat,triticum durum,durum wheat
 eggplant,Exact name,eggplant,name,eggplant,solanum melongena,eggplant
-egyptian clover,No listed match,,,,trifolium alexandrinum,
+egyptian clover,Source-supported match,berseem clover,Original ERA record review,ERA identifies Trifolium alexandrinum. USDA lists Egyptian and berseem clover together. Terminag spells the epithet alexandrium.,trifolium alexandrinum,
 endive,Exact name,endive,name,endive,cichorium endivia,endive
-ethiopian eggplant,No listed match,,,,solanum aethiopicum,
-ethiopian mustard,Review taxon / product,,,,brassica carinata,abyssinian cabbage; carinata; gomenzer
-faidherbia albida,No listed match,,,,faidherbia albida,
+ethiopian eggplant,Cedric review,,,,solanum aethiopicum,
+ethiopian mustard,Cedric review,,,,brassica carinata,abyssinian cabbage; carinata; gomenzer
+faidherbia albida,Vocabulary gap,,,,faidherbia albida,
 fava bean,ERA taxon match,faba bean,ERA Latin.Name → Terminag sciname,Vicia faba,vicia faba,faba bean
 fennel,Exact name,fennel,name,fennel,foeniculum vulgare,fennel
 fenugreek,Exact name,fenugreek,name,fenugreek,trigonella foenum-graecum,fenugreek
 fig,Exact name,fig,name,fig,ficus sp,
 finger millet,Exact name,finger millet,name,finger millet,eleusine coracana,finger millet
 flax,Exact name,flax,name,flax,linum usitatissimum,flax
-fluted pumpkin,No listed match,,,,telfairia occidentalis,
-fodder radish,No listed match,,,,raphanus sativus,
+fluted pumpkin,Vocabulary gap,,,,telfairia occidentalis,
+fodder radish,Broader crop group,radish,Original ERA record review,Source identifies raphanus sativus. Use radish for group discovery while retaining the ERA label and taxon.,raphanus sativus,
 garlic,Exact name,garlic,name,garlic,allium sativum,garlic
 ginger,Exact name,ginger,name,ginger,zingiber officinale,ginger
 grape,Exact name,grape,name,grape,vitis sp,
 groundnut,Exact name,groundnut,name,groundnut,arachis hypogaea,groundnut
-guar gum,Review taxon / product,,,,cyamopsis tetragonoloba,guar
+guar gum,Source-supported match,guar,Original ERA record review,NN0511 studied forage. ERA records Cyamopsis tetragonoloba and above-ground biomass.,cyamopsis tetragonoloba,guar
 guinea grass,Exact name,guinea grass,name,guinea grass,megathyrsus maximus,guinea grass
 hairy vetch,Exact name,hairy vetch,name,hairy vetch,vicia villosa,
 hazelnut,Exact name,hazelnut,name,hazelnut,corylus avellana,hazelnut
-hibiscus,Review taxon / product,,,,hibiscus sabdariffa; hibiscus sp,roselle
+hibiscus,Source-supported match,roselle,Original ERA record review,All four studies record Hibiscus sabdariffa in the actual outcome rows.,hibiscus sabdariffa; hibiscus sp,roselle
 huckleberry,ERA taxon match,managu,ERA Latin.Name → Terminag sciname,Solanum scabrum,solanum scabrum,managu
 indian pea,ERA taxon match,grass pea,ERA Latin.Name → Terminag sciname,Lathyrus sativus,lathyrus sativus,grass pea
 jack bean,Exact name,jack bean,name,jack bean,canavalia ensiformis,jack bean
@@ -76,35 +76,35 @@ jatropha,Exact name,jatropha,name,jatropha,jatropha curcas,jatropha
 jute mallow,Exact name,jute mallow,name,jute mallow,corchorus olitorius,jute mallow
 kale,Exact name,kale,name,kale,brassica oleracea,brussels sprouts; cabbage; cauliflower; kale; kohlrabi
 khat,Exact name,khat,name,khat,catha edulis,khat
-kikuyu grass,No listed match,,,,pennisetum clandestinum,
+kikuyu grass,Vocabulary gap,,,,pennisetum clandestinum,
 lablab,Exact name,lablab,name,lablab,lablab purpureus,lablab
 lentil,Exact name,lentil,name,lentil,lens culinaris,lentil
 lettuce,Exact name,lettuce,name,lettuce,lactuca sativa,
-leucaena leucocephala,No listed match,,,,leucaena leucocephala,
-linseed,No listed match,,,,linum sp,
+leucaena leucocephala,Vocabulary gap,,,,leucaena leucocephala,
+linseed,Source-supported match,flax,Original ERA record review,NM0132 reports grain/seed. The original study identifies flax cultivar Giza 9.,linum sp,
 lupin,Exact name,lupin,name,lupin,lupinus sp,
-macadamia,No listed match,,,,macadamia integrifolia,
+macadamia,Broader crop group,macadamia nut,Original ERA record review,Source identifies macadamia integrifolia. Use macadamia nut for group discovery while retaining the ERA label and taxon.,macadamia integrifolia,
 maize,Exact name,maize,name,maize,zea mays,silage maize; forage maize; maize; sweet corn
 mango,Exact name,mango,name,mango,mangifera indica,mango
 melon,Exact name,melon,name,melon,cucumis melo,cantaloupe; melon; muskmelon
 moringa,Exact name,moringa,name,moringa,moringa oleifera,
 mung bean,Exact name,mung bean,name,mung bean,vigna radiata,mung bean
 napier grass,Exact name,napier grass,name,napier grass,pennisetum purpureum,
-new cocoyam,No listed match,,,,xanthosoma sp,
+new cocoyam,Cedric review,,,,xanthosoma sp,
 oats,Exact name,oats,name,oats,avena sativa,oats
 okra,Exact name,okra,name,okra,abelmoschus esculentus,okra
 olive,Exact name,olive,name,olive,olea europaea,
 onion,Exact name,onion,name,onion,allium cepa,onion; shallot
 opuntia stricta,Scientific name,erect prickly pear,sciname,Opuntia stricta,opuntia stricta,erect prickly pear
 orange,Exact name,orange,name,orange,citrus sinensis,orange
-other fodder,No listed match,,,,,
-other millet,No listed match,,,,echinochloa sp,
-palisade grass,No listed match,,,,zoysia japonica,
-palm oil,No listed match,,,,elaeis guineensis,
-panicum antidotale,No listed match,,,,panicum antidotale,
+other fodder,Cedric review,,,,,
+other millet,Cedric review,,,,echinochloa sp,
+palisade grass,Cedric review,,,,zoysia japonica,
+palm oil,Broader crop group,oil palm,Original ERA record review,Source identifies elaeis guineensis. Use oil palm for group discovery while retaining the ERA label and taxon.,elaeis guineensis,
+panicum antidotale,Vocabulary gap,,,,panicum antidotale,
 passionfruit,Spacing variant,passion fruit,name,passion fruit,passiflora edulis,passion fruit
-patula pine,No listed match,,,,pinus patula,
-peach & nectarine,Review taxon / product,,,,prunus persica,nectarine; peach
+patula pine,Vocabulary gap,,,,pinus patula,
+peach & nectarine,Source-supported match,peach,Original ERA record review,Both source papers identify peach orchards. NN0090 names Carnival in the paper but records LAC 23 in ERA. Review cultivar linkage separately.,prunus persica,nectarine; peach
 pearl millet,Exact name,pearl millet,name,pearl millet,pennisetum glaucum,pearl millet
 peas,FAO name,pea,FAO_name,peas,pisum sativum,pea
 pepper,Exact name,pepper,name,pepper,piper sp,
@@ -113,34 +113,34 @@ pineapple,Exact name,pineapple,name,pineapple,ananas comosus,pineapple
 pomegranate,Exact name,pomegranate,name,pomegranate,punica granatum,pomegranate
 potato,Exact name,potato,name,potato,solanum tuberosum,jerusalem artichoke; potato
 pumpkin,Exact name,pumpkin,name,pumpkin,cucurbita maxima,
-purple vetch,No listed match,,,,vicia atropurpurea,
+purple vetch,Broader crop group,vetch,Original ERA record review,Source identifies vicia atropurpurea. Use vetch for group discovery while retaining the ERA label and taxon.,vicia atropurpurea,
 quinoa,Exact name,quinoa,name,quinoa,chenopodium quinoa,quinoa
 radish,Exact name,radish,name,radish,raphanus sativus,
-rape,Review taxon / product,,,,brassica napus,rapeseed; rutabaga
+rape,Vocabulary gap,,,,brassica napus,rapeseed; rutabaga
 red clover,Exact name,red clover,name,red clover,trifolium pratense,red clover
 rice,Exact name,rice,name,rice,oryza sativa,rice
 robusta,ERA taxon match,robusta coffee,ERA Latin.Name → Terminag sciname,Coffea canephora,coffea canephora,robusta coffee
 rubber,Exact name,rubber,name,rubber,hevea brasiliensis,rubber
 rye,Exact name,rye,name,rye,secale cereale,rye
-ryegrass sp,No listed match,,,,lolium sp,
+ryegrass sp,Cedric review,,,,lolium sp,
 safflower,Exact name,safflower,name,safflower,carthamus tinctorius,
 sesame,Exact name,sesame,name,sesame,sesamum indicum,sesame
-smutsfinger grass,No listed match,,,,digitaria eriantha,
+smutsfinger grass,Vocabulary gap,,,,digitaria eriantha,
 sorghum,Exact name,sorghum,name,sorghum,sorghum bicolor,sorghum
 soybean,Exact name,soybean,name,soybean,glycine max,soybean
 spinach,Exact name,spinach,name,spinach,spinacia oleracea,spinach
-squash (c.moschata),No listed match,,,,,
+squash (c.moschata),Source-supported match,winter squash,Original ERA record review,NM0019 explicitly names C. moschata in the crop field and reports marketable fruit.,,
 strawberry,Exact name,strawberry,name,strawberry,fragaria sp,
-stylosanthes capitata,No listed match,,,,stylosanthes capitata,
-stylosanthes guianensis,No listed match,,,,stylosanthes guianensis,
+stylosanthes capitata,Broader crop group,stylosanthes,Original ERA record review,Source identifies stylosanthes capitata. Use stylosanthes for group discovery while retaining the ERA label and taxon.,stylosanthes capitata,
+stylosanthes guianensis,Broader crop group,stylosanthes,Original ERA record review,Source identifies stylosanthes guianensis. Use stylosanthes for group discovery while retaining the ERA label and taxon.,stylosanthes guianensis,
 sudan grass,Exact name,sudan grass,name,sudan grass,sorghum sudanense,
 sugar beet,Exact name,sugar beet,name,sugar beet,beta vulgaris vulgaris,
 sugar cane,FAO name,sugarcane,FAO_name,sugar cane,saccharum officinarum; saccharum sp,sugarcane
 sunflower,Exact name,sunflower,name,sunflower,helianthus annuus,sunflower
 sunn hemp,Exact name,sunn hemp,name,sunn hemp,crotalaria juncea,sunn hemp
 sweet potato,Spacing variant,sweetpotato,name,sweetpotato,ipomoea batatas,sweetpotato
-sweetcane,No listed match,,,,saccharum arundinaceum,
-swiss chard,Review taxon / product,,,,beta vulgaris,beetroot; chard; sugar beet
+sweetcane,Vocabulary gap,,,,saccharum arundinaceum,
+swiss chard,Source-supported match,chard,Original ERA record review,"DK0065 records Swiss Chard, Beta vulgaris and leaves.",beta vulgaris,beetroot; chard; sugar beet
 tall fescue,Exact name,tall fescue,name,tall fescue,festuca arundinacea,
 taro,Exact name,taro,name,taro,colocasia esculenta,taro
 tea,Exact name,tea,name,tea,camellia sinensis,tea
@@ -148,15 +148,15 @@ teff,Exact name,teff,name,teff,eragrostis tef,teff
 tobacco,Exact name,tobacco,name,tobacco,nicotiana sp,
 tomato,Exact name,tomato,name,tomato,solanum lycopersicum,tomato
 triticale,Exact name,triticale,name,triticale,× triticosecale,
-turkey berry,No listed match,,,,solanum torvum,
+turkey berry,Vocabulary gap,,,,solanum torvum,
 turmeric,Exact name,turmeric,name,turmeric,curcuma longa,tumeric; turmeric
-urochloa eminii,No listed match,,,,urochloa eminii,
+urochloa eminii,Cedric review,,,,urochloa eminii,
 velvet bean,Exact name,velvet bean,name,velvet bean,mucuna pruriens,velvet bean
 water yam,ERA taxon match,purple yam,ERA Latin.Name → Terminag sciname,Dioscorea alata,dioscorea alata,purple yam
 waterleaf,Exact name,waterleaf,name,waterleaf,talinum fruticosum,waterleaf
 watermelon,Exact name,watermelon,name,watermelon,citrullus lanatus,watermelon
 wheat,Exact name,wheat,name,wheat,triticum aestivum,wheat
 white lupin,Exact name,white lupin,name,white lupin,lupinus albidus,
-yacon,No listed match,,,,smallanthus sonchifolius,
+yacon,Vocabulary gap,,,,smallanthus sonchifolius,
 yam,Exact name,yam,name,yam,dioscorea sp,
 zucchini,Exact name,zucchini,name,zucchini,cucurbita pepo,squash; zucchini

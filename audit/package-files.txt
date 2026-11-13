@@ -35,6 +35,8 @@ report/audit/products.csv
 report/audit/publication_links.csv
 report/audit/summary.json
 report/audit/terminag_crop_crosswalk.csv
+report/audit/crop_source_review.csv
+report/audit/crop_source_evidence.csv
 report/audit/yield_units.csv
 report/era_carob_mapping.xlsx
 report/field_dictionary.csv
