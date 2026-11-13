@@ -37,13 +37,23 @@ mapping$carob_definition <- terms$description[index]
 mapping$notes[fields == "soil_N"] <- "ERA Soil Nitrogen leaves the extractable fraction unspecified. Its outcome name, value and unit remain in the raw fields."
 mapping$notes[fields == "rain"] <- "ERA site mean annual precipitation is retained separately as era_site_map_raw."
 mapping$notes[fields == "rep"] <- "ERA replication counts are retained in era_n_replicates and the two raw replication fields."
+# Preserve the archived vocabulary columns and expose the reviewed interpretation alongside them.
+dictionary <- read.csv("report/field_dictionary.csv", stringsAsFactors = FALSE)
+stopifnot(!anyDuplicated(dictionary$field))
+review <- match(fields, dictionary$field)
+if (anyNA(review)) stop("Review new fields in report/field_dictionary.csv before building the workbook")
+mapping$definition <- dictionary$definition[review]
+mapping$reviewed_unit <- dictionary$unit[review]
+mapping$unit_basis <- dictionary$unit_basis[review]
+mapping$unit_notes <- dictionary$notes[review]
+mapping$evidence <- dictionary$evidence[review]
 wb <- createWorkbook(creator = "ERA–Carob")
 header <- createStyle(fontColour = "#FFFFFF", fgFill = "#2d6a4f", halign = "LEFT", textDecoration = "Bold")
 write_mapping <- function(title, data) {
   addWorksheet(wb, title)
   writeData(wb, title, data, headerStyle = header, withFilter = TRUE)
   freezePane(wb, title, firstRow = TRUE, firstCol = TRUE)
-  setColWidths(wb, title, cols = 1:9, widths = c(29, 24, 54, 23, 70, 21, 21, 18, 80))
+  setColWidths(wb, title, cols = 1:14, widths = c(29, 24, 54, 23, 70, 21, 21, 18, 80, 80, 28, 24, 86, 75))
   colors <- c("Mapped" = "#d8f3dc", "Mapped, no values" = "#fff3b0", "No ERA mapping" = "#ffd6d6")
   for (status in names(colors)) {
     rows <- which(data$mapping_status == status) + 1L
