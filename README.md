@@ -132,6 +132,8 @@ extraction and the paper’s results text disagree. Review that
 discrepancy before pooling the contrast. [Worked examples and primary
 sources](report/audit/meta_example.md)
 
+The [crop crosswalk](report/audit/terminag_crop_crosswalk.csv) checks 161 retained crop labels against the [pinned Terminag crop table](https://github.com/controvoc/terminag/blob/31732136beeb34eda26f1874c2487beecef63cab/values/values_crop.csv). Of the 67 without an exact name, 4 are listed synonyms, 5 match through a scientific name, FAO name or spacing, and 9 map through the ERA plant master by scientific name. Seven require product or taxon review and 42 have no match under these rules. Blank targets preserve uncertainty.
+
 Use the [field dictionary](report/field_dictionary.xlsx) or its [CSV edition](report/field_dictionary.csv) for definitions, units, source coverage and study-specific exceptions. It compares the merged fields with [Terminag](https://github.com/controvoc/terminag) and links the contributing [Carob project](https://github.com/carob-data).
 
 The [schema workbook](report/era_carob_mapping.xlsx) gives field sources
