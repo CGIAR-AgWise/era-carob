@@ -2,9 +2,11 @@
 library(dplyr)
 library(tidyr)
 source("script/pinned.R")
+source("audit/era_compile.R")
 source("script/agronomy.R")
 era_merge <- jsonlite::fromJSON(one_input("agronomic_*.json"))
 era_master <- jsonlite::fromJSON(one_input("era_master_codes*.json"))
+ERA_Compiled <- era_Compiled("downloaded_data/sf001")
 # Source ordinal is stable only within the pinned ERA archive.
 era_merge$Data.Out$era_source_row <- seq_len(nrow(era_merge$Data.Out))
 # Retain every outcome once; ambiguous or incomplete lookup keys supply no attributes.
@@ -12,7 +14,7 @@ safe_lookup <- function(x,y,by) {
   y <- unique(as.data.frame(y))
   eligible <- complete.cases(y[by])
   y <- y[eligible & !duplicated(y[by]) & !duplicated(y[by], fromLast=TRUE),,drop=FALSE]
-  z <- left_join(x,y,by=by,na_matches="never",relationship="many-to-one")
+  z <- left_join(x,y,by=by,na_matches="never", relationship="many-to-one")
   stopifnot(identical(x$era_source_row,z$era_source_row))
   z
 }
@@ -665,3 +667,27 @@ dwf$yield_part <- ifelse(dwf$variable=="Crop_Yield",map_harvest_part(dwf$yield_p
 era_provenance_cols <- c(setdiff(grep("^era_",names(dwf),value=TRUE),"era_source_row"),"yield_part_raw","control_T")
 dwf$variable <- NULL
 dwf$value <- NULL
+
+### Correction of planting and harvest dates incorrectly recorded as future dates, using era_compiled.csv as a temporary reference while awaiting the corrected data source.
+d_era <- unique(ERA_Compiled[, c("Code", "Plant.End", "Plant.Start", "Harvest.End", "Harvest.Start")])
+colnames(d_era) <- c("dataset_id", "Plant.End", "Plant.Start", "Harvest.End", "Harvest.Start")
+d_era[] <- lapply(d_era, as.character)
+
+### merge planting and harvest date from Era_compile csv file with dwf
+dwf <- safe_lookup(dwf, d_era, by= "dataset_id")
+
+##Planting
+dwf$planting_date <- gub("9999-01-01", NA, dwf$Plant.Start)
+dwf$planting_end <- dwf$Plant.End
+
+## harvest
+dwf$harvest_date <- dwf$Harvest.End
+dwf$harvest_start <- dwf$Harvest.Start
+
+dwf$Harvest.Start <- dwf$Harvest.End <- dwf$Plant.End <- dwf$Plant.Start <- NULL
+x <- which(dwf$year %in% c("Year","Moz-","Unsp", "Summ", "Wint", "F199", "G199", "F200", "firs", "seco", "Spr/", "SR20", "LR20", "Spr/", "unsp", "YEAR", "Seas"))
+dwf$year[x] <- NA
+i <- is.na(dwf$planting_date)
+dwf$planting_date[i] <- dwf$year[i]
+
+
