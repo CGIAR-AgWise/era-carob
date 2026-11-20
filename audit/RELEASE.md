@@ -1,6 +1,6 @@
-# SF-001 software and SF-003 documentation review packages (unpublished)
+# SF-001 and SF-003: shared publication plan (unpublished)
 
-Scope: SF-001 contains pinned software, aggregate validation evidence and reproduction instructions; SF-003 contains the independently versioned [schema documentation](../docs/SF-003.md). Both use this one repository. [Product metadata, proposed versions and credits](packages.json). The local wide table is an exploratory harmonisation output. No climate-enriched model data or rights-cleared combined database is released.
+Scope: SF-001 contains pinned software, aggregate validation evidence and reproduction instructions; SF-003 contains the [schema documentation](../docs/SF-003.md). Both use one GitHub repository and one planned CGSpace record. The two review archives are component selections, not separate deposit requirements. [Shared publication metadata](publication.json). [Product metadata, proposed versions and credits](packages.json). The local wide table is an exploratory harmonisation output. No climate-enriched model data or rights-cleared combined database is released.
 
 ## ERA source version
 
@@ -38,7 +38,7 @@ Install R packages dplyr, tidyr, jsonlite, stringr, data.table, knitr, rmarkdown
 1. Namita Joshi: supply revision or artifact for climate integration and updated schema, provider/version/variables/units, grid/CRS, spatial method, season window and sample keyed extracts. Confirm date origin against source records. No parallel climate extraction has been started.
 2. Namita and Cedric Ngakou: validate counts by source, year, crop and country; one climate feature vector per eligible source key; no fan-out, missing coverage explained, sample points/dates/values independently checked against source grids. Review compound mappings and model-specific inclusion/exclusion rules. Model owner must name response, predictors, sampling unit and minimum coverage before sign-off.
 3. Maintainers and data owners: approve authors, affiliation, contributors, software license and intended deposit. The upstream repository has no detected top-level software license. Do not assign a blanket license. Preserve each Carob dataset's URI, data_citation and license in pinned metadata, and confirm ERA terms. Source metadata includes noncommercial, share-alike and no-derivatives records, including CC-BY-NC-ND-4.0. Code, validation outputs and observations require separate rights decisions. Do not upload the merged table or source archives under an inferred license.
-4. After explicit approval of the exact software package, merge reviewed changes, run regression checks on the selected commit, tag v0.1 there, publish one software GitHub release with checksums and metadata, and archive approved files only. SF-003 uses its own reviewed package/version and publication decision; it does not need a second repository or a documentation-only software release. Verify the peeled tag SHA against the release commit, then verify the public Zenodo record, file checksums, version DOI resolution and reciprocal repository link. Drafts, preregistrations and reserved DOIs are not release evidence. Pete owns reporting.
+4. After approval of the exact release content, merge reviewed changes, run regression checks on the selected commit, tag v0.1 there and publish one GitHub release with checksums and metadata. Verify the peeled tag SHA against the release commit. Prepare one TIP submission for a shared CGSpace record that describes the schema documentation and links the pipeline/validation evidence. Obtain approval before entry or submission; verify the published handle separately and use it in both deliverables' reporting entries with distinct claims. Zenodo archiving is optional and does not require separate deposits for SF-001/SF-003. If a deposit is later approved, verify its files, checksums and published DOI; drafts and reserved DOIs are not public-release evidence. Pete owns reporting.
 
 Citation pending approval: Cedric Ngakou and Namita Joshi, *ERA × Carob data-to-model pipeline (SF-001)*, CGIAR Sustainable Farming Science Program (IITA and Alliance of Bioversity International and CIAT), repository and exact reviewed commit. No publication date or DOI assigned. See [software CITATION.cff](https://github.com/CGIAR-AgWise/era-carob/blob/main/CITATION.cff).
 
@@ -61,14 +61,31 @@ helper is excluded and is not called by the review pipeline.
 
 ## Publication identifiers and route
 
-Proposed route: one SF-001 software release/package and one separately citable
-SF-003 technical-documentation package. Two Zenodo records are justified **if**
-the approved products have distinct content, titles, creator credits, scopes and
-independent version histories. This is a recommendation for these products,
-not a rule that every deliverable needs a DOI. Do not deposit the same whole
-repository twice with different titles or treat SF-001/SF-003 as versions of
-each other. Cross-link the approved records as software and its documentation;
-record the corresponding software commit/release in each documentation edition.
+Agreed publication plan: **one GitHub repository and one CGSpace record for
+SF-001 and SF-003**, represented once in [publication.json](publication.json).
+The shared record should describe and provide access to the schema documentation
+and link to the pipeline, exact Git commit/release and validation evidence.
+Use a title and abstract covering both components, with agreed creators and
+component-specific credits. Confirm the appropriate record type and current
+reporting eligibility with the library/reporting team before submission.
+
+| Deliverable | Use of the shared evidence |
+|---|---|
+| SF-001 — innovation development | Pipeline code and demonstrated readiness; the shared CGSpace record supports the innovation evidence. Documentation alone does not establish model readiness. |
+| SF-003 — knowledge product | Schema definitions, units, mappings, provenance, vocabulary and snapshot described and accessible through that same CGSpace record. |
+
+Record the same verified GitHub URL and CGSpace handle against both deliverables,
+identifying the relevant files/sections and their different claims. This is one
+innovation and its documentation knowledge product, **not two knowledge products**.
+SF-007 remains an SF-001 component, not an additional innovation count.
+
+Separate Zenodo deposits or DOIs are **not required by this plan**. An optional
+archive may be considered later if preservation or citation needs justify it;
+it is not a prerequisite introduced by these two reporting IDs. The review
+manifests remain useful for choosing files and checking scope; they do not
+imply two Zenodo or CGSpace records. Track later software/schema changes in
+Git and coordinate updates to the same CGSpace record with the library,
+retaining version history.
 
 | Identifier/state | What it establishes |
 |---|---|
@@ -83,8 +100,9 @@ record the corresponding software commit/release in each documentation edition.
 Zenodo's GitHub integration archives repository releases. A curated allowlist
 attachment does **not** prove that the integration will archive only that
 attachment. This repository also tracks source data outside our allowlists.
-Therefore prefer explicitly approved manual deposits of the scoped archives,
-or verify and approve every byte of any automatic repository archive first.
+If Zenodo archiving is later requested, approve the selected files and route
+first; verify every byte of any automatic repository archive. Neither a manual
+deposit nor automatic archiving is part of the current publication requirement.
 Do not enable automatic archiving as part of this review. Root `CITATION.cff`
 describes software only; do not replace it with the documentation citation.
 
@@ -96,12 +114,14 @@ Current official sources checked 20 November 2026:
 - [Describe records](https://help.zenodo.org/docs/deposit/describe-records/): output-specific creators, resource type, rights and contributors.
 - [Alliance TIP](https://tip.alliance.cgiar.org) and [CGSpace](https://cgspace.cgiar.org): institutional route and public repository. Live TIP redirected to login and the public CGSpace request was rate-limited during this check. Current authenticated submission requirements could not be reverified; confirm them with the library before entry. No universal DOI prerequisite is established here.
 
-Before TIP entry, agree each output's eligible type, metadata, creators, rights,
-files and link to the other product; search for existing records first. Show the
-complete package for approval before any server-side draft, submission or DOI
-deposit. After review, separately verify the public CGSpace handle and reconcile
-it with the existing reporting record. Repository metadata keeps all identifiers
-unset until verified. SF-007 stays a component of SF-001; do not count it again.
+Before TIP entry, search for an existing record covering this work and agree
+one record's type, title/abstract, creators/order, rights, files and repository
+links. Its description must make the SF-003 documentation identifiable while
+also supporting SF-001's distinct innovation claim. Show the complete shared
+package for approval before server-side draft saving or submission. Verify the
+public CGSpace handle after library review and reconcile that same handle with
+both existing reporting records. Keep identifiers unset in the shared metadata
+until verified. A shared URL is not proof that either deliverable is complete.
 
 ## 19 November date correction: held for validation
 

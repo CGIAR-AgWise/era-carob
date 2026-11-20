@@ -1,3 +1,4 @@
+# Review selection only; both deliverables use the shared record in audit/publication.json.
 # SF-001 software review archive, with supporting documentation.
 # Shared evidence also appears in SF-003; it is not an additional result.
 .github/workflows/review.yml
@@ -53,3 +54,4 @@ script/pinned.R
 audit/packages.json
 audit/schema-package-files.txt
 docs/SF-003.md
+audit/publication.json

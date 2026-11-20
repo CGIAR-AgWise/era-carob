@@ -9,10 +9,6 @@
     "due_date": "2026-12-15",
     "publication_approval": "pending",
     "licence": "pending product-specific approval; source data retain original terms",
-    "version_doi": null,
-    "concept_doi": null,
-    "tip_id": null,
-    "cgspace_handle": null,
     "register_id": "SF-001",
     "title": "ERA × Carob data-to-model pipeline (SF-001)",
     "resource_type": "software",
@@ -28,7 +24,7 @@
       "Pete Steward": "reporting lead and review",
       "Oscar Bautista / IITA": "Carob contribution"
     },
-    "creators_status": "Existing CITATION.cff order retained; final publication credits and affiliations pending agreement.",
+    "creators_status": "Existing software CITATION.cff order retained; shared-record creators/order/affiliations pending agreement with component credits preserved.",
     "related_product": "SF-003",
     "components": [
       "SF-007"
@@ -37,7 +33,9 @@
       "source archives",
       "combined observation table",
       "certified climate-enriched model dataset"
-    ]
+    ],
+    "publication_record": "audit/publication.json",
+    "packaging_purpose": "Component selection for review or attachment to the one shared record; not a separate publication requirement."
   },
   "sf003": {
     "status": "unpublished review candidate",
@@ -49,10 +47,6 @@
     "due_date": "2026-12-15",
     "publication_approval": "pending",
     "licence": "pending product-specific approval; source data retain original terms",
-    "version_doi": null,
-    "concept_doi": null,
-    "tip_id": null,
-    "cgspace_handle": null,
     "register_id": "SF-003",
     "title": "ERA × Carob schema documentation (SF-003)",
     "resource_type": "technical documentation",
@@ -68,7 +62,7 @@
       "Namita Joshi": "integration and documentation update; climate integration lead",
       "Oscar Bautista / IITA": "Carob contribution"
     },
-    "creators_status": "Publication creators/order/affiliations pending agreement; roles are not author order.",
+    "creators_status": "Component roles retained; shared-record creators/order/affiliations pending agreement. No separate deposit required.",
     "related_product": "SF-001",
     "documented_schema_commit": "197ea93940cce823f36626777bd595d929f91b7b",
     "excluded": [
@@ -76,6 +70,8 @@
       "source archives",
       "combined observation table",
       "reviewed climate-output schema"
-    ]
+    ],
+    "publication_record": "audit/publication.json",
+    "packaging_purpose": "Component selection for review or attachment to the one shared record; not a separate publication requirement."
   }
 }

@@ -9,28 +9,40 @@ and CIAT. Cedric Ngakou developed the ERA-to-Carob transformation and
 merge; Namita Joshi contributed integration, reporting and fixes and
 leads climate integration.
 
-### Two deliverables, one repository
+### Two deliverables, one repository and one CGSpace record
 
 | Deliverable | Scope and primary files | Proposed review version | Reporting |
 |:---|:---|:---|:---|
 | **SF-001 — ERA × Carob data-to-model pipeline** | Transformation, merge and validation: `script/era_carob.R`, `script/era_carob_merge.R`, `script/agronomy.R`, `audit/build.R`, `audit/verify.R`, climate checks and fixtures. [Software manifest](audit/package-files.txt). | Software `0.1` (unpublished) | Alliance/Bioversity HLO 5.3 innovation development; Pete Steward reporting lead. |
-| **SF-003 — ERA × Carob schema documentation** | Definitions, units, mappings, provenance, vocabulary decisions and documented snapshot: `report/field_dictionary.xlsx`, `.csv`, `report/era_carob_mapping.xlsx`, `script/era_field_sources.csv` and source-review ledgers. [Documentation guide](docs/SF-003.md) and [manifest](audit/schema-package-files.txt). | Documentation `0.1` (unpublished; independent version series) | Linked knowledge product; Pete Steward reporting lead. |
+| **SF-003 — ERA × Carob schema documentation** | Definitions, units, mappings, provenance, vocabulary decisions and documented snapshot: `report/field_dictionary.xlsx`, `.csv`, `report/era_carob_mapping.xlsx`, `script/era_field_sources.csv` and source-review ledgers. [Documentation guide](docs/SF-003.md) and [manifest](audit/schema-package-files.txt). | Documentation snapshot `0.1` (unpublished; included in shared record) | Linked knowledge product; Pete Steward reporting lead. |
 
 Both deliverables are recorded due **15 December 2026**. SF-007 climate
 enrichment is a component of SF-001, not an automatic additional
-reported innovation. A software archive and a documentation archive may
-cite some of the same evidence; that does not create extra results or
-two datasets. The documented snapshot identifies the pinned inputs and
-schema, not a rights-cleared dataset publication.
+reported innovation.
+
+The agreed publication plan uses **one GitHub repository and one shared
+CGSpace record** for both deliverables. The record must describe and
+provide access to the schema documentation for SF-003 and link to the
+pipeline and validation evidence for SF-001. Reuse the same verified
+handle in both reporting entries, with the relevant files/sections and
+distinct claims identified. This is one innovation and its documentation
+knowledge product, not two knowledge products or two datasets.
+**Separate Zenodo deposits or DOIs are not required by this plan.**
+
+The documented snapshot identifies the pinned inputs and schema, not a
+rights-cleared dataset publication.
 
 Cedric leads transformation/merge review; Namita leads climate
-integration and its documentation update. Publication authors/order and
-affiliations require agreement for each product. Reporting ownership is
-not authorship. See [package metadata and credits](audit/packages.json)
-and [release/publication decisions](audit/RELEASE.md). SF-003 can
-describe an explicitly bounded pre-climate snapshot, but documentation
-alone does not complete SF-001 or satisfy the final climate-inclusive
-scope.
+integration and its documentation update. Agree publication
+authors/order and affiliations for the shared record, preserving
+component-specific credits. Reporting ownership is not authorship. See
+[package metadata and credits](audit/packages.json), the [shared
+publication metadata](audit/publication.json) and [release/publication
+decisions](audit/RELEASE.md). Confirm the shared record’s publication
+type and current reporting eligibility with the library/reporting team
+before submission. SF-003 can describe an explicitly bounded pre-climate
+snapshot, but documentation alone does not complete SF-001 or satisfy
+the final climate-inclusive scope.
 
 ### ERA data version
 

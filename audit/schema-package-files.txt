@@ -1,3 +1,4 @@
+# Review selection only; both deliverables use the shared record in audit/publication.json.
 # SF-003 documentation review archive; no source archives, observations or runnable pipeline.
 docs/SF-003.md
 audit/RELEASE.md
@@ -21,3 +22,4 @@ report/audit/historical_joins.csv
 report/audit/crop_labels.csv
 report/audit/yield_units.csv
 report/audit/eligibility.csv
+audit/publication.json
