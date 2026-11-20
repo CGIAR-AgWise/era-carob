@@ -1,4 +1,5 @@
-# Explicit allowlist for the review archive. Paths are relative to the selected Git commit.
+# SF-001 software review archive, with supporting documentation.
+# Shared evidence also appears in SF-003; it is not an additional result.
 .github/workflows/review.yml
 CITATION.cff
 README.Rmd
@@ -49,3 +50,6 @@ script/era_carob_merge.R
 script/era_carob_report.R
 script/era_field_sources.csv
 script/pinned.R
+audit/packages.json
+audit/schema-package-files.txt
+docs/SF-003.md

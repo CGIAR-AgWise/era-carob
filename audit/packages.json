@@ -1,0 +1,81 @@
+{
+  "sf001": {
+    "status": "unpublished review candidate",
+    "repository": "https://github.com/CGIAR-AgWise/era-carob",
+    "reporting_lead": "Pete Steward",
+    "lead_centre": "Alliance/Bioversity",
+    "programme": "Sustainable Farming",
+    "workplan": "AoW5 / HLO 5.3",
+    "due_date": "2026-12-15",
+    "publication_approval": "pending",
+    "licence": "pending product-specific approval; source data retain original terms",
+    "version_doi": null,
+    "concept_doi": null,
+    "tip_id": null,
+    "cgspace_handle": null,
+    "register_id": "SF-001",
+    "title": "ERA × Carob data-to-model pipeline (SF-001)",
+    "resource_type": "software",
+    "reporting_type": "Innovation development",
+    "version": "0.1",
+    "manifest": "audit/package-files.txt",
+    "archive_prefix": "sf001-v0.1-review/",
+    "scope": "Transformation, merge, validation and climate handoff checks. Climate-enriched model-ready output remains pending.",
+    "citation_file": "CITATION.cff",
+    "credits": {
+      "Cedric Ngakou": "transformation and merge",
+      "Namita Joshi": "integration, reporting, fixes; climate integration lead",
+      "Pete Steward": "reporting lead and review",
+      "Oscar Bautista / IITA": "Carob contribution"
+    },
+    "creators_status": "Existing CITATION.cff order retained; final publication credits and affiliations pending agreement.",
+    "related_product": "SF-003",
+    "components": [
+      "SF-007"
+    ],
+    "excluded": [
+      "source archives",
+      "combined observation table",
+      "certified climate-enriched model dataset"
+    ]
+  },
+  "sf003": {
+    "status": "unpublished review candidate",
+    "repository": "https://github.com/CGIAR-AgWise/era-carob",
+    "reporting_lead": "Pete Steward",
+    "lead_centre": "Alliance/Bioversity",
+    "programme": "Sustainable Farming",
+    "workplan": "AoW5 / HLO 5.3",
+    "due_date": "2026-12-15",
+    "publication_approval": "pending",
+    "licence": "pending product-specific approval; source data retain original terms",
+    "version_doi": null,
+    "concept_doi": null,
+    "tip_id": null,
+    "cgspace_handle": null,
+    "register_id": "SF-003",
+    "title": "ERA × Carob schema documentation (SF-003)",
+    "resource_type": "technical documentation",
+    "reporting_type": "Knowledge product",
+    "version": "0.1",
+    "manifest": "audit/schema-package-files.txt",
+    "archive_prefix": "sf003-docs-v0.1-review/",
+    "scope": "351-field dictionary, units, mappings, provenance, vocabulary decisions and documented pre-climate snapshot.",
+    "citation_file": "docs/SF-003.md",
+    "credits": {
+      "Pete Steward": "reporting lead and documentation review",
+      "Cedric Ngakou": "underlying transformation and merge",
+      "Namita Joshi": "integration and documentation update; climate integration lead",
+      "Oscar Bautista / IITA": "Carob contribution"
+    },
+    "creators_status": "Publication creators/order/affiliations pending agreement; roles are not author order.",
+    "related_product": "SF-001",
+    "documented_schema_commit": "197ea93940cce823f36626777bd595d929f91b7b",
+    "excluded": [
+      "runnable pipeline",
+      "source archives",
+      "combined observation table",
+      "reviewed climate-output schema"
+    ]
+  }
+}
