@@ -1,6 +1,6 @@
 cff-version: 1.2.0
-message: "For review: cite the exact Git commit and the original source datasets. No version DOI has been published for this candidate."
-title: "ERA × Carob: agronomic data transformation and SF-001 validation"
+message: "For review: cite the exact Git commit and the original source datasets. No version DOI has been published for this candidate. For SF-003 schema documentation, see docs/SF-003.md."
+title: "ERA × Carob data-to-model pipeline (SF-001)"
 type: software
 authors:
   - family-names: Ngakou
