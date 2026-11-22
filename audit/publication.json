@@ -1,0 +1,24 @@
+{
+  "status": "planned; not submitted or published",
+  "title": "ERA × Carob data-to-model pipeline and schema documentation",
+  "title_status": "proposed shared-record title; final metadata pending approval",
+  "register_ids": [
+    "SF-001",
+    "SF-003"
+  ],
+  "repository": "https://github.com/CGIAR-AgWise/era-carob",
+  "cgspace_record_count": 1,
+  "tip_id": null,
+  "cgspace_handle": null,
+  "zenodo_deposition": "optional; no separate deposits required",
+  "version_doi": null,
+  "concept_doi": null,
+  "record_scope": "Describe and provide access to SF-003 schema documentation; link the SF-001 pipeline, exact source revision and validation evidence.",
+  "reporting_use": {
+    "SF-001": "Innovation development: pipeline and demonstrated readiness; shared CGSpace record as supporting evidence.",
+    "SF-003": "Knowledge product: schema documentation described by the same CGSpace record."
+  },
+  "counting_rule": "One innovation and its documentation knowledge product; not two knowledge products. SF-007 is a component of SF-001.",
+  "eligibility": "Confirm publication type, documentation coverage and current-cycle reporting eligibility with library/reporting team before submission.",
+  "approval": "Exact metadata, creators/order, rights and files require approval before TIP entry or publication."
+}

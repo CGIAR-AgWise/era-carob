@@ -1,9 +1,9 @@
-name: SF-001 review checks
+name: SF-001 and SF-003 review checks
 on:
   pull_request:
   workflow_dispatch:
   push:
-    branches: [sf001/pinned-audit]
+    branches: [main, sf001/pinned-audit, codex/sf001-sf003-reporting]
 permissions:
   contents: read
 jobs:
@@ -26,3 +26,4 @@ jobs:
         run: |
           python3 -m unittest discover -s audit -p 'test_*.py'
           python3 audit/package_review.py HEAD "$RUNNER_TEMP/sf001-v0.1-review.tar.gz"
+          python3 audit/package_review.py HEAD "$RUNNER_TEMP/sf003-docs-v0.1-review.tar.gz" --product sf003

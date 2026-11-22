@@ -11,7 +11,7 @@
 
 
 
-<title>ERA × Carob: SF-001 validation</title>
+<title>ERA × Carob: SF-001 pipeline and SF-003 schema documentation</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -348,7 +348,8 @@ display: none;
 
 
 
-<h1 class="title toc-ignore">ERA × Carob: SF-001 validation</h1>
+<h1 class="title toc-ignore">ERA × Carob: SF-001 pipeline and SF-003
+schema documentation</h1>
 
 </div>
 
@@ -359,6 +360,74 @@ Farming Science Program</a> collaboration involves IITA and the Alliance
 of Bioversity International and CIAT. Cedric Ngakou developed the
 ERA-to-Carob transformation and merge; Namita Joshi contributed
 integration, reporting and fixes and leads climate integration.</p>
+<div id="two-deliverables-one-repository-and-one-cgspace-record" class="section level3">
+<h3>Two deliverables, one repository and one CGSpace record</h3>
+<table>
+<colgroup>
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Deliverable</th>
+<th align="left">Scope and primary files</th>
+<th align="left">Proposed review version</th>
+<th align="left">Reporting</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><strong>SF-001 — ERA × Carob data-to-model
+pipeline</strong></td>
+<td align="left">Transformation, merge and validation:
+<code>script/era_carob.R</code>, <code>script/era_carob_merge.R</code>,
+<code>script/agronomy.R</code>, <code>audit/build.R</code>,
+<code>audit/verify.R</code>, climate checks and fixtures. <a href="audit/package-files.txt">Software manifest</a>.</td>
+<td align="left">Software <code>0.1</code> (unpublished)</td>
+<td align="left">Alliance/Bioversity HLO 5.3 innovation development;
+Pete Steward reporting lead.</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>SF-003 — ERA × Carob schema
+documentation</strong></td>
+<td align="left">Definitions, units, mappings, provenance, vocabulary
+decisions and documented snapshot:
+<code>report/field_dictionary.xlsx</code>, <code>.csv</code>,
+<code>report/era_carob_mapping.xlsx</code>,
+<code>script/era_field_sources.csv</code> and source-review ledgers. <a href="docs/SF-003.md">Documentation guide</a> and <a href="audit/schema-package-files.txt">manifest</a>.</td>
+<td align="left">Documentation snapshot <code>0.1</code> (unpublished;
+included in shared record)</td>
+<td align="left">Linked knowledge product; Pete Steward reporting
+lead.</td>
+</tr>
+</tbody>
+</table>
+<p>Both deliverables are recorded due <strong>15 December 2026</strong>.
+SF-007 climate enrichment is a component of SF-001, not an automatic
+additional reported innovation.</p>
+<p>The agreed publication plan uses <strong>one GitHub repository and
+one shared CGSpace record</strong> for both deliverables. The record
+must describe and provide access to the schema documentation for SF-003
+and link to the pipeline and validation evidence for SF-001. Reuse the
+same verified handle in both reporting entries, with the relevant
+files/sections and distinct claims identified. This is one innovation
+and its documentation knowledge product, not two knowledge products or
+two datasets. <strong>Separate Zenodo deposits or DOIs are not required
+by this plan.</strong></p>
+<p>The documented snapshot identifies the pinned inputs and schema, not
+a rights-cleared dataset publication.</p>
+<p>Cedric leads transformation/merge review; Namita leads climate
+integration and its documentation update. Agree publication
+authors/order and affiliations for the shared record, preserving
+component-specific credits. Reporting ownership is not authorship. See
+<a href="audit/packages.json">package metadata and credits</a>, the <a href="audit/publication.json">shared publication metadata</a> and <a href="audit/RELEASE.md">release/publication decisions</a>. Confirm the
+shared record’s publication type and current reporting eligibility with
+the library/reporting team before submission. SF-003 can describe an
+explicitly bounded pre-climate snapshot, but documentation alone does
+not complete SF-001 or satisfy the final climate-inclusive scope.</p>
+</div>
 <div id="era-data-version" class="section level3">
 <h3>ERA data version</h3>
 <p>Both the historical replay and the corrected pipeline use the
@@ -372,12 +441,15 @@ The proposed v0.1 version refers to the ERA–Carob pipeline. <a href="audit/inp
 </div>
 <div id="build-and-inspect-the-candidate" class="section level3">
 <h3>Build and inspect the candidate</h3>
-<p>Use the PR revision while the changes are under review. From a
-terminal with Git, curl, Python 3 and R installed:</p>
+<p>PRs <a href="https://github.com/CGIAR-AgWise/era-carob/pull/2">#2</a>
+and <a href="https://github.com/CGIAR-AgWise/era-carob/pull/3">#3</a>
+are merged. Start from current main and record its exact commit; for
+repeatable review, check out the agreed commit. From a terminal with
+Git, curl, Python 3 and R installed:</p>
 <pre class="sh"><code>git clone https://github.com/CGIAR-AgWise/era-carob.git
 cd era-carob
-git fetch origin refs/pull/2/head
-git switch --detach FETCH_HEAD
+git switch main
+git pull --ff-only
 git rev-parse HEAD
 Rscript -e &#39;install.packages(c(&quot;dplyr&quot;,&quot;tidyr&quot;,&quot;stringr&quot;,&quot;jsonlite&quot;,&quot;data.table&quot;), repos=&quot;https://cloud.r-project.org&quot;)&#39;
 export SF001_INPUTS=&quot;$PWD/downloaded_data/sf001&quot;
@@ -537,8 +609,22 @@ count and arm errors alone cannot establish its sampling variance. For
 NN0421, the ERA figure extraction and the paper’s results text disagree.
 Review that discrepancy before pooling the contrast. <a href="report/audit/meta_example.md">Worked examples and primary
 sources</a></p>
-<p>The <a href="report/audit/terminag_crop_crosswalk.csv">crop crosswalk</a> checks 161 retained crop labels against the <a href="https://github.com/controvoc/terminag/blob/31732136beeb34eda26f1874c2487beecef63cab/values/values_crop.csv">pinned Terminag crop table</a>. Of the 67 without an exact name, 4 are listed synonyms, 5 match through a scientific name, FAO name or spacing, and 9 map through the ERA plant master by scientific name. Tracing those remaining 49 labels to 2,419 original ERA outcome rows across 92 studies added nine crop matches and 14 broader groups. Eleven labels need Cedric’s source review and 15 have vocabulary gaps. NN0090 also needs a cultivar check after its crop was resolved as peach. See <a href="report/audit/crop_source_review.csv">review decisions</a> and <a href="report/audit/crop_source_evidence.csv">study evidence with source-row locators</a>.</p>
-<p>Use the <a href="report/field_dictionary.xlsx">field dictionary</a> or its <a href="report/field_dictionary.csv">CSV edition</a> for definitions, units, source coverage and study-specific exceptions. It compares the merged fields with <a href="https://github.com/controvoc/terminag">Terminag</a> and links the contributing <a href="https://github.com/carob-data">Carob project</a>.</p>
+<p>The <a href="report/audit/terminag_crop_crosswalk.csv">crop
+crosswalk</a> checks 161 retained crop labels against the <a href="https://github.com/controvoc/terminag/blob/31732136beeb34eda26f1874c2487beecef63cab/values/values_crop.csv">pinned
+Terminag crop table</a>. Of the 67 without an exact name, 4 are listed
+synonyms, 5 match through a scientific name, FAO name or spacing, and 9
+map through the ERA plant master by scientific name. Tracing those
+remaining 49 labels to 2,419 original ERA outcome rows across 92 studies
+added nine crop matches and 14 broader groups. Eleven labels need
+Cedric’s source review and 15 have vocabulary gaps. NN0090 also needs a
+cultivar check after its crop was resolved as peach. See <a href="report/audit/crop_source_review.csv">review decisions</a> and <a href="report/audit/crop_source_evidence.csv">study evidence with
+source-row locators</a>.</p>
+<p>Use the <a href="report/field_dictionary.xlsx">field dictionary</a>
+or its <a href="report/field_dictionary.csv">CSV edition</a> for
+definitions, units, source coverage and study-specific exceptions. It
+compares the merged fields with <a href="https://github.com/controvoc/terminag">Terminag</a> and links the
+contributing <a href="https://github.com/carob-data">Carob
+project</a>.</p>
 <p>The <a href="report/era_carob_mapping.xlsx">schema workbook</a> gives
 field sources and the number of populated rows. The candidate preserves
 ERA’s original outcome, value, unit, uncertainty and harvest-part label

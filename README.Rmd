@@ -1,5 +1,5 @@
 ---
-title: "ERA × Carob: SF-001 validation"
+title: "ERA × Carob: SF-001 pipeline and SF-003 schema documentation"
 output: github_document
 ---
 
@@ -13,19 +13,34 @@ fmt <- function(x) format(x,big.mark=",",scientific=FALSE,trim=TRUE)
 
 **Review candidate, not a released model dataset.** This CGIAR [Sustainable Farming Science Program](https://www.cgiar.org/cgiar-research-portfolio-2025-2030/sustainable-farming) collaboration involves IITA and the Alliance of Bioversity International and CIAT. Cedric Ngakou developed the ERA-to-Carob transformation and merge; Namita Joshi contributed integration, reporting and fixes and leads climate integration.
 
+### Two deliverables, one repository and one CGSpace record
+
+| Deliverable | Scope and primary files | Proposed review version | Reporting |
+|:---|:---|:---|:---|
+| **SF-001 — ERA × Carob data-to-model pipeline** | Transformation, merge and validation: `script/era_carob.R`, `script/era_carob_merge.R`, `script/agronomy.R`, `audit/build.R`, `audit/verify.R`, climate checks and fixtures. [Software manifest](audit/package-files.txt). | Software `0.1` (unpublished) | Alliance/Bioversity HLO 5.3 innovation development; Pete Steward reporting lead. |
+| **SF-003 — ERA × Carob schema documentation** | Definitions, units, mappings, provenance, vocabulary decisions and documented snapshot: `report/field_dictionary.xlsx`, `.csv`, `report/era_carob_mapping.xlsx`, `script/era_field_sources.csv` and source-review ledgers. [Documentation guide](docs/SF-003.md) and [manifest](audit/schema-package-files.txt). | Documentation snapshot `0.1` (unpublished; included in shared record) | Linked knowledge product; Pete Steward reporting lead. |
+
+Both deliverables are recorded due **15 December 2026**. SF-007 climate enrichment is a component of SF-001, not an automatic additional reported innovation.
+
+The agreed publication plan uses **one GitHub repository and one shared CGSpace record** for both deliverables. The record must describe and provide access to the schema documentation for SF-003 and link to the pipeline and validation evidence for SF-001. Reuse the same verified handle in both reporting entries, with the relevant files/sections and distinct claims identified. This is one innovation and its documentation knowledge product, not two knowledge products or two datasets. **Separate Zenodo deposits or DOIs are not required by this plan.**
+
+The documented snapshot identifies the pinned inputs and schema, not a rights-cleared dataset publication.
+
+Cedric leads transformation/merge review; Namita leads climate integration and its documentation update. Agree publication authors/order and affiliations for the shared record, preserving component-specific credits. Reporting ownership is not authorship. See [package metadata and credits](audit/packages.json), the [shared publication metadata](audit/publication.json) and [release/publication decisions](audit/RELEASE.md). Confirm the shared record’s publication type and current reporting eligibility with the library/reporting team before submission. SF-003 can describe an explicitly bounded pre-climate snapshot, but documentation alone does not complete SF-001 or satisfy the final climate-inclusive scope.
+
 ### ERA data version
 
 Both the historical replay and the corrected pipeline use the **ERA Agronomy bundle dated 12 May 2025**. Its agronomic JSON combines **Majestic Hippo 2020 (2025-04-11.1)** and **Industrious Elephant 2023 (2025-05-09.2)**. Crop harmonisation uses the bundled master codes dated **2025-05-12**. The bundle also contains a compiled Parquet file labelled v1.0. The observation counts come from the agronomic JSON. The proposed v0.1 version refers to the ERA–Carob pipeline. [Pinned archive and SHA-256](audit/inputs.json)
 
 ### Build and inspect the candidate
 
-Use the PR revision while the changes are under review. From a terminal with Git, curl, Python 3 and R installed:
+PRs [#2](https://github.com/CGIAR-AgWise/era-carob/pull/2) and [#3](https://github.com/CGIAR-AgWise/era-carob/pull/3) are merged. Start from current main and record its exact commit; for repeatable review, check out the agreed commit. From a terminal with Git, curl, Python 3 and R installed:
 
 ```sh
 git clone https://github.com/CGIAR-AgWise/era-carob.git
 cd era-carob
-git fetch origin refs/pull/2/head
-git switch --detach FETCH_HEAD
+git switch main
+git pull --ff-only
 git rev-parse HEAD
 Rscript -e 'install.packages(c("dplyr","tidyr","stringr","jsonlite","data.table"), repos="https://cloud.r-project.org")'
 export SF001_INPUTS="$PWD/downloaded_data/sf001"
