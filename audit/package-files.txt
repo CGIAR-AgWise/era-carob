@@ -55,3 +55,8 @@ audit/packages.json
 audit/schema-package-files.txt
 docs/SF-003.md
 audit/publication.json
+audit/inputs-historical.json
+report/audit/date_snapshot.json
+script/date_holds.R
+audit/test_date_holds.R
+audit/check_date_successor.R

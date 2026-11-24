@@ -2,7 +2,8 @@
 # Rscript audit/check_climate.R sf001-review.rds climate.csv feature_windows.csv coverage.csv
 args <- commandArgs(TRUE)
 if (length(args)!=4L) stop("Usage: Rscript audit/check_climate.R candidate.rds climate.csv feature_windows.csv coverage.csv")
-m <- data.table::as.data.table(readRDS(args[1]))
+candidate <- readRDS(args[1])
+m <- data.table::as.data.table(candidate)
 v <- data.table::fread(args[2],colClasses=c(planting_date="character",window_start="character",window_end="character"))
 keys <- c("source","source_row")
 required <- c(keys,"latitude","longitude","planting_date","window_start","window_end","variable","units","value","grid_id","provider_version")
@@ -11,6 +12,8 @@ stopifnot(nrow(v)>0,all(required %in% names(v)),all(complete.cases(v[,..required
           !anyDuplicated(v[,c(keys,"variable","window_start","window_end"),with=FALSE]),
           !anyDuplicated(m[,..keys]),all(is.finite(v$value)))
 v <- v[,..required]
+source("script/date_holds.R")
+check_climate_date_holds(candidate,v)
 # Each feature has a named, agreed inclusive window. The two bounds may use
 # different anchors (e.g. planting through harvest) and signed day offsets.
 rules <- data.table::fread(args[3])

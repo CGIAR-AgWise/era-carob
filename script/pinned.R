@@ -1,4 +1,4 @@
-cache <- Sys.getenv("SF001_INPUTS", "downloaded_data/sf001")
+cache <- Sys.getenv("SF001_INPUTS", "downloaded_data/sf001-issue94")
 one_input <- function(pattern) {
   f <- Sys.glob(file.path(cache,pattern))
   stopifnot(length(f)==1L)
@@ -39,6 +39,7 @@ season_planting_date <- function(raw, season) {
   year <- ifelse(grepl("^[0-9]{4}([.][0-9]+)?$", season), substr(season,1,4), NA_character_)
   parsed <- as.Date(day_text,format="%Y-%m-%d")
   valid <- !is.na(parsed) & !is.na(year) &
+    year != "9999" &
     format(parsed,"%Y-%m-%d")==day_text & format(parsed,"%Y")==year
   day_text[is.na(valid) | !valid] <- NA_character_
   day_text

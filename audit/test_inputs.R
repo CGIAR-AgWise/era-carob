@@ -8,3 +8,4 @@ stopifnot(identical(season_planting_date(c("2014-06-02","2084-06-02","2014-02-30
                                          c("2014.2","2014","2014","2014","2014","2014")),
                     c("2014-06-02",rep(NA_character_,5))))
 cat("New crop vocabulary and corrected source date checks passed.\n")
+stopifnot(is.na(season_planting_date("9999-01-01","9999")))

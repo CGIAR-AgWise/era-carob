@@ -430,14 +430,17 @@ not complete SF-001 or satisfy the final climate-inclusive scope.</p>
 </div>
 <div id="era-data-version" class="section level3">
 <h3>ERA data version</h3>
-<p>Both the historical replay and the corrected pipeline use the
-<strong>ERA Agronomy bundle dated 12 May 2025</strong>. Its agronomic
-JSON combines <strong>Majestic Hippo 2020 (2025-04-11.1)</strong> and
-<strong>Industrious Elephant 2023 (2025-05-09.2)</strong>. Crop
-harmonisation uses the bundled master codes dated
-<strong>2025-05-12</strong>. The bundle also contains a compiled Parquet
-file labelled v1.0. The observation counts come from the agronomic JSON.
-The proposed v0.1 version refers to the ERA–Carob pipeline. <a href="audit/inputs.json">Pinned archive and SHA-256</a></p>
+<p>The current build uses the <strong>issue #94 date-only successor of
+the May 2025 ERA bundle</strong>, labelled
+<code>2026-11-23-issue94</code> and published on 24 November 2026. Its
+JSON retains the same Majestic Hippo and Industrious Elephant source
+cohorts, row order and non-date values, while correcting date decoding
+and recovering lost dates. The vocabulary (<code>2025-05-12</code>) and
+compiled comparison Parquet are unchanged. <a href="audit/inputs.json">Current archive and SHA-256</a>.</p>
+<p>The June replay still uses the original <strong>12 May 2025</strong>
+bundle through <a href="audit/inputs-historical.json">historical
+pins</a>, in a separate cache. The proposed software version
+<code>0.1</code> is distinct from either input version.</p>
 </div>
 <div id="build-and-inspect-the-candidate" class="section level3">
 <h3>Build and inspect the candidate</h3>
@@ -452,14 +455,17 @@ git switch main
 git pull --ff-only
 git rev-parse HEAD
 Rscript -e &#39;install.packages(c(&quot;dplyr&quot;,&quot;tidyr&quot;,&quot;stringr&quot;,&quot;jsonlite&quot;,&quot;data.table&quot;), repos=&quot;https://cloud.r-project.org&quot;)&#39;
-export SF001_INPUTS=&quot;$PWD/downloaded_data/sf001&quot;
+export SF001_INPUTS=&quot;$PWD/downloaded_data/sf001-issue94&quot;
 python3 audit/prepare.py &quot;$SF001_INPUTS&quot;
 Rscript audit/build.R
 Rscript -e &#39;d &lt;- as.data.frame(readRDS(file.path(Sys.getenv(&quot;SF001_INPUTS&quot;),&quot;sf001-review.rds&quot;))); print(table(d$source)); print(head(d[c(&quot;source&quot;,&quot;source_row&quot;,&quot;dataset_id&quot;,&quot;crop_raw&quot;,&quot;crop&quot;,&quot;yield&quot;)]))&#39;</code></pre>
-<p>Preparation verifies the two archives. The build resolves crops
-against the supplied ERA vocabulary, checks each retained row against
-its source and writes the review dataset locally. For the June replay,
-exact snapshot checks and workbook generation, follow the <a href="audit/RELEASE.md#reproduce">reproduction instructions</a>.</p>
+<p>Preparation verifies the two archives and retains the corrected
+source’s date audit and holds. The build checks prepared-file hashes and
+carries all 900 row/field holds in the local RDS metadata. The build
+resolves crops against the supplied ERA vocabulary, checks each retained
+row against its source and writes the review dataset locally. For the
+June replay, exact snapshot checks and workbook generation, follow the
+<a href="audit/RELEASE.md#reproduce">reproduction instructions</a>.</p>
 </div>
 <div id="what-the-pinned-comparison-measures" class="section level3">
 <h3>What the pinned comparison measures</h3>
@@ -635,12 +641,14 @@ its own field because Carob defines rainfall over the crop season.</p>
 </div>
 <div id="climate-and-model-readiness" class="section level3">
 <h3>Climate and model readiness</h3>
-<p>This screen uses original ERA outcomes and Carob wide rows, before
-any climate join. Coordinate checks require a finite, in-range pair
-other than (0,0); dates require a valid day and a plausible planting
-year. For ERA we also require a unique recorded season year matching the
-planting year. A full season window, grid-cell match and observed
-weather are <strong>not</strong> established by this screen.</p>
+<p>The table below is the <strong>historical May 2025 input
+screen</strong>, retained for reproducibility. It uses original ERA
+outcomes and Carob wide rows, before any climate join. Coordinate checks
+require a finite, in-range pair other than (0,0); dates require a valid
+day and a plausible planting year. For ERA we also require a unique
+recorded season year matching the planting year. A full season window,
+grid-cell match and observed weather are <strong>not</strong>
+established by this screen.</p>
 <table>
 <colgroup>
 <col width="58%" />
@@ -697,15 +705,22 @@ weather are <strong>not</strong> established by this screen.</p>
 </tr>
 </tbody>
 </table>
-<p>Example: study AG0003 records season 2014 but planting date
-2084-06-02. Do not infer a universal offset. The candidate retains the
-source planting date for audit and suppresses unmatched dates in the
-harmonised field. No reviewed climate output is available in this
-repository. Enrichment coverage is <strong>unmeasured</strong>, and no
-climate-enriched model dataset is certified. Namita owns climate
-provenance and date resolution; Cedric reviews the transformation. See
-<a href="audit/RELEASE.md">reproduction, rights and release
-gates</a>.</p>
+<p>The current date-only successor yields <strong>40,655 accepted ERA
+planting dates</strong>, from 70,161 raw planting dates on 110,277
+retained ERA rows. The existing same-year screen excludes 29,506 raw
+dates; 1,237 accepted-date rows lack coordinates. <a href="report/audit/date_snapshot.json">Current date counts and exact
+input pins</a> supersede the historical date counts above. Eight
+accepted-date outcomes still have held harvest dates and fail the
+climate hold check. These totals do not measure climate coverage.</p>
+<p>The consumer preserves source planting text, requires an exact day
+matching a single recorded season year, and rejects year 9999. The
+source release retains 900 unresolved row/field findings: no inferred
+century, year or missing day, and no automatic filling of held dates.
+Climate handoff checks reject held ERA outcome rows. See <a href="docs/SF-003.md#date-origin-precision-and-source-holds">date
+precision, provenance and holds</a>. No reviewed climate output is
+available in this repository; climate and model readiness remain
+unverified. Namita owns climate integration and source interpretation;
+Cedric reviews the transformation.</p>
 </div>
 
 

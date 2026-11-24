@@ -23,3 +23,5 @@ report/audit/crop_labels.csv
 report/audit/yield_units.csv
 report/audit/eligibility.csv
 audit/publication.json
+audit/inputs-historical.json
+report/audit/date_snapshot.json
