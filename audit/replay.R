@@ -2,6 +2,9 @@
 library(dplyr)
 library(tidyr)
 cache <- normalizePath(commandArgs(TRUE)[1], mustWork=TRUE)
+# Historical comparison must never silently run on the corrected successor.
+if (length(Sys.glob(file.path(cache,"agronomic_*issue94*.json"))))
+  stop("Historical replay requires a separate cache prepared with audit/inputs-historical.json")
 stopifnot(!is.na(Sys.setlocale("LC_COLLATE","C")))
 ref <- "81eef14c11437bddf8bb5914436e4525b45c6cce"
 helper <- "a366c29ba1cdcf7e184299cbeabdc4f762bcb26c"

@@ -30,7 +30,9 @@ Cedric leads transformation/merge review; Namita leads climate integration and i
 
 ### ERA data version
 
-Both the historical replay and the corrected pipeline use the **ERA Agronomy bundle dated 12 May 2025**. Its agronomic JSON combines **Majestic Hippo 2020 (2025-04-11.1)** and **Industrious Elephant 2023 (2025-05-09.2)**. Crop harmonisation uses the bundled master codes dated **2025-05-12**. The bundle also contains a compiled Parquet file labelled v1.0. The observation counts come from the agronomic JSON. The proposed v0.1 version refers to the ERA–Carob pipeline. [Pinned archive and SHA-256](audit/inputs.json)
+The current build uses the **issue #94 date-only successor of the May 2025 ERA bundle**, labelled `2026-11-23-issue94` and published on 24 November 2026. Its JSON retains the same Majestic Hippo and Industrious Elephant source cohorts, row order and non-date values, while correcting date decoding and recovering lost dates. The vocabulary (`2025-05-12`) and compiled comparison Parquet are unchanged. [Current archive and SHA-256](audit/inputs.json).
+
+The June replay still uses the original **12 May 2025** bundle through [historical pins](audit/inputs-historical.json), in a separate cache. The proposed software version `0.1` is distinct from either input version.
 
 ### Build and inspect the candidate
 
@@ -43,13 +45,13 @@ git switch main
 git pull --ff-only
 git rev-parse HEAD
 Rscript -e 'install.packages(c("dplyr","tidyr","stringr","jsonlite","data.table"), repos="https://cloud.r-project.org")'
-export SF001_INPUTS="$PWD/downloaded_data/sf001"
+export SF001_INPUTS="$PWD/downloaded_data/sf001-issue94"
 python3 audit/prepare.py "$SF001_INPUTS"
 Rscript audit/build.R
 Rscript -e 'd <- as.data.frame(readRDS(file.path(Sys.getenv("SF001_INPUTS"),"sf001-review.rds"))); print(table(d$source)); print(head(d[c("source","source_row","dataset_id","crop_raw","crop","yield")]))'
 ```
 
-Preparation verifies the two archives. The build resolves crops against the supplied ERA vocabulary, checks each retained row against its source and writes the review dataset locally. For the June replay, exact snapshot checks and workbook generation, follow the [reproduction instructions](audit/RELEASE.md#reproduce).
+Preparation verifies the two archives and retains the corrected source’s date audit and holds. The build checks prepared-file hashes and carries all 900 row/field holds in the local RDS metadata. The build resolves crops against the supplied ERA vocabulary, checks each retained row against its source and writes the review dataset locally. For the June replay, exact snapshot checks and workbook generation, follow the [reproduction instructions](audit/RELEASE.md#reproduce).
 
 ### What the pinned comparison measures
 
@@ -93,10 +95,12 @@ The [schema workbook](report/era_carob_mapping.xlsx) gives field sources and the
 
 ### Climate and model readiness
 
-This screen uses original ERA outcomes and Carob wide rows, before any climate join. Coordinate checks require a finite, in-range pair other than (0,0); dates require a valid day and a plausible planting year. For ERA we also require a unique recorded season year matching the planting year. A full season window, grid-cell match and observed weather are **not** established by this screen.
+The table below is the **historical May 2025 input screen**, retained for reproducibility. It uses original ERA outcomes and Carob wide rows, before any climate join. Coordinate checks require a finite, in-range pair other than (0,0); dates require a valid day and a plausible planting year. For ERA we also require a unique recorded season year matching the planting year. A full season window, grid-cell match and observed weather are **not** established by this screen.
 
 ```{r, echo=FALSE, results='asis'}
 knitr::kable(qc,format="pipe",format.args=list(big.mark=","))
 ```
 
-Example: study AG0003 records season 2014 but planting date 2084-06-02. Do not infer a universal offset. The candidate retains the source planting date for audit and suppresses unmatched dates in the harmonised field. No reviewed climate output is available in this repository. Enrichment coverage is **unmeasured**, and no climate-enriched model dataset is certified. Namita owns climate provenance and date resolution; Cedric reviews the transformation. See [reproduction, rights and release gates](audit/RELEASE.md).
+The current date-only successor yields **40,655 accepted ERA planting dates**, from 70,161 raw planting dates on 110,277 retained ERA rows. The existing same-year screen excludes 29,506 raw dates; 1,237 accepted-date rows lack coordinates. [Current date counts and exact input pins](report/audit/date_snapshot.json) supersede the historical date counts above. Eight accepted-date outcomes still have held harvest dates and fail the climate hold check. These totals do not measure climate coverage.
+
+The consumer preserves source planting text, requires an exact day matching a single recorded season year, and rejects year 9999. The source release retains 900 unresolved row/field findings: no inferred century, year or missing day, and no automatic filling of held dates. Climate handoff checks reject held ERA outcome rows. See [date precision, provenance and holds](docs/SF-003.md#date-origin-precision-and-source-holds). No reviewed climate output is available in this repository; climate and model readiness remain unverified. Namita owns climate integration and source interpretation; Cedric reviews the transformation.

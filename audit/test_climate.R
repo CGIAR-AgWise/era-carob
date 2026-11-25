@@ -20,5 +20,17 @@ stopifnot(coverage[variable=="rain",matched]==1L,coverage[variable=="temperature
 shifted <- copy(v)[, `:=`(window_start="2019-02-23",window_end="2019-06-10")]
 forged <- copy(v)[, `:=`(harvest_date="2021-06-10",window_end="2021-06-10")]
 stopifnot(check(forged)!=0L,check(shifted)!=0L,check(rbind(v,v))!=0L,check(copy(v)[,latitude:=3])!=0L)
+# Even a seemingly valid date cannot bypass a row-linked source hold.
+m[,source:="era"]
+v[,source:="era"]
+attr(m,"input_archives") <- list("era_agronomy_bundle_issue94.tar.gz"=list("url","hash"))
+saveRDS(m,paths[1])
+stopifnot(check(v)!=0L)
+attr(m,"era_date_holds") <- data.table(table="Data.Out",merged_row="1")
+saveRDS(m,paths[1])
+stopifnot(check(v)!=0L)
+attr(m,"era_date_holds") <- data.table(table="Data.Out",merged_row="2")
+saveRDS(m,paths[1])
+stopifnot(check(v)==0L)
 unlink(dir,recursive=TRUE)
 cat("Climate tests passed, including wrong season and absent feature.\n")

@@ -4,33 +4,46 @@ Scope: SF-001 contains pinned software, aggregate validation evidence and reprod
 
 ## ERA source version
 
-The 12 May 2025 agronomy bundle contains the observation input `agronomic_majestic-hippo-2020-2025-04-11.1_industrious-elephant-2023-2025-05-09.2.json`. The vocabulary input is `era_master_codes-2025-05-12.json`. The archive's internal version CSV lists an earlier master-code filename dated 23 April. These identifiers follow the actual files extracted from the checksum-verified archive.
+The current pin is `era_agronomy_bundle_2026-11-23-issue94.tar.gz`, published
+24 November 2026, SHA-256 `c8cd1eac0f2fa3686519b5cc4f26b7ab72d4bdcc7945caad4944eb9eb376d717`.
+Its observation member ends in `_issue94-2026-11-23.json`; its vocabulary is
+`era_master_codes-2025-05-12.json`. The bundle includes the row-linked date
+audit, holds and manifest. It corrects dates only; compiled comparison Parquet,
+vocabulary, non-date values and row order are unchanged. The original May
+2025 bundle remains pinned in `inputs-historical.json` for historical replay.
 
 ## Reproduce
 
 Check out the selected commit using the [README commands](https://github.com/CGIAR-AgWise/era-carob#build-and-inspect-the-candidate); PRs #2 and #3 are merged. Keep the repository history for the June replay. From repository root, with network access, Python 3.9+, Git, curl, R and Pandoc:
 
 ```sh
-export SF001_INPUTS="$PWD/downloaded_data/sf001"
-python3 audit/prepare.py "$SF001_INPUTS"
+# Historical replay and original pin-specific expectations.
+export SF001_INPUTS="$PWD/downloaded_data/sf001-historical"
+python3 audit/prepare.py "$SF001_INPUTS" --inputs audit/inputs-historical.json
 Rscript audit/replay.R "$SF001_INPUTS"
 Rscript audit/extract.R "$SF001_INPUTS"
 python3 audit/compare.py "$SF001_INPUTS"
 Rscript audit/build.R
-Rscript audit/check_snapshot.R "$SF001_INPUTS/sf001-review.rds"
-Rscript script/era_carob_mapping.R
+Rscript audit/check_snapshot.R "$SF001_INPUTS/sf001-review.rds" historical
+
+# Current date-only successor; use another cache to prevent mixed inputs.
+export SF001_INPUTS="$PWD/downloaded_data/sf001-issue94"
+python3 audit/prepare.py "$SF001_INPUTS"
+Rscript audit/build.R
+Rscript audit/check_snapshot.R "$SF001_INPUTS/sf001-review.rds" issue94
+Rscript audit/check_date_successor.R downloaded_data/sf001-historical/sf001-review.rds "$SF001_INPUTS/sf001-review.rds"
 Rscript audit/meta_example.R
 Rscript -e 'rmarkdown::render("README.Rmd"); rmarkdown::render("README.Rmd",output_format="html_document")'
 ```
 
-Install R packages dplyr, tidyr, jsonlite, stringr, data.table, knitr, rmarkdown and openxlsx. [Tested environment](session.txt). The historical replay pins LC_COLLATE=C and two carobiner helpers by Git commit. It reuses the original transform without its mutable download preamble; it does not use the older March RData in ERA_data. Allow several GB of RAM. The historical output RDS and corrected sf001-review.rds stay in the cache. [Archive URLs and SHA-256](inputs.json) fail closed on replacement. ERA tarball also matches historical Git blob 52076f1b8e78268a4d4e42235ec5339508c398eb. The Carob archive is the exact checksum-pinned agronomy CC collection. Its ZIP member timestamps read 3 June 2026 when inspected on 20 November 2026; these are archive metadata, not a verified publication date. Do not substitute a similarly named monthly or latest collection. Preserve the pinned bytes internally if URLs change.
+Install R packages dplyr, tidyr, jsonlite, stringr, data.table, knitr, rmarkdown and openxlsx. [Tested environment](session.txt). The historical replay pins LC_COLLATE=C and two carobiner helpers by Git commit. It reuses the original transform without its mutable download preamble; it does not use the older March RData in ERA_data. Allow several GB of RAM. The historical output RDS and corrected sf001-review.rds stay in the cache. [Archive URLs and SHA-256](inputs.json) fail closed on replacement. The original May 2025 ERA tarball matches historical Git blob 52076f1b8e78268a4d4e42235ec5339508c398eb. The Carob archive is the exact checksum-pinned agronomy CC collection. Its ZIP member timestamps read 3 June 2026 when inspected on 20 November 2026; these are archive metadata, not a verified publication date. Do not substitute a similarly named monthly or latest collection. Preserve the pinned bytes internally if URLs change.
 
 ## Validation and limitations
 
 - See the [rendered software report](https://github.com/CGIAR-AgWise/era-carob#readme), [join ledger](../report/audit/historical_joins.csv), [crop ledger](../report/audit/crop_labels.csv), [yield units](../report/audit/yield_units.csv) and [eligibility counts](../report/audit/eligibility.csv). Source ordinals identify rows within these exact archives, not independent experimental units. No guessed trial IDs; no automatic publication-level deduplication.
 - Only exact, unambiguous plant products in the ERA vocabulary enter the identity comparison. Compound labels remain visible; no yield is allocated across components. The June ledger does not resolve every Carob name. Domain review can change the partition. ERA nutrient, treatment, density and management fields have not been certified as model predictors.
 - Transform scalar yield units only for explicit kg/ha, Mg/ha, t/ha or g/m2. Keep original value and case-sensitive unit. Dry/fresh basis, yield part, measurement protocol, moisture, treatment comparisons, shared controls and cross-source record equivalence must be agreed for a specified model. Separate validation folds by study/trial once links are adjudicated.
-- Date/coordinate screening uses original precision, rejects malformed/aggregate coordinates, zero pair and year-only dates. It cannot establish coordinate accuracy or weather coverage. Source planting years differ by 68–71 years from the first recorded season year in the exact-date subset. No offsets applied. Carob's eligible count is a preliminary screen, not a training set. Its screening window used the historical ERA snapshot cut-off (2025). A second crop cycle, cross-year seasons, year ranges or partial dates need explicit rules.
+- Date/coordinate screening uses original precision, rejects malformed/aggregate coordinates, zero pair and year-only dates. It cannot establish coordinate accuracy or weather coverage. The historical input had shifted/lost dates. The current input uses the published upstream correction; no consumer offsets are applied. Current accepted planting dates exclude year 9999, and source-date holds remain unresolved. Carob's eligible count is a preliminary screen, not a training set. Its screening window used the historical ERA snapshot cut-off (2025). A second crop cycle, cross-year seasons, year ranges or partial dates need explicit rules.
 - Historical count sensitivity: C collation 244,041 ERA rows; C.UTF-8 243,998. The old row-number pivot and sorted full joins are order-sensitive. Original 244,094 could not be recovered in tested environments. Cedric/Namita: original session info, cached pre-pivot data or saved dwf would settle the residual.
 
 ## Publication gates and credit
@@ -123,7 +136,7 @@ public CGSpace handle after library review and reconcile that same handle with
 both existing reporting records. Keep identifiers unset in the shared metadata
 until verified. A shared URL is not proof that either deliverable is complete.
 
-## 19 November date correction: held for validation
+## Date correction and the retired 19 November override
 
 Commit `470def57dee20013204ea14ba93d6c32c134a2d3` added a compiled-Parquet
 loader and date override. The loader ignored `SF001_INPUTS`, referenced an
@@ -132,14 +145,25 @@ called nonexistent `gub()`, joined dates only at study level and substituted
 year-only text for a missing planting date. It also overwrote the value later
 retained as `planting_date_raw`, losing the original date's provenance.
 
-This review removes that override from the production path and restores the
-source dates plus existing season-aware screen. The helper remains in Git for
-follow-up; this is not a claim that the compiled dates are wrong or that the
-source date problem is solved. Cedric/Namita should supply a checksum-pinned,
-row/site/season-keyed correction, preserve original and corrected values with
-provenance, test ambiguous and unmatched keys, and distinguish full dates from
-partial years before it is enabled. Do not fix only the typo and call the
-climate pipeline validated.
+This review removes that override from the production path. It now consumes
+the published upstream issue #94 correction through a checksum-pinned JSON,
+without using the compiled-Parquet helper or study-level date substitution.
+`planting_date_raw` preserves corrected source text; the original tokens remain
+in the bundled audit. See [SF-003 date policy](../docs/SF-003.md#date-origin-precision-and-source-holds).
+
+The corrected consumer retains 110,277 ERA and 246,993 Carob rows, with 40,655
+accepted and 70,161 raw ERA planting dates. All 900 source row/field holds are
+verified against their source and retained as RDS metadata; held outcome rows
+cannot pass climate handoff checks. Missing dates on held rows are not an
+invitation to impute. Cross-year interpretation and independent climate checks
+remain pending. [Current date counts](../report/audit/date_snapshot.json).
+
+Historical eligibility and dictionary/workbook coverage remain explicitly
+labelled as May 2025 evidence. Current date counts supersede those date counts;
+non-date schema definitions and coverage are unchanged. To regenerate the
+mapping workbook for a chosen prepared candidate, run
+`Rscript script/era_carob_mapping.R`; its legend records the selected archives.
+
 
 ## Climate handoff
 
