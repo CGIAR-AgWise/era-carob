@@ -31,12 +31,13 @@ export SF001_INPUTS="$PWD/downloaded_data/sf001-issue94"
 python3 audit/prepare.py "$SF001_INPUTS"
 Rscript audit/build.R
 Rscript audit/check_snapshot.R "$SF001_INPUTS/sf001-review.rds" issue94
+Rscript audit/check_hold_guard.R "$SF001_INPUTS/sf001-review.rds"
 Rscript audit/check_date_successor.R downloaded_data/sf001-historical/sf001-review.rds "$SF001_INPUTS/sf001-review.rds"
 Rscript audit/meta_example.R
 Rscript -e 'rmarkdown::render("README.Rmd"); rmarkdown::render("README.Rmd",output_format="html_document")'
 ```
 
-Install R packages dplyr, tidyr, jsonlite, stringr, data.table, knitr, rmarkdown and openxlsx. [Tested environment](session.txt). The historical replay pins LC_COLLATE=C and two carobiner helpers by Git commit. It reuses the original transform without its mutable download preamble; it does not use the older March RData in ERA_data. Allow several GB of RAM. The historical output RDS and corrected sf001-review.rds stay in the cache. [Archive URLs and SHA-256](inputs.json) fail closed on replacement. The original May 2025 ERA tarball matches historical Git blob 52076f1b8e78268a4d4e42235ec5339508c398eb. The Carob archive is the exact checksum-pinned agronomy CC collection. Its ZIP member timestamps read 3 June 2026 when inspected on 20 November 2026; these are archive metadata, not a verified publication date. Do not substitute a similarly named monthly or latest collection. Preserve the pinned bytes internally if URLs change.
+Install R packages dplyr, tidyr, jsonlite, stringr, data.table, digest, knitr, rmarkdown and openxlsx. [Tested environment](session.txt). The historical replay pins LC_COLLATE=C and two carobiner helpers by Git commit. It reuses the original transform without its mutable download preamble; it does not use the older March RData in ERA_data. Allow several GB of RAM. The historical output RDS and corrected sf001-review.rds stay in the cache. [Archive URLs and SHA-256](inputs.json) fail closed on replacement. The original May 2025 ERA tarball matches historical Git blob 52076f1b8e78268a4d4e42235ec5339508c398eb. The Carob archive is the exact checksum-pinned agronomy CC collection. Its ZIP member timestamps read 3 June 2026 when inspected on 20 November 2026; these are archive metadata, not a verified publication date. Do not substitute a similarly named monthly or latest collection. Preserve the pinned bytes internally if URLs change.
 
 ## Validation and limitations
 
@@ -166,6 +167,15 @@ mapping workbook for a chosen prepared candidate, run
 
 
 ## Climate handoff
+
+ERA handoffs require exact current or historical archive provenance. For the
+current pin, the complete source-date ledger must match the row count and
+SHA-256 fingerprint in `audit/date-holds.json`. Missing metadata, an empty or
+truncated ledger, and changed findings are rejected before climate validation.
+The contract is derived from the checksum-verified published hold CSV; update
+it only with a reviewed new input release. `audit/check_hold_guard.R` exercises
+real held and unheld candidate rows with synthetic climate values, including
+metadata-loss regressions. This is a guard test, not climate-provider validation.
 
 Namita and the model user supply a feature-window CSV with one row per specified variable and the following columns:
 

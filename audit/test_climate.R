@@ -23,13 +23,33 @@ stopifnot(check(forged)!=0L,check(shifted)!=0L,check(rbind(v,v))!=0L,check(copy(
 # Even a seemingly valid date cannot bypass a row-linked source hold.
 m[,source:="era"]
 v[,source:="era"]
-attr(m,"input_archives") <- list("era_agronomy_bundle_issue94.tar.gz"=list("url","hash"))
+pins <- jsonlite::fromJSON("audit/inputs.json",simplifyVector=FALSE)
+attr(m,"input_archives") <- pins
 saveRDS(m,paths[1])
 stopifnot(check(v)!=0L)
 attr(m,"era_date_holds") <- data.table(table="Data.Out",merged_row="1")
 saveRDS(m,paths[1])
 stopifnot(check(v)!=0L)
 attr(m,"era_date_holds") <- data.table(table="Data.Out",merged_row="2")
+saveRDS(m,paths[1])
+stopifnot(check(v)!=0L) # A nonempty but incomplete ledger must also fail.
+attr(m,"era_date_holds") <- data.table(table=character(),merged_row=character())
+saveRDS(m,paths[1])
+stopifnot(check(v)!=0L)
+attr(m,"era_date_holds") <- NULL
+attr(m,"input_archives") <- NULL
+saveRDS(m,paths[1])
+stopifnot(check(v)!=0L) # Removing both attributes cannot bypass the gate.
+attr(m,"era_date_holds") <- data.table(table="Data.Out",merged_row="2")
+saveRDS(m,paths[1])
+stopifnot(check(v)!=0L) # Holds without recognized provenance are insufficient.
+attr(m,"era_date_holds") <- NULL
+pins[[1]][[2]] <- paste(rep("0",64),collapse="")
+attr(m,"input_archives") <- pins
+saveRDS(m,paths[1])
+stopifnot(check(v)!=0L) # A recognizable filename is not an input pin.
+# Historical replay remains explicit, never inferred from absent metadata.
+attr(m,"input_archives") <- jsonlite::fromJSON("audit/inputs-historical.json",simplifyVector=FALSE)
 saveRDS(m,paths[1])
 stopifnot(check(v)==0L)
 unlink(dir,recursive=TRUE)

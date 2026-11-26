@@ -15,7 +15,7 @@ jobs:
         with:
           use-public-rspm: true
       - name: Install fixture dependencies
-        run: Rscript -e 'install.packages(c("data.table", "dplyr", "tidyr", "jsonlite", "stringr", "openxlsx", "readxl"))'
+        run: Rscript -e 'install.packages(c("data.table", "dplyr", "tidyr", "jsonlite", "stringr", "openxlsx", "readxl", "digest"))'
       - name: Check R fixtures
         shell: bash
         run: |

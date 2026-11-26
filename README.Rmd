@@ -44,7 +44,7 @@ cd era-carob
 git switch main
 git pull --ff-only
 git rev-parse HEAD
-Rscript -e 'install.packages(c("dplyr","tidyr","stringr","jsonlite","data.table"), repos="https://cloud.r-project.org")'
+Rscript -e 'install.packages(c("dplyr","tidyr","stringr","jsonlite","data.table","digest"), repos="https://cloud.r-project.org")'
 export SF001_INPUTS="$PWD/downloaded_data/sf001-issue94"
 python3 audit/prepare.py "$SF001_INPUTS"
 Rscript audit/build.R
