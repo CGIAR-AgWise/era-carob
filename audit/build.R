@@ -8,6 +8,7 @@ source("script/date_holds.R")
 attr(merged,"input_archives") <- prepared$archives
 if (any(grepl("issue94",names(prepared$archives)))) {
   holds <- data.table::fread(one_input("issue94-date-holds.csv"),colClasses="character",na.strings="")
+  validate_date_hold_ledger(holds, jsonlite::fromJSON("audit/date-holds.json", simplifyVector=FALSE))
   validate_date_holds(holds,era_merge)
   attr(merged,"era_date_holds") <- holds
 }

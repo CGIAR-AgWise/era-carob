@@ -22,11 +22,49 @@ validate_date_holds <- function(holds, source) {
   invisible(TRUE)
 }
 
+date_hold_fingerprint <- function(holds) {
+  columns <- c("table", "field", "source_row", "merged_row", "B.Code", "raw", "date", "status")
+  if (!is.data.frame(holds) || !setequal(names(holds), columns) ||
+      anyDuplicated(names(holds)) || !all(vapply(holds, is.character, logical(1))))
+    stop("Source-date hold ledger has an invalid schema")
+  holds <- as.data.frame(holds)
+  keys <- c("table", "field", "merged_row")
+  if (anyNA(holds[keys]) || anyDuplicated(as.data.frame(holds)[keys]))
+    stop("Source-date hold ledger has missing or duplicate keys")
+  rows <- order(holds$table, holds$merged_row, holds$field, method="radix")
+  # Versioned, locale-independent encoding: fixed column order, sorted rows,
+  # UTF-8 byte lengths, and -1: for NA (distinct from an empty string).
+  parts <- unlist(lapply(columns, function(field) {
+    value <- enc2utf8(holds[[field]][rows])
+    ifelse(is.na(value), "-1:", paste0(nchar(value, type="bytes"), ":", value))
+  }), use.names=FALSE)
+  digest::digest(paste0("era-date-holds-v1\n", nrow(holds), "\n",
+                        paste0(parts, collapse="")), algo="sha256", serialize=FALSE)
+}
+
+validate_date_hold_ledger <- function(holds, contract) {
+  if (is.null(holds) || !is.data.frame(holds) || nrow(holds) != contract$rows ||
+      !identical(date_hold_fingerprint(holds), contract$canonical_sha256))
+    stop("Source-date holds are missing, incomplete or changed for the pinned input")
+  invisible(TRUE)
+}
+
 check_climate_date_holds <- function(candidate, proposed) {
+  if (!any(proposed$source == "era")) return(invisible(TRUE))
   holds <- attr(candidate,"era_date_holds")
   pins <- attr(candidate,"input_archives")
-  if (any(grepl("issue94",names(pins))) && is.null(holds))
-    stop("Corrected snapshot is missing its source-date holds")
+  current <- jsonlite::fromJSON("audit/inputs.json", simplifyVector=FALSE)
+  historical <- jsonlite::fromJSON("audit/inputs-historical.json", simplifyVector=FALSE)
+  if (identical(pins, current)) {
+    contract <- jsonlite::fromJSON("audit/date-holds.json", simplifyVector=FALSE)
+    if (!identical(pins[[contract$archive]][[2]], contract$archive_sha256))
+      stop("Source-date hold contract does not match the current input pin")
+    validate_date_hold_ledger(holds, contract)
+  } else if (!identical(pins, historical)) {
+    stop("ERA climate handoff requires recognized input archive provenance")
+  } else if (!is.null(holds)) {
+    stop("Historical input has an unexpected source-date hold ledger")
+  }
   if (!is.null(holds)) {
     held_rows <- as.integer(holds$merged_row[holds$table=="Data.Out"])
     if (any(proposed$source=="era" & proposed$source_row %in% held_rows))

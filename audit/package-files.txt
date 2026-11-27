@@ -60,3 +60,5 @@ report/audit/date_snapshot.json
 script/date_holds.R
 audit/test_date_holds.R
 audit/check_date_successor.R
+audit/date-holds.json
+audit/check_hold_guard.R

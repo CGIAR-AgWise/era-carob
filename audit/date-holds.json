@@ -1,0 +1,9 @@
+{
+  "archive": "era_agronomy_bundle_2026-11-23-issue94.tar.gz",
+  "archive_sha256": "c8cd1eac0f2fa3686519b5cc4f26b7ab72d4bdcc7945caad4944eb9eb376d717",
+  "file": "issue94-date-holds.csv",
+  "file_sha256": "3149d6ed04bcd796856a355c9544b848df29e8f1300f40a3885bf1f8347c9514",
+  "rows": 900,
+  "canonical_encoding": "era-date-holds-v1",
+  "canonical_sha256": "bd4c1ad6004575b7325b3adb71321a78d319e7c3c71762f9cec5d12dc3cf387a"
+}
